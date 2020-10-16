@@ -1,13 +1,16 @@
 import React from 'react';
 import LocationManagement from '../../components/locationManagement/LocationManagement';
-
 import "./administration.scss";
 
 const Administration = () => {
   return (
-    <div className="adminsitration-page">
-      <h1>Administration</h1>
-      <LocationManagement></LocationManagement>
+    <div className="administration-page">
+      <div className="location-management">
+        <LocationManagement></LocationManagement>
+      </div>
+      <div className="category-management">
+        WIP
+      </div>
     </div>
   );
 };

@@ -12,5 +12,5 @@ export const deleteLocation = (location) => ({
 
 export const updateLocation = (location) => ({
   type: UPDATE_LOCATION,
-  payload: {locationId: location.locationId, newLocationLabel: location.newLocationLabel}
+  payload: {locationId: location.id, newLocationLabel: location.label}
 });

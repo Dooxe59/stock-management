@@ -1,28 +1,25 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { locationsSelector } from '../../store/location/locationsSelector';
+import React, { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { addLocation } from '../../store/location/locationsActions';
-import Button from '../ui/button/Buttons';
+import LocationList from './locationList/LocationList';
+import { Button, Divider, Input } from "@chakra-ui/core";
+import { AddIcon } from '@chakra-ui/icons';
+
+import "./locationManagement.scss";
 
 const LocationManagement = () => {
-  const locations = useSelector(locationsSelector);
   const dispatch = useDispatch();
   const addNewLocation = useCallback((location) => {
     dispatch(addLocation(location));
   }, []);
 
   const [newLocationLabel, setNewLocationLabel] = useState("");
-  const inputRef = useRef(null);
 
   const handleInputTextChange = (event) => {
     setNewLocationLabel(event.target.value);
   };
 
   const isValidNewLocationLabel = newLocationLabel?.trim()?.length > 0;
-
-  const setFocusOnInput = () => {
-    inputRef.current.focus();
-  };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -38,7 +35,6 @@ const LocationManagement = () => {
 
       addNewLocation({locationLabel: locationLabel});
       clearInputText();
-      setFocusOnInput();
     }
   };
 
@@ -49,36 +45,27 @@ const LocationManagement = () => {
   return (
     <div className="location-management">
       <div className="add-location-form">
-        <span>
-          Ajouter un emplacement:
-        </span>
-        <label className="add-location-input-label">
-          <input
-            autoFocus
-            className="add-location-input"
-            name="newLocationLabel"
-            type="text"
-            autoComplete="off"
-            placeholder=" "
-            ref={inputRef}
-            value={newLocationLabel}
-            onChange={handleInputTextChange}
-            onKeyDown={handleKeyDown}
-          />
-        </label>
-        <Button
-          theme="green"
-          label="Ajouter l'emplacement'"
+        <Input 
+          autoFocus
+          variant="filled"
+          size="sm" 
+          placeholder="Ajouter un emplacement" 
+          value={newLocationLabel}
+          onChange={handleInputTextChange}
+          onKeyDown={handleKeyDown}/>
+        <Button 
+          flexShrink={0}
+          marginLeft="10px"
+          leftIcon={<AddIcon />}
+          size="sm" 
+          colorScheme="green"
           isDisabled={!isValidNewLocationLabel}
-          onClick={validateAndAddNewLocation}
-        ></Button>
+          onClick={() => validateAndAddNewLocation()}>
+          Ajouter l'emplacement
+        </Button>
       </div>
-      <div className="location-list">
-        <span className="location-list-section-label">
-          Liste des emplacements:
-        </span>
-        { JSON.stringify(locations)}
-      </div>
+      <Divider/>
+      <LocationList></LocationList>
     </div>
   );
 };

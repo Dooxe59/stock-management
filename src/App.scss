@@ -12,10 +12,6 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 
-    a {
-      text-decoration: none;
-    }
-
     .application-name {
       margin: 0 10px;
       font-size: larger;
@@ -46,28 +42,6 @@
       &:hover {
         cursor: pointer;
         text-decoration: underline;
-      }
-    }
-
-    .administration-page-button-icon {
-      width: 40px;
-      height: 100%;
-      display: none;
-      align-items: center;
-      justify-content: center;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    @media screen and (max-width: 600px) {
-      .administration-page-button-label {
-        display: none;
-      }
-
-      .administration-page-button-icon {
-        display: flex;
       }
     }
   }
