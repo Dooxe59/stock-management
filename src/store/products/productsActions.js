@@ -5,6 +5,7 @@ export const addProduct = (product) => ({
   payload: {
     productName: product.name,
     locationId: product.locationId,
+    categoryId: product.categoryId,
     quantity: product.quantity,
     expirationDate: product.expirationDate,
   }

@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { categoriesSelector } from '../../store/categories/categoriesSelector';
 import { locationsSelector } from '../../store/locations/locationsSelector';
 import { addProduct } from '../../store/products/productsActions';
 import Button from '../ui/button/Buttons';
@@ -27,7 +28,7 @@ const AddProductForm = () => {
 
   const [productLocation, setProductLocation] = useState(1);
   const handleInputProductLocationChange = (event) => {
-    setProductLocation(event.target.value);
+    setProductLocation(parseInt(event.target.value));
   };
   const locations = useSelector(locationsSelector);
   const renderSelectLocationOptions = () => {
@@ -36,6 +37,16 @@ const AddProductForm = () => {
     });
   };
 
+  const [productCategory, setProductCategory] = useState("");
+  const handleInputProductCategoryChange = (event) => {
+    setProductCategory(parseInt(event.target.value));
+  };
+  const categories = useSelector(categoriesSelector);
+  const renderSelectCategoryOptions = () => {
+    return categories.map(category => {
+      return <option value={category.id} key={category.id}>{category.label}</option>
+    });
+  };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -58,6 +69,7 @@ const AddProductForm = () => {
       const product = {
         name: productLabel.trim(),
         locationId: productLocation,
+        categoryId: productCategory,
         quantity: productQuantity.trim(),
         expirationDate: productExpirationDate.trim(),
       };
@@ -139,6 +151,17 @@ const AddProductForm = () => {
             {renderSelectLocationOptions()}
           </select>
         </label>
+        <div className="product-category">
+          <label className="product-category-input-label">
+            <span>
+              Catégorie
+            </span>
+            <select value={productCategory} onChange={handleInputProductCategoryChange}>
+              <option value=""></option>
+              {renderSelectCategoryOptions()}
+            </select>
+          </label>
+        </div>
       </div>
       <Button
         theme="green"

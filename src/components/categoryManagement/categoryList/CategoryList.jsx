@@ -31,7 +31,6 @@ const CategoryList = () => {
     onOpen();
   };
 
-  
   const dispatch = useDispatch();
   const updateCategoryStore = useCallback((category) => {
     dispatch(updateCategory(category));
@@ -47,7 +46,6 @@ const CategoryList = () => {
       return <CategoryItem category={category} key={category.id} updateCategory={() => openUpdateCategoryModal(category.id)}></CategoryItem>;
     })
   };
-
 
   const handleInputTextChange = (event) => {
     setUpdatedCategory({

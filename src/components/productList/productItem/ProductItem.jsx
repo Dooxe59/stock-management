@@ -4,25 +4,28 @@ import { locationsSelector } from '../../../store/locations/locationsSelector';
 import moment from "moment";
 
 import "./productItem.scss";
+import { categoriesSelector } from '../../../store/categories/categoriesSelector';
 
 const ProductItem = ({product}) => {
   const locations = useSelector(locationsSelector);
-
   const currentLocation = locations.find(location => location.id === product.locationId);
+  
+  // TODO: 2 render by default ??
 
+  const momentExpirationDate = moment(product.expirationDate, "DDMMYYYY");
+  const isValidExpirationDate = momentExpirationDate.isValid();
   const renderProductExpirationDate = () => {
-    return product.expirationDate ?
+    return isValidExpirationDate ?
       <div className="product-expiration-date">
-        Périmé {moment(product.expirationDate, "DDMMYYYY").fromNow()} ({product.expirationDate})
+        Périmé {momentExpirationDate.fromNow()} ({product.expirationDate})
       </div> : '';
   };
 
-  const productDate = moment(product.expirationDate, "DDMMYYYY");
   const currentDate = moment();
-  const daysRemaining = productDate.diff(currentDate, 'days') + 1;
+  const daysRemaining = momentExpirationDate.diff(currentDate, 'days') + 1;
 
   const renderProductExpirationDateState = () => {
-    if(!product.expirationDate) return '';
+    if(!isValidExpirationDate) return '';
         
     let status = '';
 
@@ -44,17 +47,28 @@ const ProductItem = ({product}) => {
       </div>)
   };
 
+  const categories = useSelector(categoriesSelector);
+  const currentCategory = categories.find(category => category.id === product.categoryId);
+  const renderProductCategory = () => {
+    return currentCategory?.label ? (
+      <div className="product-category">
+        Catégorie: {currentCategory?.label}
+      </div>
+    ) : '';
+  };
+
   return (
     <div className="product-item">
       <div className="product-name">
-        {/* Editable component chakra */}
+        {/* TODO: Editable component chakra */}
         Produit: {product.productName}
       </div>
       <div className="product-location">
-        Emplacement: {currentLocation.label}
+        Emplacement: {currentLocation?.label}
       </div>
       {renderProductExpirationDate()}
       {renderProductExpirationDateState()}
+      {renderProductCategory()}
     </div>
   );
 };
