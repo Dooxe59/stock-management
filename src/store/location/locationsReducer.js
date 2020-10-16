@@ -16,7 +16,6 @@ export const UPDATE_LOCATION = 'UPDATE_LOCATION';
 export const locationsReducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_LOCATION: {
-      console.log(action);
       if (!action.payload.locationLabel) return state;
 
       const newItem = {

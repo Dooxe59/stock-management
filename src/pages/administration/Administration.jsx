@@ -5,7 +5,7 @@ import "./administration.scss";
 
 const Administration = () => {
   return (
-    <div>
+    <div className="adminsitration-page">
       <h1>Administration</h1>
       <LocationManagement></LocationManagement>
     </div>

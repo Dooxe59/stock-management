@@ -1,10 +1,11 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { locationSelector } from '../../store/location/locationSelector';
-import { addLocation } from '../../store/location/locationActions';
+import { locationsSelector } from '../../store/location/locationsSelector';
+import { addLocation } from '../../store/location/locationsActions';
+import Button from '../ui/button/Buttons';
 
 const LocationManagement = () => {
-  const locations = useSelector(locationSelector);
+  const locations = useSelector(locationsSelector);
   const dispatch = useDispatch();
   const addNewLocation = useCallback((location) => {
     dispatch(addLocation(location));
@@ -32,7 +33,10 @@ const LocationManagement = () => {
 
   const validateAndAddNewLocation = () => {
     if (isValidNewLocationLabel) {
-      addNewLocation({locationLabel: newLocationLabel.trim()});
+      let locationLabel = newLocationLabel.trim();
+      locationLabel = locationLabel.charAt(0).toUpperCase() + locationLabel.slice(1);
+
+      addNewLocation({locationLabel: locationLabel});
       clearInputText();
       setFocusOnInput();
     }
@@ -45,6 +49,9 @@ const LocationManagement = () => {
   return (
     <div className="location-management">
       <div className="add-location-form">
+        <span>
+          Ajouter un emplacement:
+        </span>
         <label className="add-location-input-label">
           <input
             autoFocus
@@ -58,15 +65,17 @@ const LocationManagement = () => {
             onChange={handleInputTextChange}
             onKeyDown={handleKeyDown}
           />
-          <span>
-            Ajouter un emplacement:
-          </span>
         </label>
-
+        <Button
+          theme="green"
+          label="Ajouter l'emplacement'"
+          isDisabled={!isValidNewLocationLabel}
+          onClick={validateAndAddNewLocation}
+        ></Button>
       </div>
       <div className="location-list">
         <span className="location-list-section-label">
-          Aperçu des emplacements:
+          Liste des emplacements:
         </span>
         { JSON.stringify(locations)}
       </div>

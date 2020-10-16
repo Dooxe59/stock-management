@@ -5,6 +5,7 @@ Possibilité de tri par date proche (X jours restant .. )
 Possibilité de tri par catégorie
 Gestion des emplacements
 Gestions des catégories
+Recherche parmis le stock
 
 Ajout d'un élément:
 
@@ -14,4 +15,4 @@ Ajout d'un élément:
 - Quantité
 - Date péremption
 - % restant
-- Date ajout(caché/autoatique)
+- Date ajout(caché/automatique)

@@ -1,4 +1,4 @@
-import { ADD_LOCATION, DELETE_LOCATION, UPDATE_LOCATION } from "./locationReducer";
+import { ADD_LOCATION, DELETE_LOCATION, UPDATE_LOCATION } from "./locationsReducer";
 
 export const addLocation = (location) => ({
   type: ADD_LOCATION,

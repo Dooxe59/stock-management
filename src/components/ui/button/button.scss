@@ -1,0 +1,49 @@
+.button {
+  border-radius: 4px;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  border-width: 1px;
+  border-style: solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:not([disabled]) {
+    &:hover {
+      filter: brightness(110%);
+      cursor: pointer;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #cccccc;
+    border-color: #6d6d6d;
+    color: #6d6d6d;
+  }
+
+  &.button-default {
+    &:not([disabled]) {
+      background-color: #80d6ff;
+      border-color: #0077c2;
+      color: #0077c2;
+    }
+  }
+
+  &.button-green {
+    &:not([disabled]) {
+      background-color: #98ee99;
+      border-color: #338a3e;
+      color: #338a3e;
+    }
+  }
+
+  &.button-red {
+    &:not([disabled]) {
+      background-color: #ff867c;
+      border-color: #b61827;
+      color: #b61827;
+    }
+  }
+}
