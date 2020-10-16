@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { locationsSelector } from '../../../store/location/locationsSelector';
+import { locationsSelector } from '../../../store/locations/locationsSelector';
 import moment from "moment";
 
 import "./productItem.scss";

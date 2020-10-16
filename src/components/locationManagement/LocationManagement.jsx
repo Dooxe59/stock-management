@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addLocation } from '../../store/location/locationsActions';
+import { addLocation } from '../../store/locations/locationsActions';
 import LocationList from './locationList/LocationList';
 import { Button, Divider, Input } from "@chakra-ui/core";
 import { AddIcon } from '@chakra-ui/icons';

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { locationsSelector } from '../../../store/location/locationsSelector';
+import { locationsSelector } from '../../../store/locations/locationsSelector';
 import { useDispatch, useSelector } from 'react-redux';
 import LocationItem from './locationItem/LocationItem';
 import {
@@ -13,7 +13,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/core";
 import { Button, ButtonGroup, Input } from "@chakra-ui/core";
-import { updateLocation } from '../../../store/location/locationsActions';
+import { updateLocation } from '../../../store/locations/locationsActions';
 
 import "./locationList.scss";
 

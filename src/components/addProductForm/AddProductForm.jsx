@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { locationsSelector } from '../../store/location/locationsSelector';
-import { addProduct } from '../../store/product/productsActions';
+import { locationsSelector } from '../../store/locations/locationsSelector';
+import { addProduct } from '../../store/products/productsActions';
 import Button from '../ui/button/Buttons';
 
 const AddProductForm = () => {
