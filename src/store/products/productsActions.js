@@ -8,5 +8,6 @@ export const addProduct = (product) => ({
     categoryId: product.categoryId,
     quantity: product.quantity,
     expirationDate: product.expirationDate,
+    creationDate: product.creationDate,
   }
 });

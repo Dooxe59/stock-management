@@ -7,6 +7,8 @@ refacto form ajout produit
 refacto admin gestion emplacements/catégories
 Gérer ajout emplacement/catégorie via touche entrée
 
+Mise à jour d'un produit
+
 Ajouter filtre par catégorie
 Ajouter filtre par emplacement
 Ajouter filtre via saisie texte sur nom

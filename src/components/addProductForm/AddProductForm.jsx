@@ -4,6 +4,7 @@ import React, {
   useState 
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from "moment";
 import { categoriesSelector } from '../../store/categories/categoriesSelector';
 import { locationsSelector } from '../../store/locations/locationsSelector';
 import { addProduct } from '../../store/products/productsActions';
@@ -87,12 +88,14 @@ const AddProductForm = () => {
 
   const validateAndAddProduct = () => {
     if (isValidProduct) {
+      console.log(moment().format('L'));
       const product = {
         name: productLabel.trim(),
         locationId: productLocation,
         categoryId: productCategory,
         quantity: productQuantity.trim(),
         expirationDate: productExpirationDate.trim(),
+        creationDate: moment().format('L')
       };
 
       product.name = product.name.charAt(0).toUpperCase() + product.name.slice(1);
