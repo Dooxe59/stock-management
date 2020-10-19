@@ -5,16 +5,44 @@ import { categoriesSelector } from '../../../store/categories/categoriesSelector
 import { deleteProduct } from '../../../store/products/productsActions';
 import moment from "moment";
 
-import { Button, ButtonGroup, Tag, useToast } from "@chakra-ui/core";
+import { 
+  Badge, 
+  Button, 
+  ButtonGroup, 
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useToast } from "@chakra-ui/core";
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 
 import "./productItem.scss";
 
 const ProductItem = ({product}) => {
+  const [isOpen, setIsOpen] = React.useState();
+  const onClose = () => setIsOpen(false);
+  const cancelRef = React.useRef();
+
   const dispatch = useDispatch(); 
   const deleteSelectedProduct = useCallback((product) => {
     dispatch(deleteProduct(product));
   }, []);
+
+  const confirmDeleteProduct = () => {
+    const productName = product.productName;
+    deleteSelectedProduct({productId: product.id});
+    onClose();
+    toast({
+      title: "Produit supprimé",
+      description: `${productName} a bien été supprimé`,
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    })
+  }
 
   const toast = useToast();
 
@@ -64,7 +92,7 @@ const ProductItem = ({product}) => {
   const renderProductCategory = () => {
     return currentCategory?.label ? (
       <div className="product-category">
-        <Tag size="md" variant="solid" colorScheme={getColorSchemeById(currentCategory.id, 4)}>{currentCategory?.label}</Tag>
+        <Badge size="md" variant="solid" colorScheme={getColorSchemeById(currentCategory.id, 4)}>{currentCategory?.label}</Badge>
       </div>
     ) : '';
   };
@@ -80,7 +108,7 @@ const ProductItem = ({product}) => {
         {product.productName}
       </div>
       <div className="product-location">
-        <Tag size="md" variant="solid" colorScheme={getColorSchemeById(currentLocation.id)}>{currentLocation?.label}</Tag>
+        <Badge size="md" variant="outline" colorScheme={getColorSchemeById(currentLocation.id)}>{currentLocation?.label}</Badge>
       </div>
       <div className="product-quantity">
         Quantité: {product.quantity}
@@ -108,10 +136,29 @@ const ProductItem = ({product}) => {
             leftIcon={<DeleteIcon />}
             size="xs" 
             colorScheme="red"
-            onClick={() => deleteSelectedProduct({productId: product.id})
+            onClick={() => setIsOpen(true)
             }>
             Supprimer
           </Button>
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay>
+              <ModalContent>
+                <ModalHeader>Suppression d'un produit</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  Êtes-vous sur de vouloir supprimer "{product.productName}" ({product.quantity}) ?
+                </ModalBody>
+                <ModalFooter>
+                  <ButtonGroup spacing="6">
+                    <Button colorScheme="red" onClick={() => confirmDeleteProduct()}>
+                      Supprimer
+                    </Button>
+                    <Button variant="ghost" onClick={onClose}>Annuler</Button>
+                  </ButtonGroup>
+                </ModalFooter>
+              </ModalContent>
+            </ModalOverlay>
+          </Modal>
         </ButtonGroup>
       </div>
     </div>
