@@ -1,15 +1,21 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { locationsSelector } from '../../../store/locations/locationsSelector';
 import { categoriesSelector } from '../../../store/categories/categoriesSelector';
+import { deleteProduct } from '../../../store/products/productsActions';
 import moment from "moment";
 
-import { Button, Tag, useToast } from "@chakra-ui/core";
-import { EditIcon } from '@chakra-ui/icons';
+import { Button, ButtonGroup, Tag, useToast } from "@chakra-ui/core";
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 
 import "./productItem.scss";
 
 const ProductItem = ({product}) => {
+  const dispatch = useDispatch(); 
+  const deleteSelectedProduct = useCallback((product) => {
+    dispatch(deleteProduct(product));
+  }, []);
+
   const toast = useToast();
 
   const COLORS = ['blue', 'purple', 'red', 'green', 'orange', 'teal', 'gray', 'cyan', 'pink'];
@@ -82,21 +88,31 @@ const ProductItem = ({product}) => {
       {renderProductExpirationDateState()}
       {renderProductCategory()}
       <div className="product-item-actions">
-        <Button 
-          leftIcon={<EditIcon />}
-          size="xs" 
-          colorScheme="blue"
-          onClick={() => 
-            toast({
-              title: "Non implémenté.",
-              description: "Fonctionnalité non implémentée. Work In Progress ...", 
-              status: "warning",
-              duration: 5000,
-              isClosable: true,
-            })
-          }>
-          Modifier
-        </Button>
+      <ButtonGroup spacing="2">
+          <Button 
+            leftIcon={<EditIcon />}
+            size="xs" 
+            colorScheme="blue"
+            onClick={() => 
+              toast({
+                title: "Non implémenté.",
+                description: "Fonctionnalité non implémentée. Work In Progress ...", 
+                status: "warning",
+                duration: 3000,
+                isClosable: true,
+              })
+            }>
+            Modifier
+          </Button>
+          <Button 
+            leftIcon={<DeleteIcon />}
+            size="xs" 
+            colorScheme="red"
+            onClick={() => deleteSelectedProduct({productId: product.id})
+            }>
+            Supprimer
+          </Button>
+        </ButtonGroup>
       </div>
     </div>
   );

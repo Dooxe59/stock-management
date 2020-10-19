@@ -1,4 +1,4 @@
-import { ADD_PRODUCT } from "./productsReducer";
+import { ADD_PRODUCT, DELETE_PRODUCT } from "./productsReducer";
 
 export const addProduct = (product) => ({
   type: ADD_PRODUCT,
@@ -10,4 +10,9 @@ export const addProduct = (product) => ({
     expirationDate: product.expirationDate,
     creationDate: product.creationDate,
   }
+});
+
+export const deleteProduct = (product) => ({
+  type: DELETE_PRODUCT,
+  payload: {productId: product.productId}
 });

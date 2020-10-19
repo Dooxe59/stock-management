@@ -16,6 +16,7 @@ const initialState = [{
 }];
 
 export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 
 export const productsReducer = (state = initialState, action) => {
   switch(action.type) {
@@ -32,6 +33,15 @@ export const productsReducer = (state = initialState, action) => {
         id: state.length + 1,
       };
       return [...state, newProduct];
+    }
+    case DELETE_PRODUCT: {
+      const productIndex = state.findIndex(item => item.id === action.payload.productId);
+      if (productIndex === -1) return state;
+
+      const productListTemp = [...state];
+
+      productListTemp.splice(productIndex, 1);
+      return productListTemp;
     }
     default:
       return state;
