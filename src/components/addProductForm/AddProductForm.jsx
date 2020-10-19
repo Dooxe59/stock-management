@@ -22,8 +22,13 @@ import {
   ModalCloseButton,
   Select,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/core";
+import DatePicker from "react-datepicker";
+
 import { AddIcon } from '@chakra-ui/icons';
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddProductForm = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -44,9 +49,6 @@ const AddProductForm = () => {
   };
 
   const [productExpirationDate, setProductExpirationDate] = useState("");
-  const handleInputProductExpirationDateChange = (event) => {
-    setProductExpirationDate(event.target.value);
-  };
 
   const [productLocation, setProductLocation] = useState(1);
   const handleInputProductLocationChange = (event) => {
@@ -86,20 +88,27 @@ const AddProductForm = () => {
     productLabelInputRef.current.focus();
   };
 
+  const toast = useToast();
   const validateAndAddProduct = () => {
     if (isValidProduct) {
-      console.log(moment().format('L'));
       const product = {
         name: productLabel.trim(),
         locationId: productLocation,
         categoryId: productCategory,
         quantity: productQuantity.trim(),
-        expirationDate: productExpirationDate.trim(),
+        expirationDate: productExpirationDate,
         creationDate: moment().format('L')
       };
 
       product.name = product.name.charAt(0).toUpperCase() + product.name.slice(1);
       addNewProduct(product);
+      toast({
+        title: "Produit ajouté",
+        description: `${product.name} a bien été ajouté`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      })
       clearProductForm();
       setFocusOnFirstInput();
     }
@@ -153,12 +162,16 @@ const AddProductForm = () => {
               <div className="product-expiration-date">
                 <FormLabel htmlFor="productExpirationDate">Date de péremption (JJ/MM/AAAA)</FormLabel>
                 <Input 
+                  as={DatePicker}
                   id="productExpirationDate"
                   variant="filled"
                   size="sm" 
-                  placeholder="Quantité" 
-                  value={productExpirationDate}
-                  onChange={handleInputProductExpirationDateChange}
+                  locale="fr"
+                  autoComplete="off"
+                  dateFormat="dd/MM/yyyy"
+                  placeholderText="Date d'expiration"
+                  selected={productExpirationDate}
+                  onChange={date => setProductExpirationDate(date)}
                   onKeyDown={handleKeyDown}/>
               </div>
               <div className="product-location">

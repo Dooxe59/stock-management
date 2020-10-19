@@ -2,7 +2,6 @@ Application de gestion de stock
 
 Vérifier aria label dans app
 Ajouter boutons pour Consommer/Jeter
-Ajout d'un datepicker pour ajout/màj d'un produit
 refacto form ajout produit
 refacto admin gestion emplacements/catégories
 Gérer ajout emplacement/catégorie via touche entrée
