@@ -1,4 +1,33 @@
 .product-item {
-  border: 1px solid red;
+  border: 1px solid lightgray;
   border-radius: 4px;
+  width: 250px;
+  height: 125px;
+  padding: 0 10px;
+  margin: 10px;
+  flex-shrink: 0;
+
+  .product-name {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+  }
+
+  .expiration-date-status {
+    color: green;
+
+    &.expiration-date-alert {
+      color: red;
+      font-style: bold;
+    }
+
+    &.expiration-date-warning {
+      color: darkorange;
+    }
+
+    &.no-expiration-date-alert {
+      color: grey;
+      font-style: italic;
+    }
+  }
 }

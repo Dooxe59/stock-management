@@ -3,6 +3,8 @@ import {  useSelector } from 'react-redux';
 import { productsSelector } from '../../store/products/productsSelector';
 import ProductItem from './productItem/ProductItem';
 
+import "./productList.scss";
+
 const ProductList = () => {
   const products = useSelector(productsSelector);
 

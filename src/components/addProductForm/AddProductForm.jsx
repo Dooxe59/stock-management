@@ -3,9 +3,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { categoriesSelector } from '../../store/categories/categoriesSelector';
 import { locationsSelector } from '../../store/locations/locationsSelector';
 import { addProduct } from '../../store/products/productsActions';
-import Button from '../ui/button/Buttons';
+import { Button, ButtonGroup, FormLabel, Input, Select } from "@chakra-ui/core";
+import { AddIcon } from '@chakra-ui/icons';
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/core";
+
+// TODO: refact import 
 
 const AddProductForm = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const dispatch = useDispatch();
   const addNewProduct = useCallback((product) => {
     dispatch(addProduct(product));
@@ -89,86 +104,79 @@ const AddProductForm = () => {
 
   return (
     <div className="add-product-form">
-      <div className="product-label">
-        <label className="product-label-input-label">
-          <span>
-            Nom du produit
-          </span>
-          <input
-            autoFocus
-            className="product-label-input"
-            name="productLabel"
-            type="text"
-            autoComplete="off"
-            placeholder=" "
-            ref={productLabelInputRef}
-            value={productLabel}
-            onChange={handleInputProductLabelChange}
-            onKeyDown={handleKeyDown}
-          />
-        </label>
-      </div>
-      <div className="product-quantity">
-        <label className="product-quantity-input-label">
-          <span>
-            Quantité
-          </span>
-          <input
-            className="product-quantity-input"
-            name="productQuantity"
-            type="text"
-            autoComplete="off"
-            placeholder=" "
-            value={productQuantity}
-            onChange={handleInputProductQuantityChange}
-            onKeyDown={handleKeyDown}
-          />
-        </label>
-      </div>
-      <div className="product-expiration-date">
-        <label className="product-expiration-date-input-label">
-          <span>
-            Date de péremption (JJ/MM/AAAA)
-          </span>
-          <input
-            className="product-expiration-date-input"
-            name="productExpirationDate"
-            type="text"
-            autoComplete="off"
-            placeholder=" "
-            value={productExpirationDate}
-            onChange={handleInputProductExpirationDateChange}
-            onKeyDown={handleKeyDown}
-          />
-        </label>
-      </div>
-      <div className="product-location">
-        <label className="product-location-input-label">
-          <span>
-            Emplacement
-          </span>
-          <select value={productLocation} onChange={handleInputProductLocationChange}>
-            {renderSelectLocationOptions()}
-          </select>
-        </label>
-        <div className="product-category">
-          <label className="product-category-input-label">
-            <span>
-              Catégorie
-            </span>
-            <select value={productCategory} onChange={handleInputProductCategoryChange}>
-              <option value=""></option>
-              {renderSelectCategoryOptions()}
-            </select>
-          </label>
-        </div>
-      </div>
-      <Button
-        theme="green"
-        label="Ajouter le produit"
-        isDisabled={!isValidProduct}
-        onClick={validateAndAddProduct}
-      ></Button>
+      <Button 
+        leftIcon={<AddIcon />}
+        size="sm" 
+        colorScheme="blue"
+        onClick={() => onOpen()}>
+        Ajouter un nouveau produit
+      </Button>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay>
+          <ModalContent>
+            <ModalHeader>Ajouter un nouveau produit</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <div className="product-label">
+                <FormLabel htmlFor="productName">Nom du produit</FormLabel>
+                <Input 
+                  id="productName"
+                  autoFocus
+                  variant="filled"
+                  size="sm" 
+                  placeholder="Nom du produit" 
+                  value={productLabel}
+                  ref={productLabelInputRef}
+                  onChange={handleInputProductLabelChange}
+                  onKeyDown={handleKeyDown}/>
+              </div>
+              <div className="product-quantity">
+                <FormLabel htmlFor="productQuantity">Quantité</FormLabel>
+                <Input 
+                  id="productQuantity"
+                  variant="filled"
+                  size="sm" 
+                  placeholder="Quantité" 
+                  value={productQuantity}
+                  onChange={handleInputProductQuantityChange}
+                  onKeyDown={handleKeyDown}/>
+              </div>
+              <div className="product-expiration-date">
+                <FormLabel htmlFor="productExpirationDate">Date de péremption (JJ/MM/AAAA)</FormLabel>
+                <Input 
+                  id="productExpirationDate"
+                  variant="filled"
+                  size="sm" 
+                  placeholder="Quantité" 
+                  value={productExpirationDate}
+                  onChange={handleInputProductExpirationDateChange}
+                  onKeyDown={handleKeyDown}/>
+              </div>
+              <div className="product-location">
+                <FormLabel htmlFor="productExpirationDate">Emplacement</FormLabel>
+                <Select value={productLocation} onChange={handleInputProductLocationChange}>
+                  {renderSelectLocationOptions()}
+                </Select>
+                <div className="product-category">
+                  <FormLabel htmlFor="productExpirationDate">Catégorie</FormLabel>
+                  <Select value={productCategory} onChange={handleInputProductCategoryChange}>
+                    <option value=""></option>
+                    {renderSelectCategoryOptions()}
+                  </Select>
+                </div>
+              </div>
+            </ModalBody>
+            <ModalFooter>
+              <ButtonGroup spacing="6">
+                <Button colorScheme="blue" isDisabled={!isValidProduct} onClick={() => validateAndAddProduct()}>
+                  Ajouter le produit
+                </Button>
+                <Button variant="ghost" onClick={onClose}>Fermer</Button>
+              </ButtonGroup>
+            </ModalFooter>
+          </ModalContent>
+        </ModalOverlay>
+      </Modal>
     </div>
   );
 };

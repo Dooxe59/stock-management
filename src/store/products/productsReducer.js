@@ -10,7 +10,7 @@ const initialState = [{
   categoryId: 1, // Viande
   quantity: "2",
   expirationDate: "20/10/2020",
-  id: 12
+  id: 2
 }];
 
 export const ADD_PRODUCT = 'ADD_PRODUCT';

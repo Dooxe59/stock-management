@@ -7,10 +7,12 @@ import "./home.scss";
 
 const Home = () => {
   return (
-    <div className="home-page">
-      Nous sommes le {moment().format('LL')}
+    <div className="home">
       <AddProductForm></AddProductForm>
       <ProductList></ProductList>
+      <footer>
+        Nous sommes le {moment().format('LL')}
+      </footer>
     </div>
   );
 };

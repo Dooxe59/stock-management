@@ -13,6 +13,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/core";
 import { Button, ButtonGroup, Input } from "@chakra-ui/core";
+// TODO: refact iomport
 import { updateCategory } from '../../../store/categories/categoriesActions';
 
 import "./categoryList.scss";
