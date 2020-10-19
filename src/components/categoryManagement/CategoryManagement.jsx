@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import CategoryList from './categoryList/CategoryList';
-import { Button, Divider, Input } from "@chakra-ui/core";
-import { AddIcon } from '@chakra-ui/icons';
 import { addCategory } from '../../store/categories/categoriesActions';
+import CategoryList from './categoryList/CategoryList';
+import { Button, Input } from "@chakra-ui/core";
+import { AddIcon } from '@chakra-ui/icons';
 
 import "./categoryManagement.scss";
 
@@ -64,7 +64,7 @@ const CategoryManagement = () => {
           Ajouter la catégorie
         </Button>
       </div>
-      <Divider/>
+      <hr/>
       <CategoryList></CategoryList>
     </div>
   );

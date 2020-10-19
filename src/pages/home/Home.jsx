@@ -1,7 +1,7 @@
 import React from 'react';
+import moment from "moment";
 import AddProductForm from '../../components/addProductForm/AddProductForm';
 import ProductList from '../../components/productList/ProductList';
-import moment from "moment";
 
 import "./home.scss";
 

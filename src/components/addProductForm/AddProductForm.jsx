@@ -1,11 +1,17 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { 
+  useCallback, 
+  useRef, 
+  useState 
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { categoriesSelector } from '../../store/categories/categoriesSelector';
 import { locationsSelector } from '../../store/locations/locationsSelector';
 import { addProduct } from '../../store/products/productsActions';
-import { Button, ButtonGroup, FormLabel, Input, Select } from "@chakra-ui/core";
-import { AddIcon } from '@chakra-ui/icons';
 import {
+  Button, 
+  ButtonGroup, 
+  FormLabel, 
+  Input,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -13,10 +19,10 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Select,
   useDisclosure,
 } from "@chakra-ui/core";
-
-// TODO: refact import 
+import { AddIcon } from '@chakra-ui/icons';
 
 const AddProductForm = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

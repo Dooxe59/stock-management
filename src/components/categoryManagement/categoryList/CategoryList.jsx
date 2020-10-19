@@ -1,8 +1,18 @@
-import React, { useCallback, useState } from 'react';
+import React, { 
+  useCallback, 
+  useState 
+} from 'react';
+import { 
+  useDispatch,
+  useSelector 
+} from 'react-redux';
 import { categoriesSelector } from '../../../store/categories/categoriesSelector';
-import { useDispatch, useSelector } from 'react-redux';
+import { updateCategory } from '../../../store/categories/categoriesActions';
 import CategoryItem from './categoryItem/CategoryItem';
 import {
+  Button, 
+  ButtonGroup, 
+  Input,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -12,9 +22,6 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from "@chakra-ui/core";
-import { Button, ButtonGroup, Input } from "@chakra-ui/core";
-// TODO: refact iomport
-import { updateCategory } from '../../../store/categories/categoriesActions';
 
 import "./categoryList.scss";
 
@@ -67,7 +74,6 @@ const CategoryList = () => {
             <ModalHeader>Mise à jour d'une catégorie</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              {/* TODO: vérifier aria label dans app  */}
             <Input 
               size="sm" 
               aria-label="Nom de la catégorie"

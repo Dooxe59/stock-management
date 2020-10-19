@@ -1,8 +1,15 @@
-import React, { useCallback, useState } from 'react';
-import { locationsSelector } from '../../../store/locations/locationsSelector';
+import React, { 
+  useCallback,
+  useState 
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { locationsSelector } from '../../../store/locations/locationsSelector';
+import { updateLocation } from '../../../store/locations/locationsActions';
 import LocationItem from './locationItem/LocationItem';
 import {
+  Button,
+  ButtonGroup,
+  Input,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -12,8 +19,6 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from "@chakra-ui/core";
-import { Button, ButtonGroup, Input } from "@chakra-ui/core";
-import { updateLocation } from '../../../store/locations/locationsActions';
 
 import "./locationList.scss";
 

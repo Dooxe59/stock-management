@@ -3,11 +3,15 @@ import { useSelector } from 'react-redux';
 import { locationsSelector } from '../../../store/locations/locationsSelector';
 import { categoriesSelector } from '../../../store/categories/categoriesSelector';
 import moment from "moment";
-import { Tag } from "@chakra-ui/core";
+
+import { Button, Tag, useToast } from "@chakra-ui/core";
+import { EditIcon } from '@chakra-ui/icons';
 
 import "./productItem.scss";
 
 const ProductItem = ({product}) => {
+  const toast = useToast();
+
   const COLORS = ['blue', 'purple', 'red', 'green', 'orange', 'teal', 'gray', 'cyan', 'pink'];
   const locations = useSelector(locationsSelector);
   const currentLocation = locations.find(location => location.id === product.locationId);
@@ -16,12 +20,6 @@ const ProductItem = ({product}) => {
 
   const momentExpirationDate = moment(product.expirationDate, "DDMMYYYY");
   const isValidExpirationDate = momentExpirationDate.isValid();
-  // const renderProductExpirationDate = () => {
-  //   return isValidExpirationDate ?
-  //     <div className="product-expiration-date">
-  //       Périmé {momentExpirationDate.fromNow()} ({product.expirationDate})
-  //     </div> : '';
-  // };
 
   const currentDate = moment();
   const daysRemaining = momentExpirationDate.diff(currentDate, 'days') + 1;
@@ -83,6 +81,23 @@ const ProductItem = ({product}) => {
       </div>
       {renderProductExpirationDateState()}
       {renderProductCategory()}
+      <div className="product-item-actions">
+        <Button 
+          leftIcon={<EditIcon />}
+          size="xs" 
+          colorScheme="blue"
+          onClick={() => 
+            toast({
+              title: "Non implémenté.",
+              description: "Fonctionnalité non implémentée. Work In Progress ...", 
+              status: "warning",
+              duration: 5000,
+              isClosable: true,
+            })
+          }>
+          Modifier
+        </Button>
+      </div>
     </div>
   );
 };

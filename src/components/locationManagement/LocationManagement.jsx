@@ -1,8 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { 
+  useCallback,
+  useState 
+} from 'react';
 import { useDispatch } from 'react-redux';
 import { addLocation } from '../../store/locations/locationsActions';
 import LocationList from './locationList/LocationList';
-import { Button, Divider, Input } from "@chakra-ui/core";
+import { Button, Input } from "@chakra-ui/core";
 import { AddIcon } from '@chakra-ui/icons';
 
 import "./locationManagement.scss";
@@ -64,7 +67,7 @@ const LocationManagement = () => {
           Ajouter l'emplacement
         </Button>
       </div>
-      <Divider/>
+      <hr/>
       <LocationList></LocationList>
     </div>
   );

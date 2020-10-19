@@ -1,5 +1,5 @@
 import React from 'react';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { productsSelector } from '../../store/products/productsSelector';
 import ProductItem from './productItem/ProductItem';
 
