@@ -1,20 +1,49 @@
 .product-item {
   border: 1px solid lightgray;
   border-radius: 4px;
-  width: 250px;
-  height: 155px;
+  width: 100%;
   padding: 0 10px;
-  margin: 10px;
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
 
-  .product-name {
+  .product-name-quantity {
     font-weight: bold;
     display: flex;
-    justify-content: center;
+    flex: 1;
+    // justify-content: center;
+  }
+
+  .product-location {
+    margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .product-category {
+    margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
   }
 
   .expiration-date-status {
+    margin-right: 0.5rem;
     color: green;
+
+    .expiration-date-icon {
+      display: none;
+    }
+
+    @media screen and (max-width: 600px) {
+      .expiration-date-text {
+        display: none;
+      }
+
+      .expiration-date-icon {
+        display: block;
+      }
+    }
 
     &.expiration-date-alert {
       color: red;
@@ -28,6 +57,10 @@
     &.no-expiration-date-alert {
       color: grey;
       font-style: italic;
+
+      .expiration-date-icon {
+        display: none;
+      }
     }
   }
 

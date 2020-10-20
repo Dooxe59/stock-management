@@ -14,7 +14,7 @@ const LocationManagement = () => {
   const dispatch = useDispatch();
   const addNewLocation = useCallback((location) => {
     dispatch(addLocation(location));
-  }, []);
+  }, [dispatch]);
 
   const [newLocationLabel, setNewLocationLabel] = useState("");
 
@@ -49,7 +49,6 @@ const LocationManagement = () => {
     <div className="location-management">
       <div className="add-location-form">
         <Input 
-          autoFocus
           variant="filled"
           size="sm" 
           placeholder="Ajouter un emplacement" 

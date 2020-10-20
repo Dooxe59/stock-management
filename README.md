@@ -1,6 +1,6 @@
 Application de gestion de stock
 
-Vérifier aria label dans app
+Vérifier aria label dans app (input, icon button, icon)
 Ajouter boutons pour Consommer/Jeter
 refacto form ajout produit
 refacto admin gestion emplacements/catégories

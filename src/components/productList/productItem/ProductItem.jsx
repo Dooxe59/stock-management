@@ -9,6 +9,10 @@ import {
   Badge, 
   Button, 
   ButtonGroup, 
+  Menu, 
+  MenuButton, 
+  MenuItem,
+  MenuList,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -16,20 +20,21 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useToast } from "@chakra-ui/core";
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
+  useToast,
+  IconButton,
+  Text} from "@chakra-ui/core";
+import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 
 import "./productItem.scss";
 
 const ProductItem = ({product}) => {
   const [isOpen, setIsOpen] = React.useState();
   const onClose = () => setIsOpen(false);
-  const cancelRef = React.useRef();
 
   const dispatch = useDispatch(); 
   const deleteSelectedProduct = useCallback((product) => {
     dispatch(deleteProduct(product));
-  }, []);
+  }, [dispatch]);
 
   const confirmDeleteProduct = () => {
     const productName = product.productName;
@@ -61,12 +66,12 @@ const ProductItem = ({product}) => {
   const renderProductExpirationDateState = () => {
     let status = '';
     let classes = '';
-
+    
     if(!isValidExpirationDate) {
       status = `Pas de date d'expiration`;
       classes = 'no-expiration-date-alert';
     } else if(daysRemaining < 0) {
-      status = `Date dépassée depuis ${daysRemaining * -1} jours!`;
+      status = `Date dépassée depuis ${daysRemaining * -1} jours !`;
       classes = 'expiration-date-alert';
     } else if(daysRemaining === 0) {
       status = "Date limite aujourd'hui !"
@@ -83,7 +88,16 @@ const ProductItem = ({product}) => {
 
     return (
       <div className={`expiration-date-status ${classes} truncated`} title={status}>
-        { status }
+        <Text 
+          fontSize={["xs", "sm"]}
+          className="expiration-date-text">
+          { status }
+        </Text>
+        <Text 
+          fontSize={["xs", "sm"]}
+          className="expiration-date-icon">
+          { <BellIcon/> }
+        </Text>
       </div>)
   };
 
@@ -104,62 +118,74 @@ const ProductItem = ({product}) => {
 
   return (
     <div className="product-item">
-      <div className="product-name truncated" title={product.productName}>
-        {product.productName}
-      </div>
-      <div className="product-location">
-        <Badge size="md" variant="outline" colorScheme={getColorSchemeById(currentLocation.id)}>{currentLocation?.label}</Badge>
-      </div>
-      <div className="product-quantity">
-        Quantité: {product.quantity}
+      <div className="product-name-quantity truncated" title={`${product.productName} (${product.quantity})`}>
+        <Text 
+          fontSize={["xs", "sm"]}
+          className="truncated">
+          {product.productName} ({product.quantity})
+        </Text>
       </div>
       {renderProductExpirationDateState()}
       {renderProductCategory()}
+      <div className="product-location">
+        <Badge size="md" variant="outline" colorScheme={getColorSchemeById(currentLocation.id)}>{currentLocation?.label}</Badge>
+      </div>
       <div className="product-item-actions">
-      <ButtonGroup spacing="2">
-          <Button 
-            leftIcon={<EditIcon />}
+        <Menu>
+          <MenuButton 
             size="xs" 
-            colorScheme="blue"
-            onClick={() => 
-              toast({
-                title: "Non implémenté.",
-                description: "Fonctionnalité non implémentée. Work In Progress ...", 
-                status: "warning",
-                duration: 3000,
-                isClosable: true,
-              })
-            }>
-            Modifier
-          </Button>
-          <Button 
-            leftIcon={<DeleteIcon />}
-            size="xs" 
-            colorScheme="red"
-            onClick={() => setIsOpen(true)
-            }>
-            Supprimer
-          </Button>
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay>
-              <ModalContent>
-                <ModalHeader>Suppression d'un produit</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                  Êtes-vous sur de vouloir supprimer "{product.productName}" ({product.quantity}) ?
-                </ModalBody>
-                <ModalFooter>
-                  <ButtonGroup spacing="6">
-                    <Button colorScheme="red" onClick={() => confirmDeleteProduct()}>
-                      Supprimer
-                    </Button>
-                    <Button variant="ghost" onClick={onClose}>Annuler</Button>
-                  </ButtonGroup>
-                </ModalFooter>
-              </ModalContent>
-            </ModalOverlay>
-          </Modal>
-        </ButtonGroup>
+            as={IconButton}
+            transition="all 0.2s"
+            rounded="md"
+            borderWidth="2px"
+            icon={<ChevronDownIcon/>}
+            _hover={{ bg: "gray.100" }}
+            _expanded={{ bg: "teal.50" }}
+            _focus={{ outline: 0, boxShadow: "outline" }}>
+          </MenuButton>
+          <MenuList>
+            <MenuItem
+              variant="ghost"
+              fontSize={["sm", "md"]}
+              onClick={() => 
+                toast({
+                  title: "Non implémenté.",
+                  description: "Fonctionnalité non implémentée. Work In Progress ...", 
+                  status: "warning",
+                  duration: 3000,
+                  isClosable: true,
+                })
+              }>
+              Modifier
+            </MenuItem>
+            <MenuItem 
+              variant="ghost"
+              fontSize={["sm", "md"]}
+              onClick={() => setIsOpen(true)}>
+              Supprimer
+            </MenuItem>
+          </MenuList>
+        </Menu>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay>
+            <ModalContent>
+              <ModalHeader fontSize={["md", "lg"]}>
+                Suppression d'un produit</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody fontSize={["sm", "md"]}>
+                Êtes-vous sur de vouloir supprimer "{product.productName}" ({product.quantity}) ?
+              </ModalBody>
+              <ModalFooter>
+                <ButtonGroup spacing="6">
+                  <Button fontSize={["sm", "md"]} colorScheme="red" onClick={() => confirmDeleteProduct()}>
+                    Supprimer
+                  </Button>
+                  <Button fontSize={["sm", "md"]} variant="ghost" onClick={onClose}>Annuler</Button>
+                </ButtonGroup>
+              </ModalFooter>
+            </ModalContent>
+          </ModalOverlay>
+        </Modal>
       </div>
     </div>
   );

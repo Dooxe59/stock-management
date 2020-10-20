@@ -42,7 +42,7 @@ const CategoryList = () => {
   const dispatch = useDispatch();
   const updateCategoryStore = useCallback((category) => {
     dispatch(updateCategory(category));
-  }, []);
+  }, [dispatch]);
 
   const updateCategoryFromModal = () => {
     updateCategoryStore(updatedCategory);

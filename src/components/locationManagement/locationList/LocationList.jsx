@@ -40,7 +40,7 @@ const LocationList = () => {
   const dispatch = useDispatch();
   const updateLocationStore = useCallback((location) => {
     dispatch(updateLocation(location));
-  }, []);
+  }, [dispatch]);
 
   const updateLocationFromModal = () => {
     updateLocationStore(updatedLocation);

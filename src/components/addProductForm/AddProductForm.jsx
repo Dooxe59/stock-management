@@ -12,6 +12,7 @@ import {
   Button, 
   ButtonGroup, 
   FormLabel, 
+  IconButton,
   Input,
   Modal,
   ModalOverlay,
@@ -25,10 +26,10 @@ import {
   useToast,
 } from "@chakra-ui/core";
 import DatePicker from "react-datepicker";
-
 import { AddIcon } from '@chakra-ui/icons';
 
 import "react-datepicker/dist/react-datepicker.css";
+import "./addProductForm.scss";
 
 const AddProductForm = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -36,7 +37,7 @@ const AddProductForm = () => {
   const dispatch = useDispatch();
   const addNewProduct = useCallback((product) => {
     dispatch(addProduct(product));
-  }, []);
+  }, [dispatch]);
 
   const [productLabel, setProductLabel] = useState("");
   const handleInputProductLabelChange = (event) => {
@@ -122,26 +123,30 @@ const AddProductForm = () => {
 
   return (
     <div className="add-product-form">
-      <Button 
-        leftIcon={<AddIcon />}
-        size="sm" 
-        colorScheme="blue"
-        onClick={() => onOpen()}>
-        Ajouter un nouveau produit
-      </Button>
+      <IconButton 
+        title="Ajouter un nouveau produit"
+        icon={<AddIcon />} 
+        size="xs" 
+        colorScheme="teal"
+        onClick={() => onOpen()}/>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay>
           <ModalContent>
-            <ModalHeader>Ajouter un nouveau produit</ModalHeader>
+            <ModalHeader fontSize={["md", "lg"]}>
+              Ajouter un nouveau produit
+            </ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <div className="product-label">
-                <FormLabel htmlFor="productName">Nom du produit</FormLabel>
+                <FormLabel fontSize={["sm", "md"]} htmlFor="productName">
+                  Nom du produit
+                </FormLabel>
                 <Input 
                   id="productName"
                   autoFocus
                   variant="filled"
                   size="sm" 
+                  autoComplete="off"
                   placeholder="Nom du produit" 
                   value={productLabel}
                   ref={productLabelInputRef}
@@ -149,18 +154,23 @@ const AddProductForm = () => {
                   onKeyDown={handleKeyDown}/>
               </div>
               <div className="product-quantity">
-                <FormLabel htmlFor="productQuantity">Quantité</FormLabel>
+                <FormLabel fontSize={["sm", "md"]} htmlFor="productQuantity">
+                  Quantité
+                </FormLabel>
                 <Input 
                   id="productQuantity"
                   variant="filled"
                   size="sm" 
+                  autoComplete="off"
                   placeholder="Quantité" 
                   value={productQuantity}
                   onChange={handleInputProductQuantityChange}
                   onKeyDown={handleKeyDown}/>
               </div>
               <div className="product-expiration-date">
-                <FormLabel htmlFor="productExpirationDate">Date de péremption (JJ/MM/AAAA)</FormLabel>
+                <FormLabel fontSize={["sm", "md"]} htmlFor="productExpirationDate">
+                  Date de péremption (JJ/MM/AAAA)
+                </FormLabel>
                 <Input 
                   as={DatePicker}
                   id="productExpirationDate"
@@ -175,12 +185,16 @@ const AddProductForm = () => {
                   onKeyDown={handleKeyDown}/>
               </div>
               <div className="product-location">
-                <FormLabel htmlFor="productExpirationDate">Emplacement</FormLabel>
+                <FormLabel fontSize={["sm", "md"]} htmlFor="productExpirationDate">
+                  Emplacement
+                </FormLabel>
                 <Select value={productLocation} onChange={handleInputProductLocationChange}>
                   {renderSelectLocationOptions()}
                 </Select>
                 <div className="product-category">
-                  <FormLabel htmlFor="productExpirationDate">Catégorie</FormLabel>
+                  <FormLabel fontSize={["sm", "md"]} htmlFor="productExpirationDate">
+                    Catégorie
+                  </FormLabel>
                   <Select value={productCategory} onChange={handleInputProductCategoryChange}>
                     <option value=""></option>
                     {renderSelectCategoryOptions()}
@@ -190,10 +204,19 @@ const AddProductForm = () => {
             </ModalBody>
             <ModalFooter>
               <ButtonGroup spacing="6">
-                <Button colorScheme="blue" isDisabled={!isValidProduct} onClick={() => validateAndAddProduct()}>
+                <Button 
+                  fontSize={["sm", "md"]} 
+                  colorScheme="blue" 
+                  isDisabled={!isValidProduct} 
+                  onClick={() => validateAndAddProduct()}>
                   Ajouter le produit
                 </Button>
-                <Button variant="ghost" onClick={onClose}>Fermer</Button>
+                <Button 
+                  fontSize={["sm", "md"]} 
+                  variant="ghost" 
+                  onClick={onClose}>
+                  Fermer
+                </Button>
               </ButtonGroup>
             </ModalFooter>
           </ModalContent>

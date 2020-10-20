@@ -11,7 +11,7 @@ const CategoryManagement = () => {
   const dispatch = useDispatch();
   const addNewCategory = useCallback((category) => {
     dispatch(addCategory(category));
-  }, []);
+  }, [dispatch]);
 
   const [newCategoryLabel, setNewCategoryLabel] = useState("");
 
@@ -46,7 +46,6 @@ const CategoryManagement = () => {
     <div className="category-management">
       <div className="add-category-form">
         <Input 
-          autoFocus
           variant="filled"
           size="sm" 
           placeholder="Ajouter un emplacement" 
