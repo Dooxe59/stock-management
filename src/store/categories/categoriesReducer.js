@@ -5,8 +5,17 @@ const initialState = [{
   label: "Poisson",
   id: 2,
 },{
-  label: "Légumes",
+  label: "Légume",
   id: 3,
+},{
+  label: "Fruits",
+  id: 4,
+},{
+  label: "Yaourt",
+  id: 5,
+},{
+  label: "Conserve",
+  id: 6,
 }];
 
 export const ADD_CATEGORY = 'ADD_CATEGORY';

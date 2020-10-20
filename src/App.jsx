@@ -9,7 +9,7 @@ import store from './store/index.js';
 import Home from "./pages/home/Home";
 import Administration from "./pages/administration/Administration";
 import { Provider } from "react-redux";
-import { Button } from "@chakra-ui/core";
+import { Button, IconButton } from "@chakra-ui/core";
 import { SettingsIcon } from "@chakra-ui/icons";
 
 import "./app.scss";
@@ -27,9 +27,16 @@ const App = () => {
             </Link>
             <div className="empty-area"></div>
             <Link to="/administration">
-              <Button size="xs" leftIcon={<SettingsIcon />} colorScheme="teal" variant="ghost">
+              <Button className="administration-button-text" size="xs" colorScheme="teal" variant="ghost">
                 Administration
               </Button>
+              <IconButton 
+                className="administration-button-icon"
+                title="Administration"
+                variant="ghost"
+                icon={<SettingsIcon />} 
+                size="xs" 
+                colorScheme="teal"/>
             </Link>
           </div>
           <Switch>

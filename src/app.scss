@@ -30,16 +30,22 @@
       flex: 1;
     }
 
-    .administration-page-button-label {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .administration-button-text {
       margin: 0 10px;
+    }
 
-      &:hover {
-        cursor: pointer;
-        text-decoration: underline;
+    .administration-button-icon {
+      margin: 0 10px;
+      display: none;
+    }
+
+    @media screen and (max-width: 600px) {
+      .administration-button-text {
+        display: none;
+      }
+
+      .administration-button-icon {
+        display: block;
       }
     }
   }

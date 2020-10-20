@@ -2,11 +2,17 @@ const initialState = [{
   label: "Frigo",
   id: 1,
 },{
-  label: "Congélateur RDC",
+  label: "Congélo cuisine",
   id: 2,
 },{
-  label: "Congélateur sous-sol",
+  label: "Congélo cave",
   id: 3,
+},{
+  label: "Placard cuisine",
+  id: 4,
+},{
+  label: "Placard salon",
+  id: 5,
 }];
 
 export const ADD_LOCATION = 'ADD_LOCATION';
