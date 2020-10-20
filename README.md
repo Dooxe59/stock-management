@@ -5,6 +5,7 @@ Ajouter boutons pour Consommer/Jeter
 Améliorer affichage produit depuis desktop
 Améliorer affichage catégorie/emplacement depuis desktop
 refacto admin gestion emplacements/catégories
+App icon + favicon
 
 Mise à jour d'un produit
 

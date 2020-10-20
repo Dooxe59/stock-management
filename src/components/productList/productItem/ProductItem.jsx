@@ -61,7 +61,7 @@ const ProductItem = ({product}) => {
   const isValidExpirationDate = momentExpirationDate.isValid();
 
   const currentDate = moment();
-  const daysRemaining = momentExpirationDate.diff(currentDate, 'days') + 1;
+  const daysRemaining = momentExpirationDate.diff(currentDate, 'days');
 
   const renderProductExpirationDateState = () => {
     let status = '';

@@ -8,7 +8,7 @@ const initialState = [{
   label: "Légume",
   id: 3,
 },{
-  label: "Fruits",
+  label: "Fruit",
   id: 4,
 },{
   label: "Yaourt",

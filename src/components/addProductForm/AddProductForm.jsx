@@ -3,11 +3,10 @@ import React, {
   useRef, 
   useState 
 } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import moment from "moment";
-import { categoriesSelector } from '../../store/categories/categoriesSelector';
-import { locationsSelector } from '../../store/locations/locationsSelector';
 import { addProduct } from '../../store/products/productsActions';
+import LocationSelectorInput from '../locationSelectorInput/LocationSelectorInput';
 import {
   Button, 
   ButtonGroup, 
@@ -21,7 +20,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Select,
   useDisclosure,
   useToast,
 } from "@chakra-ui/core";
@@ -30,6 +28,7 @@ import { AddIcon } from '@chakra-ui/icons';
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./addProductForm.scss";
+import CategorySelectorInput from '../categorySelectorInput/CategorySelectorInput';
 
 const AddProductForm = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,22 +54,10 @@ const AddProductForm = () => {
   const handleInputProductLocationChange = (event) => {
     setProductLocation(parseInt(event.target.value));
   };
-  const locations = useSelector(locationsSelector);
-  const renderSelectLocationOptions = () => {
-    return locations.map(location => {
-      return <option value={location.id} key={location.id}>{location.label}</option>
-    });
-  };
 
   const [productCategory, setProductCategory] = useState("");
   const handleInputProductCategoryChange = (event) => {
     setProductCategory(parseInt(event.target.value));
-  };
-  const categories = useSelector(categoriesSelector);
-  const renderSelectCategoryOptions = () => {
-    return categories.map(category => {
-      return <option value={category.id} key={category.id}>{category.label}</option>
-    });
   };
 
   const handleKeyDown = (event) => {
@@ -109,7 +96,7 @@ const AddProductForm = () => {
         status: "success",
         duration: 5000,
         isClosable: true,
-      })
+      });
       clearProductForm();
       setFocusOnFirstInput();
     }
@@ -185,21 +172,16 @@ const AddProductForm = () => {
                   onKeyDown={handleKeyDown}/>
               </div>
               <div className="product-location">
-                <FormLabel fontSize={["sm", "md"]} htmlFor="productExpirationDate">
-                  Emplacement
-                </FormLabel>
-                <Select value={productLocation} onChange={handleInputProductLocationChange}>
-                  {renderSelectLocationOptions()}
-                </Select>
-                <div className="product-category">
-                  <FormLabel fontSize={["sm", "md"]} htmlFor="productExpirationDate">
-                    Catégorie
-                  </FormLabel>
-                  <Select value={productCategory} onChange={handleInputProductCategoryChange}>
-                    <option value=""></option>
-                    {renderSelectCategoryOptions()}
-                  </Select>
-                </div>
+                <LocationSelectorInput 
+                  productLocation={productLocation}
+                  handleInputProductLocationChange={handleInputProductLocationChange}>
+                </LocationSelectorInput>
+              </div>
+              <div className="product-category">
+                <CategorySelectorInput
+                  productCategory={productCategory}
+                  handleInputProductCategoryChange={handleInputProductCategoryChange}>
+                </CategorySelectorInput>
               </div>
             </ModalBody>
             <ModalFooter>
