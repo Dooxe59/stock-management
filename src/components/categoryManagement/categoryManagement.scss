@@ -5,5 +5,24 @@
     display: flex;
     margin: 0 10%;
     margin-bottom: 10px;
+
+    .add-category-button {
+      flex-shrink: 0;
+      margin-left: 10px;
+
+      &.add-category-button-icon {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .add-category-button-icon {
+        display: block !important;
+      }
+
+      .add-category-button-text {
+        display: none;
+      }
+    }
   }
 }

@@ -16,7 +16,7 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
+  Text,
   useDisclosure,
 } from "@chakra-ui/core";
 
@@ -53,6 +53,12 @@ const LocationList = () => {
     })
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && isValidUpdatedLocation) {
+      updateLocationFromModal();
+      event.preventDefault();
+    }
+  };
 
   const handleInputTextChange = (event) => {
     setUpdatedLocation({
@@ -63,29 +69,38 @@ const LocationList = () => {
 
   return (
     <div className="location-list">
-      <span className="location-list-section-label">
+      <Text fontSize={["sm", "md"]} className="location-list-section-label">
         Emplacements:
-      </span>
+      </Text>
       { renderLocations() }
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay>
           <ModalContent>
-            <ModalHeader>Mise à jour d'un emplacement</ModalHeader>
-            <ModalCloseButton />
+            <ModalHeader fontSize={["md", "lg"]}>Mise à jour d'un emplacement</ModalHeader>
             <ModalBody>
-            <Input 
-              size="sm" 
-              aria-label="Nom de l'emplacement"
-              placeholder="Nom de l'emplacement" 
-              value={updatedLocation.label}
-              onChange={handleInputTextChange}/>
+              <Input 
+                size="sm" 
+                aria-label="Nom de l'emplacement"
+                placeholder="Nom de l'emplacement" 
+                value={updatedLocation.label}
+                onChange={handleInputTextChange}
+                onKeyDown={handleKeyDown}/>
             </ModalBody>
             <ModalFooter>
               <ButtonGroup spacing="6">
-                <Button colorScheme="blue" isDisabled={!isValidUpdatedLocation} onClick={() => updateLocationFromModal()}>
+                <Button 
+                  fontSize={["sm", "md"]}
+                  colorScheme="blue"
+                  isDisabled={!isValidUpdatedLocation}
+                  onClick={() => updateLocationFromModal()}>
                   Mettre à jour
                 </Button>
-                <Button variant="ghost" onClick={onClose}>Annuler</Button>
+                <Button 
+                  fontSize={["sm", "md"]}
+                  variant="ghost"
+                  onClick={onClose}>
+                  Annuler
+                </Button>
               </ButtonGroup>
             </ModalFooter>
           </ModalContent>

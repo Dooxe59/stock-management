@@ -11,4 +11,18 @@
   .category-label {
     flex: 1;
   }
+
+  .update-category-item-button-icon {
+    display: none;
+  }
+
+  @media screen and (max-width: 480px) {
+    .update-category-item-button-text {
+      display: none;
+    }
+
+    .update-category-item-button-icon {
+      display: block;
+    }
+  }
 }

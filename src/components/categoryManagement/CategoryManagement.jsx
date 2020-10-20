@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCategory } from '../../store/categories/categoriesActions';
 import CategoryList from './categoryList/CategoryList';
-import { Button, Input } from "@chakra-ui/core";
+import { Button, IconButton, Input } from "@chakra-ui/core";
 import { AddIcon } from '@chakra-ui/icons';
 
 import "./categoryManagement.scss";
@@ -53,15 +53,23 @@ const CategoryManagement = () => {
           onChange={handleInputTextChange}
           onKeyDown={handleKeyDown}/>
         <Button 
-          flexShrink={0}
-          marginLeft="10px"
-          leftIcon={<AddIcon />}
-          size="sm" 
+          className="add-category-button add-category-button-text"
+          variant="outline"
+          size="sm"
           colorScheme="green"
           isDisabled={!isValidNewCategoryLabel}
           onClick={() => validateAndAddNewCategory()}>
-          Ajouter la catégorie
+          Ajouter 
         </Button>
+        <IconButton 
+          className="add-category-button add-category-button-icon"
+          variant="outline"
+          title="Ajouter"
+          icon={<AddIcon />} 
+          size="sm" 
+          colorScheme="green"
+          isDisabled={!isValidNewCategoryLabel}
+          onClick={() => validateAndAddNewCategory()}/>
       </div>
       <hr/>
       <CategoryList></CategoryList>

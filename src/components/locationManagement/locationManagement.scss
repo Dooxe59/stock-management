@@ -5,5 +5,24 @@
     display: flex;
     margin: 0 10%;
     margin-bottom: 10px;
+
+    .add-location-button {
+      flex-shrink: 0;
+      margin-left: 10px;
+
+      &.add-location-button-icon {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .add-location-button-icon {
+        display: block !important;
+      }
+
+      .add-location-button-text {
+        display: none;
+      }
+    }
   }
 }

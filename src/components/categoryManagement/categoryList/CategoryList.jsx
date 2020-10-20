@@ -1,17 +1,17 @@
-import React, { 
-  useCallback, 
-  useState 
+import React, {
+  useCallback,
+  useState
 } from 'react';
-import { 
+import {
   useDispatch,
-  useSelector 
+  useSelector
 } from 'react-redux';
 import { categoriesSelector } from '../../../store/categories/categoriesSelector';
 import { updateCategory } from '../../../store/categories/categoriesActions';
 import CategoryItem from './categoryItem/CategoryItem';
 import {
-  Button, 
-  ButtonGroup, 
+  Button,
+  ButtonGroup,
   Input,
   Modal,
   ModalOverlay,
@@ -19,7 +19,7 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
+  Text,
   useDisclosure,
 } from "@chakra-ui/core";
 
@@ -27,7 +27,7 @@ import "./categoryList.scss";
 
 const CategoryList = () => {
   const categories = useSelector(categoriesSelector);
-  
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [updatedCategory, setUpdatedCategory] = useState({});
 
@@ -55,6 +55,13 @@ const CategoryList = () => {
     })
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && isValidUpdatedCategory) {
+      updateCategoryFromModal();
+      event.preventDefault();
+    }
+  };
+
   const handleInputTextChange = (event) => {
     setUpdatedCategory({
       label: event.target.value,
@@ -64,29 +71,38 @@ const CategoryList = () => {
 
   return (
     <div className="category-list">
-      <span className="category-list-section-label">
+      <Text fontSize={["sm", "md"]} className="category-list-section-label">
         Catégories:
-      </span>
+      </Text>
       { renderCategories() }
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay>
           <ModalContent>
-            <ModalHeader>Mise à jour d'une catégorie</ModalHeader>
-            <ModalCloseButton />
+            <ModalHeader fontSize={["md", "lg"]}>Mise à jour d'une catégorie</ModalHeader>
             <ModalBody>
-            <Input 
-              size="sm" 
-              aria-label="Nom de la catégorie"
-              placeholder="Nom de la catégorie" 
-              value={updatedCategory.label}
-              onChange={handleInputTextChange}/>
+              <Input
+                size="sm"
+                aria-label="Nom de la catégorie"
+                placeholder="Nom de la catégorie"
+                value={updatedCategory.label}
+                onChange={handleInputTextChange}
+                onKeyDown={handleKeyDown}/>
             </ModalBody>
             <ModalFooter>
               <ButtonGroup spacing="6">
-                <Button colorScheme="blue" isDisabled={!isValidUpdatedCategory} onClick={() => updateCategoryFromModal()}>
+                <Button
+                  fontSize={["sm", "md"]}
+                  colorScheme="blue"
+                  isDisabled={!isValidUpdatedCategory}
+                  onClick={() => updateCategoryFromModal()}>
                   Mettre à jour
                 </Button>
-                <Button variant="ghost" onClick={onClose}>Annuler</Button>
+                <Button
+                  fontSize={["sm", "md"]}
+                  variant="ghost"
+                  onClick={onClose}>
+                  Annuler
+                </Button>
               </ButtonGroup>
             </ModalFooter>
           </ModalContent>

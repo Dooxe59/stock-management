@@ -5,7 +5,7 @@ import React, {
 import { useDispatch } from 'react-redux';
 import { addLocation } from '../../store/locations/locationsActions';
 import LocationList from './locationList/LocationList';
-import { Button, Input } from "@chakra-ui/core";
+import { Button, IconButton, Input } from "@chakra-ui/core";
 import { AddIcon } from '@chakra-ui/icons';
 
 import "./locationManagement.scss";
@@ -48,7 +48,7 @@ const LocationManagement = () => {
   return (
     <div className="location-management">
       <div className="add-location-form">
-        <Input 
+        <Input
           variant="filled"
           size="sm" 
           placeholder="Ajouter un emplacement" 
@@ -56,15 +56,23 @@ const LocationManagement = () => {
           onChange={handleInputTextChange}
           onKeyDown={handleKeyDown}/>
         <Button 
-          flexShrink={0}
-          marginLeft="10px"
-          leftIcon={<AddIcon />}
-          size="sm" 
+          className="add-location-button add-location-button-text"
+          variant="outline"
+          size="sm"
           colorScheme="green"
           isDisabled={!isValidNewLocationLabel}
           onClick={() => validateAndAddNewLocation()}>
-          Ajouter l'emplacement
+          Ajouter
         </Button>
+        <IconButton 
+          className="add-location-button add-location-button-icon"
+          variant="outline"
+          title="Ajouter"
+          icon={<AddIcon />} 
+          size="sm" 
+          colorScheme="green"
+          isDisabled={!isValidNewLocationLabel}
+          onClick={() => validateAndAddNewLocation()}/>
       </div>
       <hr/>
       <LocationList></LocationList>

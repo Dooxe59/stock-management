@@ -11,4 +11,18 @@
   .location-label {
     flex: 1;
   }
+
+  .update-location-item-button-icon {
+    display: none;
+  }
+
+  @media screen and (max-width: 480px) {
+    .update-location-item-button-text {
+      display: none;
+    }
+
+    .update-location-item-button-icon {
+      display: block;
+    }
+  }
 }

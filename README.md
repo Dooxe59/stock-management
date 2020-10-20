@@ -5,7 +5,6 @@ Ajouter boutons pour Consommer/Jeter
 Améliorer affichage produit depuis desktop
 Améliorer affichage catégorie/emplacement depuis desktop
 refacto admin gestion emplacements/catégories
-Gérer ajout emplacement/catégorie via touche entrée
 
 Mise à jour d'un produit
 
