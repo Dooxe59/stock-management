@@ -8,6 +8,7 @@ refacto admin gestion emplacements/catégories
 App icon + favicon
 
 Mise à jour d'un produit
+Après ajout d'un produit, remettre le focus au niveau du premier input
 
 Ajouter filtre par catégorie
 Ajouter filtre par emplacement

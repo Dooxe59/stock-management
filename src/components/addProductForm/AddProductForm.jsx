@@ -1,18 +1,16 @@
 import React, { 
   useCallback, 
-  useRef, 
   useState 
 } from 'react';
 import { useDispatch } from 'react-redux';
 import moment from "moment";
 import { addProduct } from '../../store/products/productsActions';
-import LocationSelectorInput from '../locationSelectorInput/LocationSelectorInput';
+import ProductForm from '../productForm/ProductForm';
+
 import {
   Button, 
   ButtonGroup, 
-  FormLabel, 
   IconButton,
-  Input,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -23,12 +21,10 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/core";
-import DatePicker from "react-datepicker";
 import { AddIcon } from '@chakra-ui/icons';
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./addProductForm.scss";
-import CategorySelectorInput from '../categorySelectorInput/CategorySelectorInput';
 
 const AddProductForm = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -71,10 +67,10 @@ const AddProductForm = () => {
     productLabel?.trim()?.length > 0
     && productQuantity?.trim()?.length > 0;
 
-  const productLabelInputRef = useRef(null);
-  const setFocusOnFirstInput = () => {
-    productLabelInputRef.current.focus();
-  };
+  // const productLabelInputRef = useRef(null);
+  // const setFocusOnFirstInput = () => {
+  //   productLabelInputRef.current.focus();
+  // };
 
   const toast = useToast();
   const validateAndAddProduct = () => {
@@ -98,7 +94,7 @@ const AddProductForm = () => {
         isClosable: true,
       });
       clearProductForm();
-      setFocusOnFirstInput();
+      // setFocusOnFirstInput();
     }
   }
 
@@ -106,6 +102,11 @@ const AddProductForm = () => {
     setProductLabel("");
     setProductQuantity("");
     setProductExpirationDate("");
+  };
+
+  const closeAddProductModal = () => {
+    onClose();
+    clearProductForm();
   };
 
   return (
@@ -116,7 +117,7 @@ const AddProductForm = () => {
         size="xs" 
         colorScheme="teal"
         onClick={() => onOpen()}/>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={closeAddProductModal}>
         <ModalOverlay>
           <ModalContent>
             <ModalHeader fontSize={["md", "lg"]}>
@@ -124,65 +125,19 @@ const AddProductForm = () => {
             </ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <div className="product-label">
-                <FormLabel fontSize={["sm", "md"]} htmlFor="productName">
-                  Nom du produit
-                </FormLabel>
-                <Input 
-                  id="productName"
-                  autoFocus
-                  variant="filled"
-                  size="sm" 
-                  autoComplete="off"
-                  placeholder="Nom du produit" 
-                  value={productLabel}
-                  ref={productLabelInputRef}
-                  onChange={handleInputProductLabelChange}
-                  onKeyDown={handleKeyDown}/>
-              </div>
-              <div className="product-quantity">
-                <FormLabel fontSize={["sm", "md"]} htmlFor="productQuantity">
-                  Quantité
-                </FormLabel>
-                <Input 
-                  id="productQuantity"
-                  variant="filled"
-                  size="sm" 
-                  autoComplete="off"
-                  placeholder="Quantité" 
-                  value={productQuantity}
-                  onChange={handleInputProductQuantityChange}
-                  onKeyDown={handleKeyDown}/>
-              </div>
-              <div className="product-expiration-date">
-                <FormLabel fontSize={["sm", "md"]} htmlFor="productExpirationDate">
-                  Date de péremption (JJ/MM/AAAA)
-                </FormLabel>
-                <Input 
-                  as={DatePicker}
-                  id="productExpirationDate"
-                  variant="filled"
-                  size="sm" 
-                  locale="fr"
-                  autoComplete="off"
-                  dateFormat="dd/MM/yyyy"
-                  placeholderText="Date d'expiration"
-                  selected={productExpirationDate}
-                  onChange={date => setProductExpirationDate(date)}
-                  onKeyDown={handleKeyDown}/>
-              </div>
-              <div className="product-location">
-                <LocationSelectorInput 
-                  productLocation={productLocation}
-                  handleInputProductLocationChange={handleInputProductLocationChange}>
-                </LocationSelectorInput>
-              </div>
-              <div className="product-category">
-                <CategorySelectorInput
-                  productCategory={productCategory}
-                  handleInputProductCategoryChange={handleInputProductCategoryChange}>
-                </CategorySelectorInput>
-              </div>
+              <ProductForm
+                productLabel={productLabel}
+                productQuantity={productQuantity}
+                productExpirationDate={productExpirationDate}
+                productLocation={productLocation} 
+                productCategory={productCategory}
+                handleInputProductLabelChange={(event) => handleInputProductLabelChange(event)} 
+                handleInputProductQuantityChange={(event) => handleInputProductQuantityChange(event)}
+                handleInputProductLocationChange={(event) => handleInputProductLocationChange(event)}
+                handleInputProductCategoryChange={(event) => handleInputProductCategoryChange(event)}
+                handleKeyDown={(event) => handleKeyDown(event)}
+                setProductExpirationDate={(event) => setProductExpirationDate(event)}>
+              </ProductForm>
             </ModalBody>
             <ModalFooter>
               <ButtonGroup spacing="6">
@@ -196,7 +151,7 @@ const AddProductForm = () => {
                 <Button 
                   fontSize={["sm", "md"]} 
                   variant="ghost" 
-                  onClick={onClose}>
+                  onClick={closeAddProductModal}>
                   Fermer
                 </Button>
               </ButtonGroup>

@@ -13,11 +13,10 @@ const LocationSelectorInput = ({productLocation, handleInputProductLocationChang
 
   return (
     <div className="location-selector-input">
-      <FormLabel fontSize={["sm", "md"]} htmlFor="productExpirationDate">
-        Catégorie
+      <FormLabel fontSize={["sm", "md"]} htmlFor="productLocation">
+        Emplacement
       </FormLabel>
       <Select value={productLocation} onChange={handleInputProductLocationChange}>
-        <option value=""></option>
         {renderSelectLocationOptions()}
       </Select>
     </div>
