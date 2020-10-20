@@ -2,7 +2,7 @@ Application de gestion de stock
 
 Vérifier aria label dans app (input, icon button, icon)
 Ajouter boutons pour Consommer/Jeter
-refacto form ajout produit
+Améliorer affichage productItem depuis desktop
 refacto admin gestion emplacements/catégories
 Gérer ajout emplacement/catégorie via touche entrée
 
