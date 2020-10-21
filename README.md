@@ -9,6 +9,7 @@ App icon + favicon
 
 Mise à jour d'un produit
 Après ajout d'un produit, remettre le focus au niveau du premier input
+Revoir nom composant AddProductForm
 
 Ajouter filtre par catégorie
 Ajouter filtre par emplacement

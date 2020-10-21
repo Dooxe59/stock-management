@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormLabel, Select } from '@chakra-ui/core';
-import { locationsSelector } from '../../store/locations/locationsSelector';
+import { locationsSelector } from '../../../store/locations/locationsSelector';
 import { useSelector } from 'react-redux';
 
 const LocationSelectorInput = ({productLocation, handleInputProductLocationChange}) => {

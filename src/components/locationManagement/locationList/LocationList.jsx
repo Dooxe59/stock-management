@@ -25,7 +25,7 @@ import "./locationList.scss";
 const LocationList = () => {
   const locations = useSelector(locationsSelector);
   
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isOpenUpdateLocationModal, onOpen: onOpenUpdateLocationModal, onClose: onCloseUpdateLocationModal } = useDisclosure();
   const [updatedLocation, setUpdatedLocation] = useState({});
 
   const isValidUpdatedLocation = updatedLocation?.label?.trim().length > 0;
@@ -33,7 +33,7 @@ const LocationList = () => {
   const openUpdateLocationModal = (locationId) => {
     const location = locations.find(location => location.id === locationId);
     setUpdatedLocation(location);
-    onOpen();
+    onOpenUpdateLocationModal();
   };
 
   
@@ -44,7 +44,7 @@ const LocationList = () => {
 
   const updateLocationFromModal = () => {
     updateLocationStore(updatedLocation);
-    onClose();
+    onCloseUpdateLocationModal();
   };
 
   const renderLocations = () => {
@@ -73,7 +73,7 @@ const LocationList = () => {
         Emplacements:
       </Text>
       { renderLocations() }
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpenUpdateLocationModal} onClose={onCloseUpdateLocationModal}>
         <ModalOverlay>
           <ModalContent>
             <ModalHeader fontSize={["md", "lg"]}>Mise à jour d'un emplacement</ModalHeader>
@@ -98,7 +98,7 @@ const LocationList = () => {
                 <Button 
                   fontSize={["sm", "md"]}
                   variant="ghost"
-                  onClick={onClose}>
+                  onClick={onCloseUpdateLocationModal}>
                   Annuler
                 </Button>
               </ButtonGroup>

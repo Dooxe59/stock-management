@@ -1,6 +1,6 @@
 import React from 'react';
-import LocationSelectorInput from '../locationSelectorInput/LocationSelectorInput';
-import CategorySelectorInput from '../categorySelectorInput/CategorySelectorInput';
+import LocationSelectorInput from '../inputs/locationSelectorInput/LocationSelectorInput';
+import CategorySelectorInput from '../inputs/categorySelectorInput/CategorySelectorInput';
 import { FormLabel, Input } from "@chakra-ui/core";
 import DatePicker from "react-datepicker";
 

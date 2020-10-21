@@ -28,7 +28,7 @@ import "./categoryList.scss";
 const CategoryList = () => {
   const categories = useSelector(categoriesSelector);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isOpenUpdateCategoryModal, onOpen: onOpenUpdateCategoryModal, onClose: onCloseUpdateCategoryModal } = useDisclosure();
   const [updatedCategory, setUpdatedCategory] = useState({});
 
   const isValidUpdatedCategory = updatedCategory?.label?.trim().length > 0;
@@ -36,7 +36,7 @@ const CategoryList = () => {
   const openUpdateCategoryModal = (categoryId) => {
     const category = categories.find(category => category.id === categoryId);
     setUpdatedCategory(category);
-    onOpen();
+    onOpenUpdateCategoryModal();
   };
 
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const CategoryList = () => {
 
   const updateCategoryFromModal = () => {
     updateCategoryStore(updatedCategory);
-    onClose();
+    onCloseUpdateCategoryModal();
   };
 
   const renderCategories = () => {
@@ -75,7 +75,7 @@ const CategoryList = () => {
         Catégories:
       </Text>
       { renderCategories() }
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpenUpdateCategoryModal} onClose={onCloseUpdateCategoryModal}>
         <ModalOverlay>
           <ModalContent>
             <ModalHeader fontSize={["md", "lg"]}>Mise à jour d'une catégorie</ModalHeader>
@@ -100,7 +100,7 @@ const CategoryList = () => {
                 <Button
                   fontSize={["sm", "md"]}
                   variant="ghost"
-                  onClick={onClose}>
+                  onClick={onCloseUpdateCategoryModal}>
                   Annuler
                 </Button>
               </ButtonGroup>

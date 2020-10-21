@@ -1,7 +1,7 @@
 import { FormLabel, Select } from '@chakra-ui/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { categoriesSelector } from '../../store/categories/categoriesSelector';
+import { categoriesSelector } from '../../../store/categories/categoriesSelector';
 
 const CategorySelectorInput = ({productCategory, handleInputProductCategoryChange}) => {
   const categories = useSelector(categoriesSelector);

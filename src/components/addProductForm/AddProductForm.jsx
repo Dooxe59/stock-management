@@ -27,7 +27,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./addProductForm.scss";
 
 const AddProductForm = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isOpenDeleteProductModal, onOpen: onOpenDeleteProductModal, onClose: onCloseDeleteProductModal } = useDisclosure();
 
   const dispatch = useDispatch();
   const addNewProduct = useCallback((product) => {
@@ -105,7 +105,7 @@ const AddProductForm = () => {
   };
 
   const closeAddProductModal = () => {
-    onClose();
+    onCloseDeleteProductModal();
     clearProductForm();
   };
 
@@ -116,8 +116,8 @@ const AddProductForm = () => {
         icon={<AddIcon />} 
         size="xs" 
         colorScheme="teal"
-        onClick={() => onOpen()}/>
-      <Modal isOpen={isOpen} onClose={closeAddProductModal}>
+        onClick={() => onOpenDeleteProductModal()}/>
+      <Modal isOpen={isOpenDeleteProductModal} onClose={closeAddProductModal}>
         <ModalOverlay>
           <ModalContent>
             <ModalHeader fontSize={["md", "lg"]}>
