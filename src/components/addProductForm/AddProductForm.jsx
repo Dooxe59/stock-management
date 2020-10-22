@@ -46,14 +46,17 @@ const AddProductForm = () => {
 
   const [productExpirationDate, setProductExpirationDate] = useState("");
 
+  // TODO: refacto app parseInt
   const [productLocation, setProductLocation] = useState(1);
   const handleInputProductLocationChange = (event) => {
-    setProductLocation(parseInt(event.target.value));
+    const parsedValue = parseInt(event.target.value) || "";
+    setProductLocation(parsedValue);
   };
 
   const [productCategory, setProductCategory] = useState("");
   const handleInputProductCategoryChange = (event) => {
-    setProductCategory(parseInt(event.target.value));
+    const parsedValue = parseInt(event.target.value) || "";
+    setProductCategory(parsedValue);
   };
 
   const handleKeyDown = (event) => {
@@ -64,8 +67,7 @@ const AddProductForm = () => {
   };
 
   const isValidProduct =
-    productLabel?.trim()?.length > 0
-    && productQuantity?.trim()?.length > 0;
+    productLabel?.trim()?.length > 0 && productQuantity?.trim()?.length > 0;
 
   // const productLabelInputRef = useRef(null);
   // const setFocusOnFirstInput = () => {
@@ -104,7 +106,7 @@ const AddProductForm = () => {
     setProductExpirationDate("");
   };
 
-  const closeAddProductModal = () => {
+  const closeDeleteProductModal = () => {
     onCloseDeleteProductModal();
     clearProductForm();
   };
@@ -117,7 +119,7 @@ const AddProductForm = () => {
         size="xs" 
         colorScheme="teal"
         onClick={() => onOpenDeleteProductModal()}/>
-      <Modal isOpen={isOpenDeleteProductModal} onClose={closeAddProductModal}>
+      <Modal isOpen={isOpenDeleteProductModal} onClose={closeDeleteProductModal}>
         <ModalOverlay>
           <ModalContent>
             <ModalHeader fontSize={["md", "lg"]}>
@@ -151,7 +153,7 @@ const AddProductForm = () => {
                 <Button 
                   fontSize={["sm", "md"]} 
                   variant="ghost" 
-                  onClick={closeAddProductModal}>
+                  onClick={closeDeleteProductModal}>
                   Fermer
                 </Button>
               </ButtonGroup>

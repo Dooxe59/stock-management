@@ -11,7 +11,7 @@ const ProductList = () => {
   const renderProducts = () => {
     if(!products.length) return 'La liste est vide !';
     return products.map((product) => {
-      return <ProductItem product={product} key={product.id}></ProductItem>
+      return <ProductItem product={product} key={`${product.id}-${product.productName}`}></ProductItem>
     })
   }
 

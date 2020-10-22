@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { locationsSelector } from '../../../store/locations/locationsSelector';
 import { categoriesSelector } from '../../../store/categories/categoriesSelector';
-import { deleteProduct } from '../../../store/products/productsActions';
+import { deleteProduct, updateProduct } from '../../../store/products/productsActions';
 import moment from "moment";
 
 import { 
@@ -28,22 +28,29 @@ import {
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 
 import "./productItem.scss";
+import { useState } from 'react';
+import ProductForm from '../../productForm/ProductForm';
 
 const ProductItem = ({product}) => {
+  const dispatch = useDispatch(); 
+  
   const { 
     isOpen: isOpenDeleteProductModal, 
     onOpen: onOpenDeleteProductModal, 
     onClose: onCloseDeleteProductModal 
   } = useDisclosure();
 
-  const dispatch = useDispatch(); 
   const deleteSelectedProduct = useCallback((product) => {
     dispatch(deleteProduct(product));
   }, [dispatch]);
 
+  const currentProductId = product?.id;
+  
+  const toast = useToast();
+
   const confirmDeleteProduct = () => {
     const productName = product.productName;
-    deleteSelectedProduct({productId: product.id});
+    deleteSelectedProduct({productId: currentProductId});
     onCloseDeleteProductModal();
     toast({
       title: "Produit supprimé",
@@ -52,11 +59,8 @@ const ProductItem = ({product}) => {
       duration: 5000,
       isClosable: true,
     })
-  }
+  };
 
-  const toast = useToast();
-
-  const COLORS = ['blue', 'purple', 'red', 'green', 'orange', 'teal', 'gray', 'cyan', 'pink'];
   const locations = useSelector(locationsSelector);
   const currentLocation = locations.find(location => location.id === product.locationId);
   
@@ -121,11 +125,81 @@ const ProductItem = ({product}) => {
     ) : '';
   };
 
+  const COLORS = ['blue', 'purple', 'red', 'green', 'orange', 'teal', 'gray', 'cyan', 'pink'];
   const getColorSchemeById = (id, shift = 0) => {
     const colorIndex = (id + shift) % 9;
     return COLORS[colorIndex];
   };
 
+  const { 
+    isOpen: isOpenUpdateProductModal, 
+    onOpen: onOpenUpdateProductModal, 
+    onClose: onCloseUpdateProductModal 
+  } = useDisclosure();
+  const [updateProductLabel, setUpdateProductLabel] = useState(product?.productName);
+  const handleInputProductLabelChange = (event) => {
+    setUpdateProductLabel(event.target.value);
+  };
+
+  const [updateProductQuantity, setUpdateProductQuantity] = useState(product?.quantity);
+  const handleInputProductQuantityChange = (event) => {
+    setUpdateProductQuantity(event.target.value);
+  };
+
+  const [updateProductExpirationDate, setUpdateProductExpirationDate] = useState(moment(product?.expirationDate, "DD/MM/YYYY")?.toDate());
+
+  const [updateProductLocation, setUpdateProductLocation] = useState(product?.locationId);
+  const handleInputProductLocationChange = (event) => {
+    const parsedValue = parseInt(event.target.value) || "";
+    setUpdateProductLocation(parsedValue);
+  };
+
+  const [updateProductCategory, setUpdateProductCategory] = useState(product?.categoryId);
+  const handleInputProductCategoryChange = (event) => {
+    const parsedValue = parseInt(event.target.value) || "";
+    setUpdateProductCategory(parsedValue);
+  };
+
+  // TODO: refactor event key Enter in app 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      validateAndUpdateProduct();
+      event.preventDefault();
+    }
+  };
+
+  const isValidUpdateProduct =
+  updateProductLabel?.trim()?.length > 0 && updateProductQuantity?.trim()?.length > 0;
+
+  const updateExistingProduct = useCallback((product) => {
+    dispatch(updateProduct(product));
+  }, [dispatch]);
+
+  const validateAndUpdateProduct = () => {
+    if (isValidUpdateProduct) {
+      const product = {
+        productId: currentProductId,
+        name: updateProductLabel.trim(),
+        locationId: updateProductLocation,
+        categoryId: updateProductCategory,
+        quantity: updateProductQuantity.trim(),
+        expirationDate: updateProductExpirationDate,
+        creationDate: moment().format('L')
+      };
+
+      product.name = product.name.charAt(0).toUpperCase() + product.name.slice(1);
+
+      updateExistingProduct(product);
+      toast({
+        title: "Produit mis à jour",
+        description: `${product.name} a bien été mis à jour`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      onCloseUpdateProductModal();
+    }
+  }
   return (
     <div className="product-item">
       <div className="product-name-quantity truncated" title={`${product.productName} (${product.quantity})`}>
@@ -162,15 +236,7 @@ const ProductItem = ({product}) => {
             <MenuItem
               variant="ghost"
               fontSize={["sm", "md"]}
-              onClick={() => 
-                toast({
-                  title: "Non implémenté.",
-                  description: "Fonctionnalité non implémentée. Work In Progress ...", 
-                  status: "warning",
-                  duration: 3000,
-                  isClosable: true,
-                })
-              }>
+              onClick={onOpenUpdateProductModal}>
               Modifier
             </MenuItem>
             <MenuItem 
@@ -181,6 +247,48 @@ const ProductItem = ({product}) => {
             </MenuItem>
           </MenuList>
         </Menu>
+        <Modal isOpen={isOpenUpdateProductModal} onClose={onCloseUpdateProductModal}>
+          <ModalOverlay>
+            <ModalContent>
+              <ModalHeader fontSize={["md", "lg"]}>
+                Modifier un produit
+              </ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <ProductForm
+                  productLabel={updateProductLabel}
+                  productQuantity={updateProductQuantity}
+                  productExpirationDate={updateProductExpirationDate}
+                  productLocation={updateProductLocation} 
+                  productCategory={updateProductCategory}
+                  handleInputProductLabelChange={(event) => handleInputProductLabelChange(event)} 
+                  handleInputProductQuantityChange={(event) => handleInputProductQuantityChange(event)}
+                  handleInputProductLocationChange={(event) => handleInputProductLocationChange(event)}
+                  handleInputProductCategoryChange={(event) => handleInputProductCategoryChange(event)}
+                  handleKeyDown={(event) => handleKeyDown(event)}
+                  setProductExpirationDate={(event) => setUpdateProductExpirationDate(event)}>
+                </ProductForm>
+              </ModalBody>
+              <ModalFooter>
+                <ButtonGroup spacing="6">
+                  <Button 
+                    fontSize={["sm", "md"]} 
+                    colorScheme="blue" 
+                    isDisabled={!isValidUpdateProduct} 
+                    onClick={validateAndUpdateProduct}>
+                    Modifier le produit
+                  </Button>
+                  <Button 
+                    fontSize={["sm", "md"]} 
+                    variant="ghost" 
+                    onClick={onCloseUpdateProductModal}>
+                    Fermer
+                  </Button>
+                </ButtonGroup>
+              </ModalFooter>
+            </ModalContent>
+          </ModalOverlay>
+        </Modal>
         <Modal isOpen={isOpenDeleteProductModal} onClose={onCloseDeleteProductModal}>
           <ModalOverlay>
             <ModalContent>

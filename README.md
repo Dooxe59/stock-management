@@ -18,3 +18,5 @@ Tri par ajout plus récent/dates les plus proches
 
 Authentification
 BDD
+
+Bloquer quantité 0 dans ajout + update
