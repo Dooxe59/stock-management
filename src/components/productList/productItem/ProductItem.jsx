@@ -20,16 +20,21 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useToast,
   IconButton,
-  Text} from "@chakra-ui/core";
+  Text,
+  useDisclosure,
+  useToast
+} from "@chakra-ui/core";
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 
 import "./productItem.scss";
 
 const ProductItem = ({product}) => {
-  const [isOpen, setIsOpen] = React.useState();
-  const onClose = () => setIsOpen(false);
+  const { 
+    isOpen: isOpenDeleteProductModal, 
+    onOpen: onOpenDeleteProductModal, 
+    onClose: onCloseDeleteProductModal 
+  } = useDisclosure();
 
   const dispatch = useDispatch(); 
   const deleteSelectedProduct = useCallback((product) => {
@@ -39,7 +44,7 @@ const ProductItem = ({product}) => {
   const confirmDeleteProduct = () => {
     const productName = product.productName;
     deleteSelectedProduct({productId: product.id});
-    onClose();
+    onCloseDeleteProductModal();
     toast({
       title: "Produit supprimé",
       description: `${productName} a bien été supprimé`,
@@ -106,7 +111,12 @@ const ProductItem = ({product}) => {
   const renderProductCategory = () => {
     return currentCategory?.label ? (
       <div className="product-category">
-        <Badge size="md" variant="solid" colorScheme={getColorSchemeById(currentCategory.id, 4)}>{currentCategory?.label}</Badge>
+        <Badge 
+          size="md"
+          variant="solid"
+          colorScheme={getColorSchemeById(currentCategory.id, 4)}>
+          {currentCategory?.label}
+        </Badge>
       </div>
     ) : '';
   };
@@ -128,7 +138,12 @@ const ProductItem = ({product}) => {
       {renderProductExpirationDateState()}
       {renderProductCategory()}
       <div className="product-location">
-        <Badge size="md" variant="outline" colorScheme={getColorSchemeById(currentLocation.id)}>{currentLocation?.label}</Badge>
+        <Badge 
+          size="md"
+          variant="outline"
+          colorScheme={getColorSchemeById(currentLocation.id)}>
+          {currentLocation?.label}
+        </Badge>
       </div>
       <div className="product-item-actions">
         <Menu>
@@ -140,7 +155,7 @@ const ProductItem = ({product}) => {
             borderWidth="2px"
             icon={<ChevronDownIcon/>}
             _hover={{ bg: "gray.100" }}
-            _expanded={{ bg: "teal.50" }}
+            _expanded={{ bg: "teal.100" }}
             _focus={{ outline: 0, boxShadow: "outline" }}>
           </MenuButton>
           <MenuList>
@@ -161,26 +176,29 @@ const ProductItem = ({product}) => {
             <MenuItem 
               variant="ghost"
               fontSize={["sm", "md"]}
-              onClick={() => setIsOpen(true)}>
+              onClick={onOpenDeleteProductModal}>
               Supprimer
             </MenuItem>
           </MenuList>
         </Menu>
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpenDeleteProductModal} onClose={onCloseDeleteProductModal}>
           <ModalOverlay>
             <ModalContent>
               <ModalHeader fontSize={["md", "lg"]}>
-                Suppression d'un produit</ModalHeader>
+                Suppression d'un produit
+              </ModalHeader>
               <ModalCloseButton />
               <ModalBody fontSize={["sm", "md"]}>
                 Êtes-vous sur de vouloir supprimer "{product.productName}" ({product.quantity}) ?
               </ModalBody>
               <ModalFooter>
                 <ButtonGroup spacing="6">
-                  <Button fontSize={["sm", "md"]} colorScheme="red" onClick={() => confirmDeleteProduct()}>
+                  <Button fontSize={["sm", "md"]} colorScheme="red" onClick={confirmDeleteProduct}>
                     Supprimer
                   </Button>
-                  <Button fontSize={["sm", "md"]} variant="ghost" onClick={onClose}>Annuler</Button>
+                  <Button fontSize={["sm", "md"]} variant="ghost" onClick={onCloseDeleteProductModal}>
+                    Annuler
+                  </Button>
                 </ButtonGroup>
               </ModalFooter>
             </ModalContent>
