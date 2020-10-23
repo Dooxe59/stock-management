@@ -1,0 +1,15 @@
+.filter-toolbar {
+  display: flex;
+  align-items: flex-end;
+  height: 90px;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+
+  .search-filter,
+  .location-filter,
+  .category-filter,
+  .product-sort {
+    flex: 1;
+    margin: 0 10px;
+  }
+}

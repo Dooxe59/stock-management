@@ -1,8 +1,10 @@
-import { FormLabel, Input, Select } from '@chakra-ui/core';
+import { Button, FormLabel, Input, Select } from '@chakra-ui/core';
 import React from 'react';
 import { sortProductOptions } from '../../consts';
 import CategorySelectorInput from '../inputs/categorySelectorInput/CategorySelectorInput';
 import LocationSelectorInput from '../inputs/locationSelectorInput/LocationSelectorInput';
+
+import "./filterToolbar.scss";
 
 const FilterToolbar = ({
   searchFilter,
@@ -12,7 +14,8 @@ const FilterToolbar = ({
   handleInputSearchFilterChange,
   handleInputLocationFilterChange,
   handleInputCategoryFilterChange,
-  handleInputProductSortChange }) => {
+  handleInputProductSortChange,
+  resetFilters }) => {
 
   const renderSelectSortProductOptions = () => {
     return sortProductOptions.map(option => {
@@ -55,6 +58,14 @@ const FilterToolbar = ({
           <option value=""></option>
           {renderSelectSortProductOptions()}
         </Select>
+      </div>
+      <div className="reset-filters-button">
+       <Button 
+          fontSize={["sm", "md"]} 
+          colorScheme="blue" 
+          onClick={() => resetFilters()}>
+          Effacer
+        </Button>
       </div>
     </div>
   );

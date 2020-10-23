@@ -10,7 +10,7 @@ App icon + favicon
 Après ajout d'un produit, remettre le focus au niveau du premier input
 Revoir nom composant AddProductForm
 
-reset filtres
+reset filtres désactivé si aucun filtre select
 
 Authentification
 BDD

@@ -14,6 +14,13 @@ const Home = () => {
   const [categoryFilter, setCategoryFilter] = useState("");
   const [productSort, setProductSort] = useState("");
 
+  const resetFilters = () => {
+    setSearchFilter("");
+    setLocationFilter("");
+    setCategoryFilter("");
+    setProductSort("");
+  };
+
   const currentProductFilter = () => {
     return searchFilter.trim().length ? `Liste filtrée` : 'Tous les produits';
   };
@@ -21,18 +28,17 @@ const Home = () => {
   return (
     <div className="home">
       {/* DRAWER chakra filter */}
-      <div className="filter-toolbar">
-        <FilterToolbar
-          searchFilter={searchFilter}
-          locationFilter={locationFilter}
-          categoryFilter={categoryFilter}
-          productSort={productSort}
-          handleInputSearchFilterChange={(event) => setSearchFilter(event.target.value)}  
-          handleInputLocationFilterChange={(event) => setLocationFilter(parseInt(event.target.value) || "")}
-          handleInputCategoryFilterChange={(event) => setCategoryFilter(parseInt(event.target.value) || "")}
-          handleInputProductSortChange={(event) => setProductSort(parseInt(event.target.value) || "")}>  
-        </FilterToolbar>
-      </div>
+      <FilterToolbar
+        searchFilter={searchFilter}
+        locationFilter={locationFilter}
+        categoryFilter={categoryFilter}
+        productSort={productSort}
+        handleInputSearchFilterChange={(event) => setSearchFilter(event.target.value)}  
+        handleInputLocationFilterChange={(event) => setLocationFilter(parseInt(event.target.value) || "")}
+        handleInputCategoryFilterChange={(event) => setCategoryFilter(parseInt(event.target.value) || "")}
+        handleInputProductSortChange={(event) => setProductSort(parseInt(event.target.value) || "")}
+        resetFilters={resetFilters}>  
+      </FilterToolbar>
       <div className="action-toolbar">
         <Text 
           fontSize={["sm", "md"]}
