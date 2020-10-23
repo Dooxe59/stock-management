@@ -22,7 +22,7 @@ const Home = () => {
   };
 
   const currentProductFilter = () => {
-    return searchFilter.trim().length ? `Liste filtrée` : 'Tous les produits';
+    return searchFilter.trim().length || locationFilter || categoryFilter ? `Liste filtrée` : 'Tous les produits';
   };
 
   return (
