@@ -2,16 +2,56 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { productsSelector } from '../../store/products/productsSelector';
 import ProductItem from './productItem/ProductItem';
+import _ from 'lodash';
+import moment from "moment";
 
 import "./productList.scss";
 
-const ProductList = ({searchFilter}) => {
+const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}) => {
   const products = useSelector(productsSelector);
 
+  // TODO: refaco method
   const filteredProducts = () => {
     const trimmedSearchFilter = searchFilter.trim()?.toLowerCase();
-    return trimmedSearchFilter ? 
-      products.filter(product => product.productName.toLowerCase().includes(trimmedSearchFilter)) : products
+
+    let sortedProducts = [...products];
+    switch(productSort) {
+      case 1:
+        sortedProducts = _.orderBy(sortedProducts, (product) => {
+          return moment(product.expirationDate, "DD/MM/YYYY")?.toDate();
+        });
+        break;
+      case 2:
+        sortedProducts = _.orderBy(sortedProducts, "productName", "asc");
+        break;
+      case 3:
+        sortedProducts = _.orderBy(sortedProducts, "categoryId", "asc");
+        break;
+      case 4:
+        sortedProducts = _.orderBy(sortedProducts, "locationId", "asc");
+        break;
+      default: 
+        break;
+    }
+
+    if(!trimmedSearchFilter && !locationFilter && !categoryFilter) return sortedProducts;
+    
+    let filtered = [...sortedProducts];
+
+    if(trimmedSearchFilter) {
+      filtered = filtered.filter(product => 
+        product.productName.toLowerCase().includes(trimmedSearchFilter));
+    }
+
+    if(locationFilter) {
+      filtered = filtered.filter(product => product.locationId === locationFilter);
+    }
+
+    if(categoryFilter) {
+      filtered = filtered.filter(product => product.categoryId === categoryFilter);
+    }
+
+    return filtered;
   };
 
   const renderProducts = () => {

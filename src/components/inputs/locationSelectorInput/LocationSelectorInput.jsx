@@ -3,7 +3,7 @@ import { FormLabel, Select } from '@chakra-ui/core';
 import { locationsSelector } from '../../../store/locations/locationsSelector';
 import { useSelector } from 'react-redux';
 
-const LocationSelectorInput = ({productLocation, handleInputProductLocationChange}) => {
+const LocationSelectorInput = ({productLocation, handleInputProductLocationChange, addEmptySelect}) => {
   const locations = useSelector(locationsSelector);
   const renderSelectLocationOptions = () => {
     return locations.map(location => {
@@ -17,6 +17,7 @@ const LocationSelectorInput = ({productLocation, handleInputProductLocationChang
         Emplacement
       </FormLabel>
       <Select value={productLocation} onChange={handleInputProductLocationChange}>
+        {addEmptySelect ? <option value=""></option> : ""}
         {renderSelectLocationOptions()}
       </Select>
     </div>

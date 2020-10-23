@@ -1,7 +1,8 @@
 const initialState = [{
   productName: "Tomates",
   locationId: 1, // Frigo
-  quantity: "4",
+  categoryId: 3, // Légume
+  quantity: "2",
   expirationDate: "24/10/2020",
   creationDate: "18/10/2020",
   id: 1,
@@ -10,10 +11,42 @@ const initialState = [{
   locationId: 1, // Frigo
   categoryId: 1, // Viande
   quantity: "2",
-  expirationDate: "20/10/2020",
+  expirationDate: "2/12/2020",
   creationDate: "18/10/2020",
   id: 2
-}];
+},{
+  productName: "Steak haché 5%",
+  locationId: 1, // Frigo
+  categoryId: 1, // Viande
+  quantity: "1",
+  expirationDate: "1/11/2020",
+  creationDate: "18/10/2020",
+  id: 3
+}, {
+  productName: "Couscous",
+  locationId: 4, // Plcard cuisine
+  categoryId: 6, // Conserves
+  quantity: "2",
+  expirationDate: "27/10/2020",
+  creationDate: "18/10/2020",
+  id: 4
+}, {
+  productName: "Fish and chips",
+  locationId: 2, // Congélo cuisine
+  categoryId: 2, // Poisson
+  quantity: "2",
+  expirationDate: "14/10/2020",
+  creationDate: "18/10/2020",
+  id: 5
+},{
+  productName: "Knaki",
+  locationId: 1, // Congélo cuisine
+  categoryId: 1, // Poisson
+  quantity: "10",
+  expirationDate: "14/09/2020",
+  creationDate: "18/10/2020",
+  id: 6
+},];
 
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';

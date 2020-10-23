@@ -10,9 +10,7 @@ App icon + favicon
 Après ajout d'un produit, remettre le focus au niveau du premier input
 Revoir nom composant AddProductForm
 
-Ajouter filtre par catégorie
-Ajouter filtre par emplacement
-Tri par ajout plus récent/dates les plus proches
+reset filtres
 
 Authentification
 BDD

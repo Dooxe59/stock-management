@@ -10,9 +10,12 @@ import FilterToolbar from '../../components/filterToolbar/FilterToolbar';
 
 const Home = () => {
   const [searchFilter, setSearchFilter] = useState("");
+  const [locationFilter, setLocationFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("");
+  const [productSort, setProductSort] = useState("");
 
   const currentProductFilter = () => {
-    return searchFilter.trim().length ? `Liste filtrée (nom: ${searchFilter})` : 'Tous les produits';
+    return searchFilter.trim().length ? `Liste filtrée` : 'Tous les produits';
   };
 
   return (
@@ -21,7 +24,13 @@ const Home = () => {
       <div className="filter-toolbar">
         <FilterToolbar
           searchFilter={searchFilter}
-          handleInputSearchFilterChange={(event) => setSearchFilter(event.target.value)}>  
+          locationFilter={locationFilter}
+          categoryFilter={categoryFilter}
+          productSort={productSort}
+          handleInputSearchFilterChange={(event) => setSearchFilter(event.target.value)}  
+          handleInputLocationFilterChange={(event) => setLocationFilter(parseInt(event.target.value))}
+          handleInputCategoryFilterChange={(event) => setCategoryFilter(parseInt(event.target.value))}
+          handleInputProductSortChange={(event) => setProductSort(parseInt(event.target.value))}>  
         </FilterToolbar>
       </div>
       <div className="action-toolbar">
@@ -32,7 +41,12 @@ const Home = () => {
         </Text>
         <AddProductForm></AddProductForm>
       </div>
-      <ProductList searchFilter={searchFilter}></ProductList>
+      <ProductList 
+        searchFilter={searchFilter}
+        locationFilter={locationFilter}
+        categoryFilter={categoryFilter}
+        productSort={productSort}>
+      </ProductList>
       <footer className="app-footer">
         <Text fontSize={["sm", "md"]}>
           Nous sommes le {moment().format('LL')}
