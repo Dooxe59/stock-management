@@ -145,6 +145,7 @@ const AddProductForm = () => {
               <ButtonGroup spacing="6">
                 <Button 
                   fontSize={["sm", "md"]} 
+                  size="sm"
                   colorScheme="blue" 
                   isDisabled={!isValidProduct} 
                   onClick={() => validateAndAddProduct()}>
@@ -152,6 +153,7 @@ const AddProductForm = () => {
                 </Button>
                 <Button 
                   fontSize={["sm", "md"]} 
+                  size="sm"
                   variant="ghost" 
                   onClick={closeDeleteProductModal}>
                   Fermer

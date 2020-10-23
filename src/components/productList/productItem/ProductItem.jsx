@@ -234,14 +234,16 @@ const ProductItem = ({product}) => {
           </MenuButton>
           <MenuList>
             <MenuItem
-              variant="ghost"
               fontSize={["sm", "md"]}
+              size="sm"
+              variant="ghost"
               onClick={onOpenUpdateProductModal}>
               Modifier
             </MenuItem>
             <MenuItem 
-              variant="ghost"
               fontSize={["sm", "md"]}
+              size="sm"
+              variant="ghost"
               onClick={onOpenDeleteProductModal}>
               Supprimer
             </MenuItem>
@@ -273,6 +275,7 @@ const ProductItem = ({product}) => {
                 <ButtonGroup spacing="6">
                   <Button 
                     fontSize={["sm", "md"]} 
+                    size="sm"
                     colorScheme="blue" 
                     isDisabled={!isValidUpdateProduct} 
                     onClick={validateAndUpdateProduct}>
@@ -280,6 +283,7 @@ const ProductItem = ({product}) => {
                   </Button>
                   <Button 
                     fontSize={["sm", "md"]} 
+                    size="sm"
                     variant="ghost" 
                     onClick={onCloseUpdateProductModal}>
                     Fermer
@@ -301,10 +305,18 @@ const ProductItem = ({product}) => {
               </ModalBody>
               <ModalFooter>
                 <ButtonGroup spacing="6">
-                  <Button fontSize={["sm", "md"]} colorScheme="red" onClick={confirmDeleteProduct}>
+                  <Button 
+                    fontSize={["sm", "md"]} 
+                    size="sm"
+                    colorScheme="red" 
+                    onClick={confirmDeleteProduct}>
                     Supprimer
                   </Button>
-                  <Button fontSize={["sm", "md"]} variant="ghost" onClick={onCloseDeleteProductModal}>
+                  <Button 
+                    fontSize={["sm", "md"]} 
+                    size="sm"
+                    variant="ghost" 
+                    onClick={onCloseDeleteProductModal}>
                     Annuler
                   </Button>
                 </ButtonGroup>

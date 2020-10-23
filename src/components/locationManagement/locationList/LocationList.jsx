@@ -90,6 +90,7 @@ const LocationList = () => {
               <ButtonGroup spacing="6">
                 <Button 
                   fontSize={["sm", "md"]}
+                  size="sm"
                   colorScheme="blue"
                   isDisabled={!isValidUpdatedLocation}
                   onClick={() => updateLocationFromModal()}>
@@ -97,6 +98,7 @@ const LocationList = () => {
                 </Button>
                 <Button 
                   fontSize={["sm", "md"]}
+                  size="sm"
                   variant="ghost"
                   onClick={onCloseUpdateLocationModal}>
                   Annuler

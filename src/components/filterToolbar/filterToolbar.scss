@@ -1,7 +1,8 @@
 .filter-toolbar {
   display: flex;
-  align-items: flex-end;
-  height: 90px;
+  flex-direction: column;
+  // align-items: flex-end;
+  // height: 90px;
   padding: 10px;
   border-bottom: 1px solid lightgray;
 
@@ -11,5 +12,26 @@
   .product-sort {
     flex: 1;
     margin: 0 10px;
+  }
+
+  .filter-inputs {
+    display: flex;
+    // align-items: flex-end;
+  }
+
+  @media screen and (max-width: 960px) {
+    .filter-inputs {
+      flex-direction: column;
+    }
+  }
+
+  .reset-filters-button {
+    margin-top: 10px;
+    align-items: flex-end;
+    display: flex;
+
+    @media screen and (max-width: 960px) {
+      justify-content: flex-end;
+    }
   }
 }

@@ -92,6 +92,7 @@ const CategoryList = () => {
               <ButtonGroup spacing="6">
                 <Button
                   fontSize={["sm", "md"]}
+                  size="sm"
                   colorScheme="blue"
                   isDisabled={!isValidUpdatedCategory}
                   onClick={() => updateCategoryFromModal()}>
@@ -99,6 +100,7 @@ const CategoryList = () => {
                 </Button>
                 <Button
                   fontSize={["sm", "md"]}
+                  size="sm"
                   variant="ghost"
                   onClick={onCloseUpdateCategoryModal}>
                   Annuler
