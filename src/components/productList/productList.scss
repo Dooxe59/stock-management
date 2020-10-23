@@ -1,9 +1,11 @@
 .product-list {
   padding: 0;
   display: flex;
-  flex: 1;
-  flex-direction: column;
+  flex-wrap: wrap;
+  // flex: 1;
+  // flex-direction: column;
   overflow-x: hidden;
   overflow-y: auto;
   margin: 0 10px;
+  justify-content: space-around;
 }

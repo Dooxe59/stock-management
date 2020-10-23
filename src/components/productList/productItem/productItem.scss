@@ -8,11 +8,14 @@
   align-items: center;
   flex-shrink: 0;
 
+  @media screen and (min-width: 960px) {
+    width: 49%;
+  }
+
   .product-name-quantity {
     font-weight: bold;
     display: flex;
     flex: 1;
-    // justify-content: center;
   }
 
   .product-location {
@@ -35,7 +38,7 @@
       display: none;
     }
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 1440px) {
       .expiration-date-text {
         display: none;
       }

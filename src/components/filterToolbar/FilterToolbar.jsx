@@ -34,7 +34,7 @@ const FilterToolbar = ({
 
   return (
     <div className="filter-toolbar">
-      <Button size="xs" variant={showFiltersButtonVariant} colorScheme="blue" onClick={handleToggle}>
+      <Button size="xs" variant={showFiltersButtonVariant} colorScheme="teal" onClick={handleToggle}>
         {showFiltersButtonLabel}
       </Button>
       <Collapse mt={4} isOpen={showFilters} className="filter-inputs">
@@ -77,7 +77,7 @@ const FilterToolbar = ({
             fontSize={["sm", "md"]} 
             size="xs"
             variant="solid"
-            colorScheme="blue" 
+            colorScheme="teal" 
             onClick={() => resetFilters()}>
             Effacer les filtres
           </Button>

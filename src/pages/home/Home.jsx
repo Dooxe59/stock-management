@@ -47,12 +47,14 @@ const Home = () => {
         </Text>
         <AddProductForm></AddProductForm>
       </div>
-      <ProductList 
-        searchFilter={searchFilter}
-        locationFilter={locationFilter}
-        categoryFilter={categoryFilter}
-        productSort={productSort}>
-      </ProductList>
+      <div className="product-list-container">
+        <ProductList 
+          searchFilter={searchFilter}
+          locationFilter={locationFilter}
+          categoryFilter={categoryFilter}
+          productSort={productSort}>
+        </ProductList>
+      </div>
       <footer className="app-footer">
         <Text fontSize={["sm", "md"]}>
           Nous sommes le {moment().format('LL')}
