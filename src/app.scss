@@ -48,5 +48,21 @@
         display: block;
       }
     }
+
+    .help-button-icon {
+      margin: 0 10px;
+    }
+
+    .bell-icon-alert {
+      color: red;
+    }
+
+    .bell-icon-warning {
+      color: orange;
+    }
+
+    .bell-icon {
+      color: green;
+    }
   }
 }
