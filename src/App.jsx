@@ -27,13 +27,17 @@ const App = () => {
             </Link>
             <div className="empty-area"></div>
             <Link to="/administration">
-              <Button className="administration-button-text" size="xs" colorScheme="teal" variant="ghost">
+              <Button 
+                className="administration-button-text" 
+                variant="outline"
+                size="xs" 
+                colorScheme="teal">
                 Administration
               </Button>
               <IconButton 
                 className="administration-button-icon"
                 title="Administration"
-                variant="ghost"
+                variant="outline"
                 icon={<SettingsIcon />} 
                 size="xs" 
                 colorScheme="teal"/>
