@@ -30,6 +30,8 @@ const FilterToolbar = ({
   const showFiltersButtonLabel = showFilters ? 
     "Masquer les filtres" : "Afficher les filtres";
 
+  const isEnabledResetFilterButton = searchFilter.trim().length || locationFilter || categoryFilter;
+
   const showFiltersButtonVariant = showFilters ? "outline" : "solid";
 
   return (
@@ -78,6 +80,7 @@ const FilterToolbar = ({
             size="xs"
             variant="solid"
             colorScheme="teal" 
+            isDisabled={!isEnabledResetFilterButton}
             onClick={() => resetFilters()}>
             Effacer les filtres
           </Button>
