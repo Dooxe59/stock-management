@@ -70,7 +70,6 @@ const FilterToolbar = ({
             Tri
           </FormLabel>
           <Select size="sm" value={productSort} onChange={handleInputProductSortChange}>
-            <option value=""></option>
             {renderSelectSortProductOptions()}
           </Select>
         </div>

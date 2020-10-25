@@ -7,18 +7,18 @@ import "./home.scss";
 import { Text } from '@chakra-ui/core';
 import { useState } from 'react';
 import FilterToolbar from '../../components/filterToolbar/FilterToolbar';
+import { sortProductOptions } from '../../consts';
 
 const Home = () => {
   const [searchFilter, setSearchFilter] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
-  const [productSort, setProductSort] = useState("");
+  const [productSort, setProductSort] = useState(sortProductOptions[0].id);
 
   const resetFilters = () => {
     setSearchFilter("");
     setLocationFilter("");
     setCategoryFilter("");
-    setProductSort("");
   };
 
   const currentProductFilter = () => {
