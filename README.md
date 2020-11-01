@@ -8,10 +8,15 @@ App icon PWA
 
 Après ajout d'un produit, remettre le focus au niveau du premier input
 
-Authentification
+Authentification: gestion des erreurs
 BDD = Ne pas oublier de mettre en mode protégé
+BDD: gestion des erreurs + loader
 
 colorScheme={getColorSchemeById(currentLocation?.id)}
 URGENT: COLOR A revoir car plus d'id
 
 refacto app.jsx
+
+déconnexion
+style page login
+Gestion enter page login

@@ -1,6 +1,6 @@
 import firebase from "../firebase";
 
-const db = firebase.ref("/location");
+const db = firebase.database().ref("/location");
 
 class LocationService {
   getAll() {

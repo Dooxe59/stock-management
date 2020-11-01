@@ -1,0 +1,60 @@
+.application-top-bar {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border-bottom: 2px solid lightgray;
+
+  .application-name {
+    margin: 0 10px;
+    font-size: larger;
+    font-weight: bold;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1976d2;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  .empty-area {
+    flex: 1;
+  }
+
+  .administration-button-text {
+    margin: 0 10px;
+  }
+
+  .administration-button-icon {
+    display: none;
+  }
+
+  @media screen and (max-width: 480px) {
+    .administration-button-text {
+      display: none;
+    }
+
+    .administration-button-icon {
+      display: block;
+    }
+  }
+
+  .help-button-icon {
+    margin: 0 10px;
+  }
+
+  .bell-icon-alert {
+    color: red;
+  }
+
+  .bell-icon-warning {
+    color: orange;
+  }
+
+  .bell-icon {
+    color: green;
+  }
+}

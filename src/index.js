@@ -11,6 +11,7 @@ import fr from 'date-fns/locale/fr';
 import moment from "moment";
 import "moment/locale/fr";
 import { Provider } from 'react-redux';
+import AuthProvider from "./components/authProvider/AuthProvider";
 
 registerLocale('fr', fr);
 moment.locale("fr");
@@ -19,9 +20,11 @@ moment.locale("fr");
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <AuthProvider>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </AuthProvider>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')

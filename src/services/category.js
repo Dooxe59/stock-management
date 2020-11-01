@@ -1,6 +1,6 @@
 import firebase from "../firebase";
 
-const db = firebase.ref("/category");
+const db = firebase.database().ref("/category");
 
 class CategoryService {
   getAll() {

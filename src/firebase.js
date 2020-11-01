@@ -1,5 +1,6 @@
 import * as firebase from "firebase";
 import "firebase/database";
+import "firebase/auth";
 
 let config = {
   apiKey: "AIzaSyCaX8U0ZlCaRjWeGM8M9mmK2Ahk-d73tGA",
@@ -12,7 +13,8 @@ let config = {
     measurementId: "G-CYN2SNR87T"
 };
 
-firebase.initializeApp(config);
+const app = firebase.initializeApp(config);
 // firebase.analytics();
+export default app;
 
-export default firebase.database();
+// export default firebase.database();
