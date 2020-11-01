@@ -2,11 +2,7 @@ import React, {
   useCallback,
   useState
 } from 'react';
-import {
-  useDispatch,
-  useSelector
-} from 'react-redux';
-import { categoriesSelector } from '../../../store/categories/categoriesSelector';
+import { useDispatch } from 'react-redux';
 import { updateCategory } from '../../../store/categories/categoriesActions';
 import CategoryItem from './categoryItem/CategoryItem';
 import {
@@ -21,20 +17,24 @@ import {
   ModalBody,
   Text,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/core";
+import CategoryService from "../../../services/category";
 
 import "./categoryList.scss";
 
-const CategoryList = () => {
-  const categories = useSelector(categoriesSelector);
-
-  const { isOpen: isOpenUpdateCategoryModal, onOpen: onOpenUpdateCategoryModal, onClose: onCloseUpdateCategoryModal } = useDisclosure();
+const CategoryList = ({categories}) => {
+  const { 
+    isOpen: isOpenUpdateCategoryModal,
+    onOpen: onOpenUpdateCategoryModal,
+    onClose: onCloseUpdateCategoryModal
+  } = useDisclosure();
   const [updatedCategory, setUpdatedCategory] = useState({});
 
   const isValidUpdatedCategory = updatedCategory?.label?.trim().length > 0;
 
-  const openUpdateCategoryModal = (categoryId) => {
-    const category = categories.find(category => category.id === categoryId);
+  const openUpdateCategoryModal = (categoryKey) => {
+    const category = categories.find(category => category.categoryKey === categoryKey);
     setUpdatedCategory(category);
     onOpenUpdateCategoryModal();
   };
@@ -44,14 +44,38 @@ const CategoryList = () => {
     dispatch(updateCategory(category));
   }, [dispatch]);
 
+  const toast = useToast();
+
   const updateCategoryFromModal = () => {
-    updateCategoryStore(updatedCategory);
-    onCloseUpdateCategoryModal();
+    const data = {
+      label: updatedCategory.label,
+    };
+    CategoryService.update(updatedCategory.categoryKey, data)
+      .then(() => {
+        updateCategoryStore(updatedCategory);
+        onCloseUpdateCategoryModal();
+        toast({
+          title: "Catégorie miss à jour",
+          description: `${updatedCategory.label} a bien été mise à jour`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      })
+      .catch((e) => {
+        // TODO: manage error + loading
+        console.log(e);
+      });
   };
 
   const renderCategories = () => {
-    return categories.map(category => {
-      return <CategoryItem category={category} key={category.id} updateCategory={() => openUpdateCategoryModal(category.id)}></CategoryItem>;
+    return categories.map((category, index) => {
+      return (
+        <CategoryItem 
+          category={category} 
+          key={index}
+          updateCategory={() => openUpdateCategoryModal(category.categoryKey)}>
+        </CategoryItem>);
     })
   };
 
@@ -65,7 +89,7 @@ const CategoryList = () => {
   const handleInputTextChange = (event) => {
     setUpdatedCategory({
       label: event.target.value,
-      id: updatedCategory.id,
+      categoryKey: updatedCategory.categoryKey,
     });
   };
 

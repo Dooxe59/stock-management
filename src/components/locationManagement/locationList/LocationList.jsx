@@ -2,8 +2,7 @@ import React, {
   useCallback,
   useState 
 } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { locationsSelector } from '../../../store/locations/locationsSelector';
+import { useDispatch } from 'react-redux';
 import { updateLocation } from '../../../store/locations/locationsActions';
 import LocationItem from './locationItem/LocationItem';
 import {
@@ -18,38 +17,66 @@ import {
   ModalBody,
   Text,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/core";
+import LocationService from "../../../services/location";
 
 import "./locationList.scss";
 
-const LocationList = () => {
-  const locations = useSelector(locationsSelector);
-  
-  const { isOpen: isOpenUpdateLocationModal, onOpen: onOpenUpdateLocationModal, onClose: onCloseUpdateLocationModal } = useDisclosure();
+const LocationList = ({locations}) => {
+  const { 
+    isOpen: isOpenUpdateLocationModal, 
+    onOpen: onOpenUpdateLocationModal, 
+    onClose: onCloseUpdateLocationModal 
+  } = useDisclosure();
   const [updatedLocation, setUpdatedLocation] = useState({});
 
   const isValidUpdatedLocation = updatedLocation?.label?.trim().length > 0;
 
-  const openUpdateLocationModal = (locationId) => {
-    const location = locations.find(location => location.id === locationId);
+  const openUpdateLocationModal = (locationKey) => {
+    const location = locations.find(location => location.locationKey === locationKey);
     setUpdatedLocation(location);
     onOpenUpdateLocationModal();
   };
 
-  
   const dispatch = useDispatch();
   const updateLocationStore = useCallback((location) => {
     dispatch(updateLocation(location));
   }, [dispatch]);
 
+  const toast = useToast();
+
   const updateLocationFromModal = () => {
-    updateLocationStore(updatedLocation);
-    onCloseUpdateLocationModal();
+    const data = {
+      label: updatedLocation.label,
+    };
+    LocationService.update(updatedLocation.locationKey, data)
+      .then(() => {
+        updateLocationStore(updatedLocation);
+        onCloseUpdateLocationModal();
+        toast({
+          title: "Emplacement mis à jour",
+          description: `${updatedLocation.label} a bien été mis à jour`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      })
+      .catch((e) => {
+        // TODO: manage error + loading
+        console.log(e);
+      });
+    
   };
 
   const renderLocations = () => {
-    return locations.map(location => {
-      return <LocationItem location={location} key={location.id} updateLocation={() => openUpdateLocationModal(location.id)}></LocationItem>;
+    return locations.map((location, index) => {
+      return (
+        <LocationItem 
+          location={location} 
+          key={index} 
+          updateLocation={() => openUpdateLocationModal(location.locationKey)}>
+        </LocationItem>);
     })
   };
 
@@ -63,7 +90,7 @@ const LocationList = () => {
   const handleInputTextChange = (event) => {
     setUpdatedLocation({
       label: event.target.value,
-      id: updatedLocation.id,
+      locationKey: updatedLocation.locationKey,
     });
   };
 

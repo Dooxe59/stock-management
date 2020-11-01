@@ -46,16 +46,16 @@ const AddProductForm = () => {
 
   const [productExpirationDate, setProductExpirationDate] = useState("");
 
-  // TODO: refacto app parseInt
-  const [productLocation, setProductLocation] = useState(1);
+  // TODO: Selected key en dur :(
+  const defaultSelectedLocation = "-MKl-UouPPAvf62J4F81";
+  const [productLocation, setProductLocation] = useState(defaultSelectedLocation);
   const handleInputProductLocationChange = (event) => {
-    const parsedValue = parseInt(event.target.value) || "";
-    setProductLocation(parsedValue);
+    setProductLocation(event.target.value || "");
   };
 
   const [productCategory, setProductCategory] = useState("");
   const handleInputProductCategoryChange = (event) => {
-    const parsedValue = parseInt(event.target.value) || "";
+    const parsedValue = event.target.value || "";
     setProductCategory(parsedValue);
   };
 
@@ -79,8 +79,8 @@ const AddProductForm = () => {
     if (isValidProduct) {
       const product = {
         name: productLabel.trim(),
-        locationId: productLocation,
-        categoryId: productCategory,
+        locationKey: productLocation,
+        categoryKey: productCategory,
         quantity: productQuantity.trim(),
         expirationDate: productExpirationDate,
         creationDate: moment().format('L')

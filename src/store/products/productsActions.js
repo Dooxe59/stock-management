@@ -5,8 +5,8 @@ export const addProduct = (product) => ({
   type: ADD_PRODUCT,
   payload: {
     productName: product.name,
-    locationId: product.locationId,
-    categoryId: product.categoryId,
+    locationKey: product.locationKey,
+    categoryKey: product.categoryKey,
     quantity: product.quantity,
     expirationDate: product.expirationDate,
     creationDate: product.creationDate,
@@ -23,8 +23,8 @@ export const updateProduct = (product) => ({
   payload: {
     productId: product.productId,
     productName: product.name,
-    locationId: product.locationId,
-    categoryId: product.categoryId,
+    locationKey: product.locationKey,
+    categoryKey: product.categoryKey,
     quantity: product.quantity,
     expirationDate: product.expirationDate,
   }

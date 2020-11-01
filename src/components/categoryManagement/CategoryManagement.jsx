@@ -1,9 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addCategory } from '../../store/categories/categoriesActions';
 import CategoryList from './categoryList/CategoryList';
-import { Button, IconButton, Input } from "@chakra-ui/core";
+import { Button, IconButton, Input, useToast } from "@chakra-ui/core";
 import { AddIcon } from '@chakra-ui/icons';
+import CategoryService from "../../services/category";
+import { categoriesSelector } from '../../store/categories/categoriesSelector';
 
 import "./categoryManagement.scss";
 
@@ -12,6 +14,8 @@ const CategoryManagement = () => {
   const addNewCategory = useCallback((category) => {
     dispatch(addCategory(category));
   }, [dispatch]);
+
+  const categories = useSelector(categoriesSelector);
 
   const [newCategoryLabel, setNewCategoryLabel] = useState("");
 
@@ -28,13 +32,33 @@ const CategoryManagement = () => {
     }
   };
 
+  const toast = useToast();
+
   const validateAndAddNewCategory = () => {
     if (isValidNewCategoryLabel) {
       let categoryLabel = newCategoryLabel.trim();
       categoryLabel = categoryLabel.charAt(0).toUpperCase() + categoryLabel.slice(1);
 
-      addNewCategory({categoryLabel: categoryLabel});
-      clearInputText();
+      let data = {
+        label: categoryLabel,
+      };
+
+      CategoryService.create(data)
+        .then((response) => {
+          addNewCategory({categoryLabel: categoryLabel, categoryKey: response.key});
+          toast({
+            title: "Catégorie ajouté",
+            description: `${categoryLabel} a bien été ajouté`,
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+          clearInputText();
+        })
+        .catch((e) => {
+          // TODO: manage error + loading
+          console.log(e);
+        });
     }
   };
 
@@ -72,7 +96,7 @@ const CategoryManagement = () => {
           onClick={() => validateAndAddNewCategory()}/>
       </div>
       <hr/>
-      <CategoryList></CategoryList>
+      <CategoryList categories={categories}></CategoryList>
     </div>
   );
 };

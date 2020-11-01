@@ -1,16 +1,20 @@
-import { ADD_LOCATION, DELETE_LOCATION, UPDATE_LOCATION } from "./locationsReducer";
+import { 
+  ADD_LOCATION, 
+  INIT_LOCATION, 
+  UPDATE_LOCATION
+} from "./locationsReducer";
+
+export const initLocation = (locations) => ({
+  type: INIT_LOCATION,
+  payload: {locations}
+});
 
 export const addLocation = (location) => ({
   type: ADD_LOCATION,
-  payload: {locationLabel: location.locationLabel}
-});
-
-export const deleteLocation = (location) => ({
-  type: DELETE_LOCATION,
-  payload: {locationId: location.locationId}
+  payload: {locationLabel: location.locationLabel, locationKey: location.locationKey}
 });
 
 export const updateLocation = (location) => ({
   type: UPDATE_LOCATION,
-  payload: {locationId: location.id, newLocationLabel: location.label}
+  payload: {locationKey: location.locationKey, newLocationLabel: location.label}
 });

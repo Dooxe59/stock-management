@@ -10,7 +10,6 @@ import "./productList.scss";
 const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}) => {
   const products = useSelector(productsSelector);
 
-  // TODO: refaco method
   const filteredProducts = () => {
     const trimmedSearchFilter = searchFilter.trim()?.toLowerCase();
 
@@ -25,10 +24,10 @@ const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}
         sortedProducts = _.orderBy(sortedProducts, "productName", "asc");
         break;
       case 3:
-        sortedProducts = _.orderBy(sortedProducts, "categoryId", "asc");
+        sortedProducts = _.orderBy(sortedProducts, "categoryKey", "asc");
         break;
       case 4:
-        sortedProducts = _.orderBy(sortedProducts, "locationId", "asc");
+        sortedProducts = _.orderBy(sortedProducts, "locationKey", "asc");
         break;
       default: 
         break;
@@ -44,11 +43,11 @@ const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}
     }
 
     if(locationFilter) {
-      filtered = filtered.filter(product => product.locationId === locationFilter);
+      filtered = filtered.filter(product => product.locationKey === locationFilter);
     }
 
     if(categoryFilter) {
-      filtered = filtered.filter(product => product.categoryId === categoryFilter);
+      filtered = filtered.filter(product => product.categoryKey === categoryFilter);
     }
 
     return filtered;

@@ -9,4 +9,9 @@ App icon PWA
 Après ajout d'un produit, remettre le focus au niveau du premier input
 
 Authentification
-BDD
+BDD = Ne pas oublier de mettre en mode protégé
+
+colorScheme={getColorSchemeById(currentLocation?.id)}
+URGENT: COLOR A revoir car plus d'id
+
+refacto app.jsx

@@ -62,8 +62,7 @@ const ProductItem = ({product}) => {
   };
 
   const locations = useSelector(locationsSelector);
-  const currentLocation = locations.find(location => location.id === product.locationId);
-  
+  const currentLocation = locations.find(location => location.locationKey === product.locationKey);
   // TODO: 2 render by default ??
 
   const momentExpirationDate = moment(product.expirationDate, "DDMMYYYY");
@@ -111,14 +110,14 @@ const ProductItem = ({product}) => {
   };
 
   const categories = useSelector(categoriesSelector);
-  const currentCategory = categories.find(category => category.id === product.categoryId);
+  const currentCategory = categories.find(category => category.categoryKey === product.categoryKey);
   const renderProductCategory = () => {
     return currentCategory?.label ? (
       <div className="product-category">
         <Badge 
           size="md"
           variant="solid"
-          colorScheme={getColorSchemeById(currentCategory.id, 4)}>
+          colorScheme={getColorScheme(currentCategory.categoryKey, 4)}>
           {currentCategory?.label}
         </Badge>
       </div>
@@ -126,9 +125,11 @@ const ProductItem = ({product}) => {
   };
 
   const COLORS = ['blue', 'purple', 'red', 'green', 'orange', 'teal', 'gray', 'cyan', 'pink'];
-  const getColorSchemeById = (id, shift = 0) => {
-    const colorIndex = (id + shift) % 9;
-    return COLORS[colorIndex];
+  const getColorScheme = (key, shift = 0) => {
+    return COLORS[0];
+    // TODO: WIP rfactor methods id
+    // const colorIndex = (key + shift) % 9;
+    // return COLORS[colorIndex];
   };
 
   const { 
@@ -146,17 +147,19 @@ const ProductItem = ({product}) => {
     setUpdateProductQuantity(event.target.value);
   };
 
-  const [updateProductExpirationDate, setUpdateProductExpirationDate] = useState(moment(product?.expirationDate, "DD/MM/YYYY")?.toDate());
+  const defaultDate = moment(product?.expirationDate, "DD/MM/YYYY")?.isValid() ? 
+    moment(product?.expirationDate, "DD/MM/YYYY")?.toDate() : "";
+  const [updateProductExpirationDate, setUpdateProductExpirationDate] = useState(defaultDate);
 
-  const [updateProductLocation, setUpdateProductLocation] = useState(product?.locationId);
+  const [updateProductLocation, setUpdateProductLocation] = useState(product?.locationKey);
   const handleInputProductLocationChange = (event) => {
-    const parsedValue = parseInt(event.target.value) || "";
+    const parsedValue = event.target.value || "";
     setUpdateProductLocation(parsedValue);
   };
 
   const [updateProductCategory, setUpdateProductCategory] = useState(product?.categoryId);
   const handleInputProductCategoryChange = (event) => {
-    const parsedValue = parseInt(event.target.value) || "";
+    const parsedValue = event.target.value || "";
     setUpdateProductCategory(parsedValue);
   };
 
@@ -180,15 +183,14 @@ const ProductItem = ({product}) => {
       const product = {
         productId: currentProductId,
         name: updateProductLabel.trim(),
-        locationId: updateProductLocation,
-        categoryId: updateProductCategory,
+        locationKey: updateProductLocation,
+        categoryKey: updateProductCategory,
         quantity: updateProductQuantity.trim(),
         expirationDate: updateProductExpirationDate,
         creationDate: moment().format('L')
       };
 
       product.name = product.name.charAt(0).toUpperCase() + product.name.slice(1);
-
       updateExistingProduct(product);
       toast({
         title: "Produit mis à jour",
@@ -215,7 +217,7 @@ const ProductItem = ({product}) => {
         <Badge 
           size="md"
           variant="outline"
-          colorScheme={getColorSchemeById(currentLocation.id)}>
+          colorScheme={getColorScheme(currentLocation?.locationKey)}>
           {currentLocation?.label}
         </Badge>
       </div>

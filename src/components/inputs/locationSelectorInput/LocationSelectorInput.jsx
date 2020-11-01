@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 const LocationSelectorInput = ({productLocation, handleInputProductLocationChange, addEmptySelect, inputSize = "sm"}) => {
   const locations = useSelector(locationsSelector);
   const renderSelectLocationOptions = () => {
-    return locations.map(location => {
-      return <option value={location.id} key={location.id}>{location.label}</option>
+    return locations.map((location, index) => {
+      return <option value={location.locationKey} key={index}>{location.label}</option>
     });
   };
 

@@ -1,41 +1,28 @@
-const initialState = [{
-  label: "Viande",
-  id: 1,
-},{
-  label: "Poisson",
-  id: 2,
-},{
-  label: "Légume",
-  id: 3,
-},{
-  label: "Fruit",
-  id: 4,
-},{
-  label: "Yaourt",
-  id: 5,
-},{
-  label: "Conserve",
-  id: 6,
-}];
+const initialState = [];
 
 export const ADD_CATEGORY = 'ADD_CATEGORY';
+export const INIT_CATEGORY = 'INIT_CATEGORY';
 export const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
 
 export const categoriesReducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_CATEGORY: {
-      if (!action.payload.categoryLabel) return state;
+      if (!action.payload.categoryLabel  || !action.payload.categoryKey) return state;
 
       const newItem = {
         label: action.payload.categoryLabel,
-        id: state.length + 1,
+        categoryKey: action.payload.categoryKey,
       };
       return [...state, newItem];
     }
+    case INIT_CATEGORY: {
+      if(!action.payload.categories) return;
+      return action.payload.categories;
+    }
     case UPDATE_CATEGORY: {
-      if (!action.payload.newCategoryLabel) return state;
+      if (!action.payload.newCategoryLabel || !action.payload.categoryKey) return state;
 
-      const categoryIndex = state.findIndex(item => item.id === action.payload.categoryId);
+      const categoryIndex = state.findIndex(item => item.categoryKey === action.payload.categoryKey);
       if (categoryIndex === -1) return state;
 
       const categoryListTemp = [...state];

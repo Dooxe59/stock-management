@@ -2,11 +2,13 @@ import React, {
   useCallback,
   useState 
 } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addLocation } from '../../store/locations/locationsActions';
 import LocationList from './locationList/LocationList';
-import { Button, IconButton, Input } from "@chakra-ui/core";
+import { Button, IconButton, Input, useToast } from "@chakra-ui/core";
 import { AddIcon } from '@chakra-ui/icons';
+import LocationService from "../../services/location";
+import { locationsSelector } from '../../store/locations/locationsSelector';
 
 import "./locationManagement.scss";
 
@@ -15,6 +17,9 @@ const LocationManagement = () => {
   const addNewLocation = useCallback((location) => {
     dispatch(addLocation(location));
   }, [dispatch]);
+
+  // TODO: refacto with locationList
+  const locations = useSelector(locationsSelector);
 
   const [newLocationLabel, setNewLocationLabel] = useState("");
 
@@ -31,13 +36,33 @@ const LocationManagement = () => {
     }
   };
 
+  const toast = useToast();
+
   const validateAndAddNewLocation = () => {
     if (isValidNewLocationLabel) {
       let locationLabel = newLocationLabel.trim();
       locationLabel = locationLabel.charAt(0).toUpperCase() + locationLabel.slice(1);
 
-      addNewLocation({locationLabel: locationLabel});
-      clearInputText();
+      let data = {
+        label: locationLabel,
+      };
+
+      LocationService.create(data)
+        .then((response) => {
+          addNewLocation({locationLabel: locationLabel, locationKey: response.key});
+          toast({
+            title: "Emplacement ajouté",
+            description: `${locationLabel} a bien été ajouté`,
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+          clearInputText();
+        })
+        .catch((e) => {
+          // TODO: manage error + loading
+          console.log(e);
+        });
     }
   };
 
@@ -75,7 +100,7 @@ const LocationManagement = () => {
           onClick={() => validateAndAddNewLocation()}/>
       </div>
       <hr/>
-      <LocationList></LocationList>
+      <LocationList locations={locations}></LocationList>
     </div>
   );
 };

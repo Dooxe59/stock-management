@@ -34,8 +34,8 @@ const Home = () => {
         categoryFilter={categoryFilter}
         productSort={productSort}
         handleInputSearchFilterChange={(event) => setSearchFilter(event.target.value)}  
-        handleInputLocationFilterChange={(event) => setLocationFilter(parseInt(event.target.value) || "")}
-        handleInputCategoryFilterChange={(event) => setCategoryFilter(parseInt(event.target.value) || "")}
+        handleInputLocationFilterChange={(event) => setLocationFilter(event.target.value || "")}
+        handleInputCategoryFilterChange={(event) => setCategoryFilter(event.target.value || "")}
         handleInputProductSortChange={(event) => setProductSort(parseInt(event.target.value) || "")}
         resetFilters={resetFilters}>  
       </FilterToolbar>

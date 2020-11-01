@@ -6,8 +6,8 @@ import { categoriesSelector } from '../../../store/categories/categoriesSelector
 const CategorySelectorInput = ({productCategory, handleInputProductCategoryChange, inputSize = "sm"}) => {
   const categories = useSelector(categoriesSelector);
   const renderSelectCategoryOptions = () => {
-    return categories.map(category => {
-      return <option value={category.id} key={category.id}>{category.label}</option>
+    return categories.map((category, index) => {
+      return <option value={category.categoryKey} key={index}>{category.label}</option>
     });
   };
 

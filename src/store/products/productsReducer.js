@@ -1,47 +1,47 @@
 const initialState = [{
   productName: "Tomates",
-  locationId: 1, // Frigo
-  categoryId: 3, // Légume
+  locationKey: "-MKl-UouPPAvf62J4F81",
+  categoryKey: "-MKzFgsT_XJEc0MrUMe2", 
   quantity: "2",
   expirationDate: "24/10/2020",
   creationDate: "18/10/2020",
   id: 1,
 }, {
   productName: "Steak poivre",
-  locationId: 1, // Frigo
-  categoryId: 1, // Viande
+  locationKey: "-MKl-UouPPAvf62J4F81",
+  categoryKey: "-MKzFgsT_XJEc0MrUMe2", 
   quantity: "2",
   expirationDate: "2/12/2020",
   creationDate: "18/10/2020",
   id: 2
 },{
   productName: "Steak haché 5%",
-  locationId: 1, // Frigo
-  categoryId: 1, // Viande
+  locationKey: "-MKl-UouPPAvf62J4F81",
+  categoryKey: "-MKzFgsT_XJEc0MrUMe2", 
   quantity: "1",
   expirationDate: "1/11/2020",
   creationDate: "18/10/2020",
   id: 3
 }, {
   productName: "Couscous",
-  locationId: 4, // Plcard cuisine
-  categoryId: 6, // Conserves
+  locationKey: "-MKl-UouPPAvf62J4F81",
+  categoryKey: "-MKzFgsT_XJEc0MrUMe2", 
   quantity: "2",
   expirationDate: "27/10/2020",
   creationDate: "18/10/2020",
   id: 4
 }, {
   productName: "Fish and chips",
-  locationId: 2, // Congélo cuisine
-  categoryId: 2, // Poisson
+  locationKey: "-MKl-UouPPAvf62J4F81",
+  categoryKey: "-MKzFgsT_XJEc0MrUMe2", 
   quantity: "2",
   expirationDate: "14/10/2020",
   creationDate: "18/10/2020",
   id: 5
 },{
   productName: "Knaki",
-  locationId: 1, // Congélo cuisine
-  categoryId: 1, // Poisson
+  locationKey: "-MKl-UouPPAvf62J4F81",
+  categoryKey: "-MKzFgsT_XJEc0MrUMe2", 
   quantity: "10",
   expirationDate: "14/09/2020",
   creationDate: "18/10/2020",
@@ -55,12 +55,12 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const productsReducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_PRODUCT: {
-      if (!action.payload.productName || !action.payload.locationId) return state;
+      if (!action.payload.productName || !action.payload.locationKey) return state;
 
       const newProduct = {
         productName: action.payload.productName,
-        locationId: action.payload.locationId,
-        categoryId: action.payload.categoryId,
+        locationKey: action.payload.locationKey,
+        categoryKey: action.payload.categoryKey,
         quantity: action.payload.quantity,
         expirationDate: action.payload.expirationDate,
         creationDate: action.payload.creationDate,
