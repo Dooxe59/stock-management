@@ -1,0 +1,30 @@
+.login {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+
+  .login-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 100%;
+
+    .login-title {
+      display: flex;
+      justify-content: center;
+    }
+
+    .mail-input {
+      margin: 10px 0;
+    }
+
+    .password-input {
+      margin-bottom: 10px;
+    }
+
+    .authenticate-button {
+    }
+  }
+}

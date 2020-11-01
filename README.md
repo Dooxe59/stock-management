@@ -18,5 +18,3 @@ URGENT: COLOR A revoir car plus d'id
 refacto app.jsx
 
 déconnexion
-style page login
-Gestion enter page login
