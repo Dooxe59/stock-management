@@ -4,6 +4,10 @@
   height: 40px;
   border-bottom: 2px solid lightgray;
 
+  a {
+    display: flex;
+  }
+
   .application-name {
     margin: 0 10px;
     font-size: larger;
@@ -24,26 +28,34 @@
     flex: 1;
   }
 
-  .administration-button-text {
-    margin: 0 10px;
+  .administration-button-text,
+  .logout-button-text {
+    margin: 0 5px;
   }
 
-  .administration-button-icon {
+  .administration-button-icon,
+  .logout-button-icon {
     display: none;
   }
 
   @media screen and (max-width: 480px) {
-    .administration-button-text {
+    .administration-button-text,
+    .logout-button-text {
       display: none;
     }
 
-    .administration-button-icon {
+    .administration-button-icon,
+    .logout-button-icon {
       display: block;
     }
-  }
 
-  .help-button-icon {
-    margin: 0 10px;
+    .help-button-icon {
+      margin: 0 5px;
+    }
+
+    .logout-button-icon {
+      margin-right: 5px;
+    }
   }
 
   .bell-icon-alert {

@@ -1,6 +1,5 @@
 import { ADD_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT } from "./productsReducer";
 
-// TODO: Améliorer payload ? 
 export const addProduct = (product) => ({
   type: ADD_PRODUCT,
   payload: {

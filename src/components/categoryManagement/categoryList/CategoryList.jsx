@@ -44,7 +44,7 @@ const CategoryList = ({categories}) => {
     dispatch(updateCategory(category));
   }, [dispatch]);
 
-  const toast = useToast();
+  const categoryListToast = useToast();
 
   const updateCategoryFromModal = () => {
     const data = {
@@ -54,7 +54,7 @@ const CategoryList = ({categories}) => {
       .then(() => {
         updateCategoryStore(updatedCategory);
         onCloseUpdateCategoryModal();
-        toast({
+        categoryListToast({
           title: "Catégorie miss à jour",
           description: `${updatedCategory.label} a bien été mise à jour`,
           status: "success",

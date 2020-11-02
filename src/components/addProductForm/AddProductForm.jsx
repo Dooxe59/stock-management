@@ -74,7 +74,7 @@ const AddProductForm = () => {
   //   productLabelInputRef.current.focus();
   // };
 
-  const toast = useToast();
+  const addProductFormToast = useToast();
   const validateAndAddProduct = () => {
     if (isValidProduct) {
       const product = {
@@ -88,7 +88,7 @@ const AddProductForm = () => {
 
       product.name = product.name.charAt(0).toUpperCase() + product.name.slice(1);
       addNewProduct(product);
-      toast({
+      addProductFormToast({
         title: "Produit ajouté",
         description: `${product.name} a bien été ajouté`,
         status: "success",

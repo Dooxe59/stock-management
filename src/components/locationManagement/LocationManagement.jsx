@@ -18,7 +18,6 @@ const LocationManagement = () => {
     dispatch(addLocation(location));
   }, [dispatch]);
 
-  // TODO: refacto with locationList
   const locations = useSelector(locationsSelector);
 
   const [newLocationLabel, setNewLocationLabel] = useState("");
@@ -36,7 +35,7 @@ const LocationManagement = () => {
     }
   };
 
-  const toast = useToast();
+  const locationManagementToast = useToast();
 
   const validateAndAddNewLocation = () => {
     if (isValidNewLocationLabel) {
@@ -50,7 +49,7 @@ const LocationManagement = () => {
       LocationService.create(data)
         .then((response) => {
           addNewLocation({locationLabel: locationLabel, locationKey: response.key});
-          toast({
+          locationManagementToast({
             title: "Emplacement ajouté",
             description: `${locationLabel} a bien été ajouté`,
             status: "success",

@@ -9,20 +9,43 @@ import {
   PopoverContent, 
   PopoverHeader, 
   PopoverTrigger, 
-  Text 
+  Text, 
+  useToast
 } from "@chakra-ui/core";
 import { 
   BellIcon, 
+  ExternalLinkIcon,
   QuestionIcon, 
-  SettingsIcon 
+  SettingsIcon
 } from "@chakra-ui/icons";
 import {
   Link
 } from "react-router-dom";
 
 import "./applicationTopBar.scss";
+import app from '../../firebase';
 
 const ApplicationTopBar = () => {
+  const applicationTopBarToast = useToast();
+
+  const tryLogOut = () => {
+    app.auth().signOut().then(() => {
+      applicationTopBarToast({
+        title: "Déconnection effectuée",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    }).catch(error => {
+      applicationTopBarToast({
+        title: "Déconnection impossible",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    });
+  };
+
   return (
     <div className="application-top-bar">
       <Link to="/">
@@ -65,7 +88,7 @@ const ApplicationTopBar = () => {
             <Text 
               fontSize={["xs", "sm"]}
               className="bell-icon-alert">
-              { <BellIcon/> }: Date passée ou aujourd'hui
+              { <BellIcon/> }: Date passée / aujourd'hui
             </Text>
             <Text 
             fontSize={["xs", "sm"]}
@@ -80,6 +103,22 @@ const ApplicationTopBar = () => {
           </PopoverBody>
         </PopoverContent>
       </Popover>
+      <Button 
+        className="logout-button-text" 
+        variant="outline"
+        size="xs" 
+        colorScheme="pink"
+        onClick={() => tryLogOut()}>
+        Déconnexion
+      </Button>
+      <IconButton 
+        className="logout-button-icon"
+        title="Déconnexion"
+        variant="outline"
+        icon={<ExternalLinkIcon />} 
+        size="xs" 
+        colorScheme="pink"
+        onClick={() => tryLogOut()}/>
     </div>
   );
 };

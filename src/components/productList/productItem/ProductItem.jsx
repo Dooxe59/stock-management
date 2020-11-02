@@ -46,13 +46,13 @@ const ProductItem = ({product}) => {
 
   const currentProductId = product?.id;
   
-  const toast = useToast();
+  const productItemToast = useToast();
 
   const confirmDeleteProduct = () => {
     const productName = product.productName;
     deleteSelectedProduct({productId: currentProductId});
     onCloseDeleteProductModal();
-    toast({
+    productItemToast({
       title: "Produit supprimé",
       description: `${productName} a bien été supprimé`,
       status: "success",
@@ -170,7 +170,6 @@ const ProductItem = ({product}) => {
     setUpdateProductCategory(parsedValue);
   };
 
-  // TODO: refactor event key Enter in app 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       validateAndUpdateProduct();
@@ -199,7 +198,7 @@ const ProductItem = ({product}) => {
 
       product.name = product.name.charAt(0).toUpperCase() + product.name.slice(1);
       updateExistingProduct(product);
-      toast({
+      productItemToast({
         title: "Produit mis à jour",
         description: `${product.name} a bien été mis à jour`,
         status: "success",

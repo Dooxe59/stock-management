@@ -44,7 +44,7 @@ const LocationList = ({locations}) => {
     dispatch(updateLocation(location));
   }, [dispatch]);
 
-  const toast = useToast();
+  const locationListToast = useToast();
 
   const updateLocationFromModal = () => {
     const data = {
@@ -54,7 +54,7 @@ const LocationList = ({locations}) => {
       .then(() => {
         updateLocationStore(updatedLocation);
         onCloseUpdateLocationModal();
-        toast({
+        locationListToast({
           title: "Emplacement mis à jour",
           description: `${updatedLocation.label} a bien été mis à jour`,
           status: "success",

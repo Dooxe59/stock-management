@@ -32,7 +32,7 @@ const CategoryManagement = () => {
     }
   };
 
-  const toast = useToast();
+  const categoryManagementToast = useToast();
 
   const validateAndAddNewCategory = () => {
     if (isValidNewCategoryLabel) {
@@ -46,7 +46,7 @@ const CategoryManagement = () => {
       CategoryService.create(data)
         .then((response) => {
           addNewCategory({categoryLabel: categoryLabel, categoryKey: response.key});
-          toast({
+          categoryManagementToast({
             title: "Catégorie ajouté",
             description: `${categoryLabel} a bien été ajouté`,
             status: "success",
