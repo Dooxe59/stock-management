@@ -15,3 +15,4 @@ BDD: gestion des erreurs + loader
 refacto app.jsx
 
 create Toast Provider
+Revoir l'ensemble des libellés des toasts

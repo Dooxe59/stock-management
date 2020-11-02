@@ -90,7 +90,7 @@ const AddProductForm = () => {
       addNewProduct(product);
       addProductFormToast({
         title: "Produit ajouté",
-        description: `${product.name} a bien été ajouté`,
+        description: `${product.name} a bien été ajouté.`,
         status: "success",
         duration: 5000,
         isClosable: true,

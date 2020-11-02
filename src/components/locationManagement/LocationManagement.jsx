@@ -51,7 +51,7 @@ const LocationManagement = () => {
           addNewLocation({locationLabel: locationLabel, locationKey: response.key});
           locationManagementToast({
             title: "Emplacement ajouté",
-            description: `${locationLabel} a bien été ajouté`,
+            description: `${locationLabel} a bien été ajouté.`,
             status: "success",
             duration: 5000,
             isClosable: true,
@@ -59,7 +59,14 @@ const LocationManagement = () => {
           clearInputText();
         })
         .catch((e) => {
-          // TODO: manage error + loading
+          // TODO: manage loading
+          locationManagementToast({
+            title: "Echec de l'ajout de l'emplacement",
+            description: `${locationLabel} n'a pas été ajouté. Veuillez réessayer.`,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
           console.log(e);
         });
     }

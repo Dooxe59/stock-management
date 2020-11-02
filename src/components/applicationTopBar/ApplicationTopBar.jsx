@@ -31,14 +31,14 @@ const ApplicationTopBar = () => {
   const tryLogOut = () => {
     app.auth().signOut().then(() => {
       applicationTopBarToast({
-        title: "Déconnection effectuée",
+        title: "Déconnexion effectuée",
         status: "success",
         duration: 5000,
         isClosable: true,
       });
     }).catch(error => {
       applicationTopBarToast({
-        title: "Déconnection impossible",
+        title: "Echec de la déconnexion ",
         status: "error",
         duration: 5000,
         isClosable: true,

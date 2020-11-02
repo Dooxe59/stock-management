@@ -56,14 +56,21 @@ const LocationList = ({locations}) => {
         onCloseUpdateLocationModal();
         locationListToast({
           title: "Emplacement mis à jour",
-          description: `${updatedLocation.label} a bien été mis à jour`,
+          description: `${updatedLocation.label} a bien été mis à jour.`,
           status: "success",
           duration: 5000,
           isClosable: true,
         });
       })
       .catch((e) => {
-        // TODO: manage error + loading
+        // TODO: manage loading
+        locationListToast({
+          title: "Echec de la mise à jour de l'emplacement",
+          description: `${updatedLocation.label} n'a pas été mis à jour. Veuillez réessayer.`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
         console.log(e);
       });
     

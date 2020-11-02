@@ -1,4 +1,4 @@
-import { Button, Heading, Input, InputGroup, InputRightElement } from '@chakra-ui/core';
+import { Button, Heading, Input, InputGroup, InputRightElement, useToast } from '@chakra-ui/core';
 import React from 'react';
 import { useCallback } from 'react';
 import { useContext } from 'react';
@@ -22,6 +22,8 @@ const Login = ({history}) => {
     setPassword(e.target.value);
   };
 
+  const loginToast = useToast();
+
   const handleLogin = useCallback(
     async (event, mail, password) => {
       event.preventDefault();
@@ -31,8 +33,13 @@ const Login = ({history}) => {
           .signInWithEmailAndPassword(mail, password);
         history.push("/");
       } catch (error) {
-        // TODO: manage errors
-        console.error(error);
+        loginToast({
+          title: "Echec de la connexion",
+          description: "L'adresse e-mail ou le mot de passe est invalide.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
       }
     }, [history]
   );

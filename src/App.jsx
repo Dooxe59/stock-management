@@ -48,7 +48,7 @@ const App = () => {
         initStoreLocations(dbLocations);
       })
       .catch(error => {
-        // TODO: error management
+        // TODO: error management + loading
         console.error(error.message);
       });
 
@@ -66,7 +66,7 @@ const App = () => {
         initStoreCategories(dbCategories);
       })
       .catch(error => {
-        // TODO: error management
+        // TODO: error management + loading
         console.error(error.message);
       });
   });

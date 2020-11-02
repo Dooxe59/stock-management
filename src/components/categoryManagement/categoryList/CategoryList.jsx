@@ -55,15 +55,22 @@ const CategoryList = ({categories}) => {
         updateCategoryStore(updatedCategory);
         onCloseUpdateCategoryModal();
         categoryListToast({
-          title: "Catégorie miss à jour",
-          description: `${updatedCategory.label} a bien été mise à jour`,
+          title: "Catégorie mise à jour",
+          description: `${updatedCategory.label} a bien été mise à jour.`,
           status: "success",
           duration: 5000,
           isClosable: true,
         });
       })
       .catch((e) => {
-        // TODO: manage error + loading
+        // TODO: manage loading
+        categoryListToast({
+          title: "Echec de la mise à jour de la catégorie",
+          description: `${updatedCategory.label} n'a pas été mis à jour. Veuillez réessayer.`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
         console.log(e);
       });
   };

@@ -54,7 +54,7 @@ const ProductItem = ({product}) => {
     onCloseDeleteProductModal();
     productItemToast({
       title: "Produit supprimé",
-      description: `${productName} a bien été supprimé`,
+      description: `${productName} a bien été supprimé.`,
       status: "success",
       duration: 5000,
       isClosable: true,
@@ -200,7 +200,7 @@ const ProductItem = ({product}) => {
       updateExistingProduct(product);
       productItemToast({
         title: "Produit mis à jour",
-        description: `${product.name} a bien été mis à jour`,
+        description: `${product.name} a bien été mis à jour.`,
         status: "success",
         duration: 5000,
         isClosable: true,

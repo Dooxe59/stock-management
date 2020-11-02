@@ -48,7 +48,7 @@ const CategoryManagement = () => {
           addNewCategory({categoryLabel: categoryLabel, categoryKey: response.key});
           categoryManagementToast({
             title: "Catégorie ajouté",
-            description: `${categoryLabel} a bien été ajouté`,
+            description: `${categoryLabel} a bien été ajouté.`,
             status: "success",
             duration: 5000,
             isClosable: true,
@@ -56,7 +56,14 @@ const CategoryManagement = () => {
           clearInputText();
         })
         .catch((e) => {
-          // TODO: manage error + loading
+          // TODO: manage loading
+          categoryManagementToast({
+            title: "Echec de l'ajout de la catégorie",
+            description: `${categoryLabel} n'a pas été ajoutée. Veuillez réessayer.`,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
           console.log(e);
         });
     }
