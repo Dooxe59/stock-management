@@ -12,9 +12,6 @@ Authentification: gestion des erreurs
 BDD = Ne pas oublier de mettre en mode protégé
 BDD: gestion des erreurs + loader
 
-colorScheme={getColorSchemeById(currentLocation?.id)}
-URGENT: COLOR A revoir car plus d'id
-
 refacto app.jsx
 
 déconnexion

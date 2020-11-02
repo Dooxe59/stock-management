@@ -117,19 +117,26 @@ const ProductItem = ({product}) => {
         <Badge 
           size="md"
           variant="solid"
-          colorScheme={getColorScheme(currentCategory.categoryKey, 4)}>
+          colorScheme={getColorScheme(currentCategory?.categoryKey, 4)}>
           {currentCategory?.label}
         </Badge>
       </div>
     ) : '';
   };
 
-  const COLORS = ['blue', 'purple', 'red', 'green', 'orange', 'teal', 'gray', 'cyan', 'pink'];
+  const COLORS = ['blue', 'red', 'green', 'orange', 'gray', 'teal', 'purple', 'cyan', 'pink'];
   const getColorScheme = (key, shift = 0) => {
-    return COLORS[0];
-    // TODO: WIP rfactor methods id
-    // const colorIndex = (key + shift) % 9;
-    // return COLORS[colorIndex];
+    let hash = 0;
+    if (!key || !key.length) return shift % 9;
+
+    for (let i = 0; i < key.length; i++) {
+      const charCode = key.charCodeAt(i);
+      hash = ((hash << 7) - hash) + charCode;
+      hash = hash & hash;
+    }
+    if(hash < 0) hash *= -1; 
+    const colorIndex = (hash + shift) % 9;
+    return COLORS[colorIndex];
   };
 
   const { 
