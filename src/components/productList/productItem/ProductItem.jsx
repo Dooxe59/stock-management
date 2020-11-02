@@ -157,7 +157,7 @@ const ProductItem = ({product}) => {
     setUpdateProductLocation(parsedValue);
   };
 
-  const [updateProductCategory, setUpdateProductCategory] = useState(product?.categoryId);
+  const [updateProductCategory, setUpdateProductCategory] = useState(product?.categoryKey);
   const handleInputProductCategoryChange = (event) => {
     const parsedValue = event.target.value || "";
     setUpdateProductCategory(parsedValue);
