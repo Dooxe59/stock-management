@@ -12,9 +12,11 @@ import Home from "./pages/home/Home";
 import Administration from "./pages/administration/Administration";
 import Login from "./pages/login/Login";
 import { initLocation } from './store/locations/locationsActions';
+import { initCategory } from "./store/categories/categoriesActions";
+import { initProduct } from "./store/products/productsActions";
 import LocationService from "./services/location";
 import CategoryService from "./services/category";
-import { initCategory } from "./store/categories/categoriesActions";
+import ProductService from "./services/product";
 import ApplicationTopBar from "./components/applicationTopBar/ApplicationTopBar";
 import { AuthContext } from "./components/authProvider/AuthProvider";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
@@ -33,6 +35,10 @@ const App = () => {
     dispatch(initCategory(categories));
   }, [dispatch]);
   
+  const initStoreProducts = useCallback((products) => {
+    dispatch(initProduct(products));
+  }, [dispatch]);
+
   useEffect(() => {
     LocationService.getAll().once("value")
       .then(locations => {
@@ -69,6 +75,30 @@ const App = () => {
         // TODO: error management + loading
         console.error(error.message);
       });
+
+    ProductService.getAll().once("value")
+    .then(products => {
+      const dbProducts = [];
+      products.forEach((product) => {
+        let key = product.key;
+        let data = product.val();
+        dbProducts.push({
+          // TODO: productKey: key,
+          id: product.id,
+          categoryKey: data.categoryKey,
+          creationDate: data.creationDate,
+          expirationDate: data.expirationDate,
+          locationKey: data.locationKey,
+          productName: data.productName,
+          quantity: data.quantity,
+        });
+      });
+      initStoreProducts(dbProducts);
+    })
+    .catch(error => {
+      // TODO: error management + loading
+      console.error(error.message);
+    });
   });
 
   const {currentUser} = useContext(AuthContext);
