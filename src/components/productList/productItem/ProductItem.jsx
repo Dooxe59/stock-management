@@ -73,7 +73,6 @@ const ProductItem = ({product}) => {
           isClosable: true,
         });
       });
-
   };
 
   const locations = useSelector(locationsSelector);

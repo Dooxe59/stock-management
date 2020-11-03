@@ -16,7 +16,9 @@ const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}
     switch(productSort) {
       case 1:
         sortedProducts = _.orderBy(sortedProducts, (product) => {
-          return moment(product.expirationDate, "DD/MM/YYYY")?.toDate();
+          const date = moment(product.expirationDate, "DD/MM/YYYY")?.isValid() ?
+            moment(product.expirationDate, "DD/MM/YYYY")?.toDate() : null;
+          return date;
         });
         break;
       case 2:
@@ -36,16 +38,16 @@ const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}
     
     let filtered = [...sortedProducts];
 
-    if(trimmedSearchFilter) {
+    if (trimmedSearchFilter) {
       filtered = filtered.filter(product => 
         product.productName.toLowerCase().includes(trimmedSearchFilter));
     }
 
-    if(locationFilter) {
+    if (locationFilter) {
       filtered = filtered.filter(product => product.locationKey === locationFilter);
     }
 
-    if(categoryFilter) {
+    if (categoryFilter) {
       filtered = filtered.filter(product => product.categoryKey === categoryFilter);
     }
 
@@ -53,7 +55,7 @@ const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}
   };
 
   const renderProducts = () => {
-    if(!filteredProducts().length) return 'La liste est vide !';
+    if (!filteredProducts().length) return 'La liste est vide !';
     return filteredProducts().map((product, index) => {
       return <ProductItem product={product} key={index}></ProductItem>
     })
