@@ -48,7 +48,7 @@ const AddProductForm = () => {
   const [productExpirationDate, setProductExpirationDate] = useState("");
 
   // TODO: Selected key en dur :(
-  const defaultSelectedLocation = "-MKl-UouPPAvf62J4F81";
+  const defaultSelectedLocation = "-MLEz92wvk2WfZwYzriv";
   const [productLocation, setProductLocation] = useState(defaultSelectedLocation);
   const handleInputProductLocationChange = (event) => {
     setProductLocation(event.target.value || "");
