@@ -9,7 +9,7 @@ import app from "../../firebase.js";
 
 import "./login.scss";
 
-const Login = ({history}) => {
+const Login = () => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -23,15 +23,14 @@ const Login = ({history}) => {
   };
 
   const loginToast = useToast();
-
+  
   const handleLogin = useCallback(
-    async (event, mail, password) => {
+    async (event, mail, password, loginToast) => {
       event.preventDefault();
       try {
         await app
           .auth()
           .signInWithEmailAndPassword(mail, password);
-        history.push("/");
       } catch (error) {
         loginToast({
           title: "Echec de la connexion",
@@ -41,7 +40,7 @@ const Login = ({history}) => {
           isClosable: true,
         });
       }
-    }, [history]
+    }, []
   );
 
   const handleKeyDown = (event) => {
@@ -96,7 +95,7 @@ const Login = ({history}) => {
           size="sm"
           colorScheme="blue"
           isDisabled={!isValidAuthenticationForm}
-          onClick={(event) => handleLogin(event, mail, password)}>
+          onClick={(event) => handleLogin(event, mail, password, loginToast)}>
           Se connecter 
         </Button>
       </div>

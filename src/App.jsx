@@ -83,7 +83,7 @@ const App = () => {
         let key = product.key;
         let data = product.val();
         dbProducts.push({
-          // TODO: productKey: key,
+          productKey: key,
           id: product.id,
           categoryKey: data.categoryKey,
           creationDate: data.creationDate,
