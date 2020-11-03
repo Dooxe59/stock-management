@@ -16,3 +16,9 @@ refacto app.jsx
 
 create Toast Provider
 Revoir l'ensemble des libellés des toasts
+
+Tri par date exp (sans date devant les produits avec date)
+F5 fait apparaitre page login avant de naviguer
+
+Pb niveau génération couleurs
+notif PWA + invalider cache

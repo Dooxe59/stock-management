@@ -71,9 +71,7 @@ const LocationList = ({locations}) => {
           duration: 5000,
           isClosable: true,
         });
-        console.log(e);
       });
-    
   };
 
   const renderLocations = () => {

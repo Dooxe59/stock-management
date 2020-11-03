@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { locationsSelector } from '../../../store/locations/locationsSelector';
 import { categoriesSelector } from '../../../store/categories/categoriesSelector';
 import { deleteProduct, updateProduct } from '../../../store/products/productsActions';
+import ProductService from "../../../services/product";
 import moment from "moment";
 
 import { 
@@ -44,21 +45,35 @@ const ProductItem = ({product}) => {
     dispatch(deleteProduct(product));
   }, [dispatch]);
 
-  const currentProductId = product?.id;
+  const currentProductKey = product?.productKey;
   
   const productItemToast = useToast();
 
   const confirmDeleteProduct = () => {
     const productName = product.productName;
-    deleteSelectedProduct({productId: currentProductId});
-    onCloseDeleteProductModal();
-    productItemToast({
-      title: "Produit supprimé",
-      description: `${productName} a bien été supprimé.`,
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-    })
+    ProductService.delete(currentProductKey)
+      .then(() => {
+        deleteSelectedProduct({productKey: currentProductKey});
+        onCloseDeleteProductModal();
+        productItemToast({
+          title: "Produit supprimé",
+          description: `${productName} a bien été supprimé.`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      })
+      .catch((e) => {
+        // TODO: manage loading
+        productItemToast({
+          title: "Echec de la suppression du produit",
+          description: `${productName} n'a pas été supprimé. Veuillez réessayer.`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      });
+
   };
 
   const locations = useSelector(locationsSelector);
@@ -186,26 +201,39 @@ const ProductItem = ({product}) => {
 
   const validateAndUpdateProduct = () => {
     if (isValidUpdateProduct) {
-      const product = {
-        productId: currentProductId,
-        name: updateProductLabel.trim(),
+      const expirationDate = moment(updateProductExpirationDate, "DD/MM/YYYY")?.isValid() ? 
+        moment(updateProductExpirationDate, "DD/MM/YYYY")?.format('L') : "";
+      const updatedProduct = {
+        productName: updateProductLabel.trim(),
         locationKey: updateProductLocation,
         categoryKey: updateProductCategory,
         quantity: updateProductQuantity.trim(),
-        expirationDate: updateProductExpirationDate,
-        creationDate: moment().format('L')
+        expirationDate,
       };
-
-      product.name = product.name.charAt(0).toUpperCase() + product.name.slice(1);
-      updateExistingProduct(product);
-      productItemToast({
-        title: "Produit mis à jour",
-        description: `${product.name} a bien été mis à jour.`,
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
-      onCloseUpdateProductModal();
+      product.productName = updatedProduct.productName.charAt(0).toUpperCase() + updatedProduct.productName.slice(1);
+      
+      ProductService.update(product.productKey, updatedProduct)
+        .then(() => {
+          updateExistingProduct({...updatedProduct, productKey: product.productKey});
+          productItemToast({
+            title: "Produit mis à jour",
+            description: `${updatedProduct.productName} a bien été mis à jour.`,
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+          onCloseUpdateProductModal();
+        })
+        .catch((e) => {
+          // TODO: manage loading
+          productItemToast({
+            title: "Echec de la mise à jour du produit",
+            description: `${updatedProduct.productName} n'a pas été mis à jour. Veuillez réessayer.`,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        });
     }
   }
   return (

@@ -77,28 +77,26 @@ const App = () => {
       });
 
     ProductService.getAll().once("value")
-    .then(products => {
-      const dbProducts = [];
-      products.forEach((product) => {
-        let key = product.key;
-        let data = product.val();
-        dbProducts.push({
-          productKey: key,
-          id: product.id,
-          categoryKey: data.categoryKey,
-          creationDate: data.creationDate,
-          expirationDate: data.expirationDate,
-          locationKey: data.locationKey,
-          productName: data.productName,
-          quantity: data.quantity,
+      .then(products => {
+        const dbProducts = [];
+        products.forEach((product) => {
+          let key = product.key;
+          let data = product.val();
+          dbProducts.push({
+            productKey: key,
+            categoryKey: data.categoryKey,
+            expirationDate: data.expirationDate,
+            locationKey: data.locationKey,
+            productName: data.productName,
+            quantity: data.quantity,
+          });
         });
+        initStoreProducts(dbProducts);
+      })
+      .catch(error => {
+        // TODO: error management + loading
+        console.error(error.message);
       });
-      initStoreProducts(dbProducts);
-    })
-    .catch(error => {
-      // TODO: error management + loading
-      console.error(error.message);
-    });
   });
 
   const {currentUser} = useContext(AuthContext);

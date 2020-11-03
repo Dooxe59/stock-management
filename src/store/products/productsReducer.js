@@ -8,15 +8,15 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const productsReducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_PRODUCT: {
-      if (!action.payload.productName || !action.payload.locationKey) return state;
+      if (!action.payload.productName || !action.payload.productKey) return state;
 
       const newProduct = {
+        productKey: action.payload.productKey,
         productName: action.payload.productName,
         locationKey: action.payload.locationKey,
         categoryKey: action.payload.categoryKey,
         quantity: action.payload.quantity,
         expirationDate: action.payload.expirationDate,
-        creationDate: action.payload.creationDate,
         id: state.length + 1,
       };
       return [...state, newProduct];
@@ -26,7 +26,7 @@ export const productsReducer = (state = initialState, action) => {
       return action.payload.products;
     }
     case UPDATE_PRODUCT: {
-      const productIndex = state.findIndex(item => item.id === action.payload.productId);
+      const productIndex = state.findIndex(item => item.productKey === action.payload.productKey);
       if (productIndex === -1) return state;
 
       const productListTemp = [...state];
@@ -34,7 +34,7 @@ export const productsReducer = (state = initialState, action) => {
       return productListTemp;
     }
     case DELETE_PRODUCT: {
-      const productIndex = state.findIndex(item => item.id === action.payload.productId);
+      const productIndex = state.findIndex(item => item.productKey === action.payload.productKey);
       if (productIndex === -1) return state;
 
       const productListTemp = [...state];

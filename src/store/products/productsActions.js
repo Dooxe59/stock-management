@@ -8,25 +8,25 @@ export const initProduct = (products) => ({
 export const addProduct = (product) => ({
   type: ADD_PRODUCT,
   payload: {
-    productName: product.name,
+    productKey: product.productKey,
+    productName: product.productName,
     locationKey: product.locationKey,
     categoryKey: product.categoryKey,
     quantity: product.quantity,
     expirationDate: product.expirationDate,
-    creationDate: product.creationDate,
   }
 });
 
 export const deleteProduct = (product) => ({
   type: DELETE_PRODUCT,
-  payload: {productId: product.productId}
+  payload: {productKey: product.productKey}
 });
 
 export const updateProduct = (product) => ({
   type: UPDATE_PRODUCT,
   payload: {
-    productId: product.productId,
-    productName: product.name,
+    productKey: product.productKey,
+    productName: product.productName,
     locationKey: product.locationKey,
     categoryKey: product.categoryKey,
     quantity: product.quantity,

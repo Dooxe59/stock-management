@@ -9,7 +9,6 @@ import "./productList.scss";
 
 const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}) => {
   const products = useSelector(productsSelector);
-
   const filteredProducts = () => {
     const trimmedSearchFilter = searchFilter.trim()?.toLowerCase();
 

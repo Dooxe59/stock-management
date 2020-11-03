@@ -22,6 +22,7 @@ import {
   useToast,
 } from "@chakra-ui/core";
 import { AddIcon } from '@chakra-ui/icons';
+import ProductService from "../../services/product";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./addProductForm.scss";
@@ -77,25 +78,40 @@ const AddProductForm = () => {
   const addProductFormToast = useToast();
   const validateAndAddProduct = () => {
     if (isValidProduct) {
+      const expirationDate = moment(productExpirationDate, "DD/MM/YYYY")?.isValid() ? 
+        moment(productExpirationDate, "DD/MM/YYYY")?.format('L') : "";
       const product = {
-        name: productLabel.trim(),
+        productName: productLabel.trim(),
         locationKey: productLocation,
         categoryKey: productCategory,
         quantity: productQuantity.trim(),
-        expirationDate: productExpirationDate,
-        creationDate: moment().format('L')
+        expirationDate,
       };
+      product.productName = product.productName.charAt(0).toUpperCase() + product.productName.slice(1);
 
-      product.name = product.name.charAt(0).toUpperCase() + product.name.slice(1);
-      addNewProduct(product);
-      addProductFormToast({
-        title: "Produit ajouté",
-        description: `${product.name} a bien été ajouté.`,
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
-      clearProductForm();
+      ProductService.create(product)
+        .then((response) => {
+          addNewProduct({...product, productKey: response.key});
+          addProductFormToast({
+            title: "Produit ajouté",
+            description: `${product.productName} a bien été ajouté.`,
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+          clearProductForm();
+        })
+        .catch((e) => {
+          // TODO: manage loading
+          addProductFormToast({
+            title: "Echec de l'ajout du produit",
+            description: `${product.productName} n'a pas été ajouté. Veuillez réessayer.`,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+          console.log(e);
+        });
       // setFocusOnFirstInput();
     }
   }
