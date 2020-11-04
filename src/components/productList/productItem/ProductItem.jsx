@@ -83,7 +83,7 @@ const ProductItem = ({product}) => {
   const isValidExpirationDate = momentExpirationDate.isValid();
 
   const currentDate = moment();
-  const daysRemaining = momentExpirationDate.diff(currentDate, 'days');
+  const daysRemaining = momentExpirationDate.diff(currentDate, 'days') + 1;
 
   const renderProductExpirationDateState = () => {
     let status = '';
@@ -168,20 +168,19 @@ const ProductItem = ({product}) => {
     setUpdateProductQuantity(event.target.value);
   };
 
-  const defaultDate = moment(product?.expirationDate, "DD/MM/YYYY")?.isValid() ? 
-    moment(product?.expirationDate, "DD/MM/YYYY")?.toDate() : "";
-  const [updateProductExpirationDate, setUpdateProductExpirationDate] = useState(defaultDate);
+  const [updateProductExpirationDate, setUpdateProductExpirationDate] = useState(product?.expirationDate);
+  const handleInputProductExpirationDateChange = (event) => {
+    setUpdateProductExpirationDate(event.target.value || "");
+  };
 
   const [updateProductLocation, setUpdateProductLocation] = useState(product?.locationKey);
   const handleInputProductLocationChange = (event) => {
-    const parsedValue = event.target.value || "";
-    setUpdateProductLocation(parsedValue);
+    setUpdateProductLocation(event.target.value || "");
   };
 
   const [updateProductCategory, setUpdateProductCategory] = useState(product?.categoryKey);
   const handleInputProductCategoryChange = (event) => {
-    const parsedValue = event.target.value || "";
-    setUpdateProductCategory(parsedValue);
+    setUpdateProductCategory(event.target.value || "");
   };
 
   const handleKeyDown = (event) => {
@@ -302,8 +301,8 @@ const ProductItem = ({product}) => {
                   handleInputProductQuantityChange={(event) => handleInputProductQuantityChange(event)}
                   handleInputProductLocationChange={(event) => handleInputProductLocationChange(event)}
                   handleInputProductCategoryChange={(event) => handleInputProductCategoryChange(event)}
-                  handleKeyDown={(event) => handleKeyDown(event)}
-                  setProductExpirationDate={(event) => setUpdateProductExpirationDate(event)}>
+                  handleInputProductExpirationDateChange={(event) => handleInputProductExpirationDateChange(event)}
+                  handleKeyDown={(event) => handleKeyDown(event)}>
                 </ProductForm>
               </ModalBody>
               <ModalFooter>

@@ -2,7 +2,6 @@ import React from 'react';
 import LocationSelectorInput from '../inputs/locationSelectorInput/LocationSelectorInput';
 import CategorySelectorInput from '../inputs/categorySelectorInput/CategorySelectorInput';
 import { FormLabel, Input } from "@chakra-ui/core";
-import DatePicker from "react-datepicker";
 
 const ProductForm = ({
   productLabel, 
@@ -14,8 +13,8 @@ const ProductForm = ({
   handleInputProductQuantityChange,
   handleInputProductLocationChange,
   handleInputProductCategoryChange,
-  handleKeyDown, 
-  setProductExpirationDate}) => {
+  handleInputProductExpirationDateChange,
+  handleKeyDown}) => {
   return (
     <div className="product-form">
        <div className="product-label">
@@ -24,13 +23,11 @@ const ProductForm = ({
           </FormLabel>
           <Input 
             id="productName"
-            // autoFocus
             variant="filled"
             size="sm" 
             autoComplete="off"
             placeholder="Nom du produit" 
             value={productLabel}
-            // ref={productLabelInputRef}
             onChange={handleInputProductLabelChange}
             onKeyDown={handleKeyDown}/>
         </div>
@@ -53,16 +50,13 @@ const ProductForm = ({
             Date de péremption (JJ/MM/AAAA)
           </FormLabel>
           <Input 
-            as={DatePicker}
             id="productExpirationDate"
             variant="filled"
             size="sm" 
-            locale="fr"
             autoComplete="off"
-            dateFormat="dd/MM/yyyy"
-            placeholderText="Date d'expiration"
-            selected={productExpirationDate}
-            onChange={date => setProductExpirationDate(date)}
+            placeholder="Date d'expiration" 
+            value={productExpirationDate}
+            onChange={handleInputProductExpirationDateChange}
             onKeyDown={handleKeyDown}/>
         </div>
         <div className="product-location">

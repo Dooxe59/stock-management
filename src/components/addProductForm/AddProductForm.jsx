@@ -24,7 +24,6 @@ import {
 import { AddIcon } from '@chakra-ui/icons';
 import ProductService from "../../services/product";
 
-import "react-datepicker/dist/react-datepicker.css";
 import "./addProductForm.scss";
 
 const AddProductForm = () => {
@@ -46,6 +45,10 @@ const AddProductForm = () => {
   };
 
   const [productExpirationDate, setProductExpirationDate] = useState("");
+  const handleInputProductExpirationDateChange = (event) => {
+    setProductExpirationDate(event.target.value);
+  };
+
 
   // TODO: Selected key en dur :(
   const defaultSelectedLocation = "-MLEz92wvk2WfZwYzriv";
@@ -56,9 +59,9 @@ const AddProductForm = () => {
 
   const [productCategory, setProductCategory] = useState("");
   const handleInputProductCategoryChange = (event) => {
-    const parsedValue = event.target.value || "";
-    setProductCategory(parsedValue);
+    setProductCategory(event.target.value || "");
   };
+
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -70,16 +73,11 @@ const AddProductForm = () => {
   const isValidProduct =
     productLabel?.trim()?.length > 0 && productQuantity?.trim()?.length > 0;
 
-  // const productLabelInputRef = useRef(null);
-  // const setFocusOnFirstInput = () => {
-  //   productLabelInputRef.current.focus();
-  // };
-
   const addProductFormToast = useToast();
   const validateAndAddProduct = () => {
     if (isValidProduct) {
       const expirationDate = moment(productExpirationDate, "DD/MM/YYYY")?.isValid() ? 
-        moment(productExpirationDate, "DD/MM/YYYY")?.format('L') : "";
+        productExpirationDate : "";
       const product = {
         productName: productLabel.trim(),
         locationKey: productLocation,
@@ -153,8 +151,8 @@ const AddProductForm = () => {
                 handleInputProductQuantityChange={(event) => handleInputProductQuantityChange(event)}
                 handleInputProductLocationChange={(event) => handleInputProductLocationChange(event)}
                 handleInputProductCategoryChange={(event) => handleInputProductCategoryChange(event)}
-                handleKeyDown={(event) => handleKeyDown(event)}
-                setProductExpirationDate={(event) => setProductExpirationDate(event)}>
+                handleInputProductExpirationDateChange={(event) => handleInputProductExpirationDateChange(event)}
+                handleKeyDown={(event) => handleKeyDown(event)}>
               </ProductForm>
             </ModalBody>
             <ModalFooter>
