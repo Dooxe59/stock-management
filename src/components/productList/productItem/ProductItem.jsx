@@ -273,7 +273,7 @@ const ProductItem = ({product}) => {
               size="sm"
               variant="ghost"
               onClick={onOpenUpdateProductModal}>
-              Modifier ({product.productName})
+              Modifier
             </MenuItem>
             <MenuItem 
               fontSize={["sm", "md"]}
