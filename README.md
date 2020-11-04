@@ -19,6 +19,4 @@ Revoir l'ensemble des libellés des toasts
 
 F5 fait apparaitre page login avant de naviguer
 
-Pb niveau génération couleurs
-
 notif PWA + invalider cache
