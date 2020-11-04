@@ -131,7 +131,7 @@ const ProductItem = ({product}) => {
         <Badge 
           size="md"
           variant="solid"
-          colorScheme={getColorScheme(currentCategory?.categoryKey, 4)}>
+          colorScheme={getColorScheme(currentCategory?.label)}>
           {currentCategory?.label}
         </Badge>
       </div>
@@ -139,9 +139,9 @@ const ProductItem = ({product}) => {
   };
 
   const COLORS = ['blue', 'red', 'green', 'orange', 'gray', 'teal', 'purple', 'cyan', 'pink'];
-  const getColorScheme = (key, shift = 0) => {
+  const getColorScheme = (key) => {
     let hash = 0;
-    if (!key || !key.length) return shift % 9;
+    if (!key || !key.length) return;
 
     for (let i = 0; i < key.length; i++) {
       const charCode = key.charCodeAt(i);
@@ -149,7 +149,8 @@ const ProductItem = ({product}) => {
       hash = hash & hash;
     }
     if(hash < 0) hash *= -1; 
-    const colorIndex = (hash + shift) % 9;
+
+    const colorIndex = hash % 9;
     return COLORS[colorIndex];
   };
 
@@ -200,7 +201,7 @@ const ProductItem = ({product}) => {
   const validateAndUpdateProduct = () => {
     if (isValidUpdateProduct) {
       const expirationDate = moment(updateProductExpirationDate, "DD/MM/YYYY")?.isValid() ? 
-        moment(updateProductExpirationDate, "DD/MM/YYYY")?.format('L') : "";
+        updateProductExpirationDate : "";
       const updatedProduct = {
         productName: updateProductLabel.trim(),
         locationKey: updateProductLocation,
@@ -249,7 +250,7 @@ const ProductItem = ({product}) => {
         <Badge 
           size="md"
           variant="outline"
-          colorScheme={getColorScheme(currentLocation?.locationKey)}>
+          colorScheme={getColorScheme(currentLocation?.label)}>
           {currentLocation?.label}
         </Badge>
       </div>
@@ -272,7 +273,7 @@ const ProductItem = ({product}) => {
               size="sm"
               variant="ghost"
               onClick={onOpenUpdateProductModal}>
-              Modifier
+              Modifier ({product.productName})
             </MenuItem>
             <MenuItem 
               fontSize={["sm", "md"]}

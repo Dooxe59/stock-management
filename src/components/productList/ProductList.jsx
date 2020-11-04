@@ -56,8 +56,8 @@ const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}
 
   const renderProducts = () => {
     if (!filteredProducts().length) return 'La liste est vide !';
-    return filteredProducts().map((product, index) => {
-      return <ProductItem product={product} key={index}></ProductItem>
+    return filteredProducts().map((product) => {
+      return <ProductItem product={product} key={product.productKey}></ProductItem>
     })
   }
 
