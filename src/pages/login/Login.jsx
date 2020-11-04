@@ -66,6 +66,8 @@ const Login = () => {
           Connexion
         </Heading>
         <Input 
+          autoComplete="email"
+          type="email"
           className="mail-input"
           variant="filled"
           size="md" 
