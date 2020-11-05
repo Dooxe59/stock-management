@@ -4,7 +4,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ChakraProvider } from "@chakra-ui/core";
 import store from './store/index.js';
-import fr from 'date-fns/locale/fr';
 import moment from "moment";
 import "moment/locale/fr";
 import { Provider } from 'react-redux';
