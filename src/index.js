@@ -7,7 +7,8 @@ import store from './store/index.js';
 import moment from "moment";
 import "moment/locale/fr";
 import { Provider } from 'react-redux';
-import AuthProvider from "./components/authProvider/AuthProvider";
+import AuthProvider from "./providers/AuthProvider";
+import ToastProvider from "./providers/ToastProvider";
 
 import './index.scss';
 
@@ -18,9 +19,11 @@ ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
       <AuthProvider>
-        <Provider store={store}>
-          <App />
-        </Provider>
+        <ToastProvider>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </ToastProvider>
       </AuthProvider>
     </ChakraProvider>
   </React.StrictMode>,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { 
   Button, 
   IconButton, 
@@ -9,8 +9,7 @@ import {
   PopoverContent, 
   PopoverHeader, 
   PopoverTrigger, 
-  Text, 
-  useToast
+  Text
 } from "@chakra-ui/core";
 import { 
   BellIcon, 
@@ -21,23 +20,24 @@ import {
 import {
   Link
 } from "react-router-dom";
+import app from '../../firebase';
+import { ToastContext } from '../../providers/ToastProvider';
 
 import "./applicationTopBar.scss";
-import app from '../../firebase';
 
 const ApplicationTopBar = () => {
-  const applicationTopBarToast = useToast();
+  const {toast} = useContext(ToastContext);
 
   const tryLogOut = () => {
     app.auth().signOut().then(() => {
-      applicationTopBarToast({
+      toast({
         title: "Déconnexion effectuée",
         status: "success",
         duration: 5000,
         isClosable: true,
       });
     }).catch(error => {
-      applicationTopBarToast({
+      toast({
         title: "Echec de la déconnexion ",
         status: "error",
         duration: 5000,

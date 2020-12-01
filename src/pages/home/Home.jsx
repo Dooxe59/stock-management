@@ -1,13 +1,12 @@
 import React from 'react';
-import moment from "moment";
 import AddProductForm from '../../components/addProductForm/AddProductForm';
 import ProductList from '../../components/productList/ProductList';
-
-import "./home.scss";
 import { Text } from '@chakra-ui/core';
 import { useState } from 'react';
 import FilterToolbar from '../../components/filterToolbar/FilterToolbar';
 import { sortProductOptions } from '../../consts';
+
+import "./home.scss";
 
 const Home = () => {
   const [searchFilter, setSearchFilter] = useState("");
@@ -55,11 +54,11 @@ const Home = () => {
           productSort={productSort}>
         </ProductList>
       </div>
-      <footer className="app-footer">
+      {/* <footer className="app-footer">
         <Text fontSize={["sm", "md"]}>
           Nous sommes le {moment().format('LL')}
         </Text>
-      </footer>
+      </footer> */}
     </div>
   );
 };

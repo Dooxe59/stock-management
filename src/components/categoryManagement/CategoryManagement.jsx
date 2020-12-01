@@ -1,11 +1,16 @@
-import React, { useCallback, useState } from 'react';
+import React, { 
+  useCallback,
+  useContext,
+  useState 
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCategory } from '../../store/categories/categoriesActions';
 import CategoryList from './categoryList/CategoryList';
-import { Button, IconButton, Input, useToast } from "@chakra-ui/core";
+import { Button, IconButton, Input } from "@chakra-ui/core";
 import { AddIcon } from '@chakra-ui/icons';
 import CategoryService from "../../services/category";
 import { categoriesSelector } from '../../store/categories/categoriesSelector';
+import { ToastContext } from '../../providers/ToastProvider';
 
 import "./categoryManagement.scss";
 
@@ -32,7 +37,7 @@ const CategoryManagement = () => {
     }
   };
 
-  const categoryManagementToast = useToast();
+  const {toast} = useContext(ToastContext);
 
   const validateAndAddNewCategory = () => {
     if (isValidNewCategoryLabel) {
@@ -46,8 +51,8 @@ const CategoryManagement = () => {
       CategoryService.create(data)
         .then((response) => {
           addNewCategory({categoryLabel: categoryLabel, categoryKey: response.key});
-          categoryManagementToast({
-            title: "Catégorie ajouté",
+          toast({
+            title: "Catégorie ajoutée",
             description: `${categoryLabel} a bien été ajouté.`,
             status: "success",
             duration: 5000,
@@ -57,7 +62,7 @@ const CategoryManagement = () => {
         })
         .catch((e) => {
           // TODO: manage loading
-          categoryManagementToast({
+          toast({
             title: "Echec de l'ajout de la catégorie",
             description: `${categoryLabel} n'a pas été ajoutée. Veuillez réessayer.`,
             status: "error",

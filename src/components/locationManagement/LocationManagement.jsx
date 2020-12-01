@@ -1,14 +1,16 @@
 import React, { 
   useCallback,
+  useContext,
   useState 
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addLocation } from '../../store/locations/locationsActions';
 import LocationList from './locationList/LocationList';
-import { Button, IconButton, Input, useToast } from "@chakra-ui/core";
+import { Button, IconButton, Input } from "@chakra-ui/core";
 import { AddIcon } from '@chakra-ui/icons';
 import LocationService from "../../services/location";
 import { locationsSelector } from '../../store/locations/locationsSelector';
+import { ToastContext } from '../../providers/ToastProvider';
 
 import "./locationManagement.scss";
 
@@ -35,7 +37,7 @@ const LocationManagement = () => {
     }
   };
 
-  const locationManagementToast = useToast();
+  const {toast} = useContext(ToastContext);
 
   const validateAndAddNewLocation = () => {
     if (isValidNewLocationLabel) {
@@ -49,7 +51,7 @@ const LocationManagement = () => {
       LocationService.create(data)
         .then((response) => {
           addNewLocation({locationLabel: locationLabel, locationKey: response.key});
-          locationManagementToast({
+          toast({
             title: "Emplacement ajouté",
             description: `${locationLabel} a bien été ajouté.`,
             status: "success",
@@ -60,7 +62,7 @@ const LocationManagement = () => {
         })
         .catch((e) => {
           // TODO: manage loading
-          locationManagementToast({
+          toast({
             title: "Echec de l'ajout de l'emplacement",
             description: `${locationLabel} n'a pas été ajouté. Veuillez réessayer.`,
             status: "error",

@@ -1,12 +1,12 @@
 import React, { 
   useCallback, 
+  useContext,
   useState 
 } from 'react';
 import { useDispatch } from 'react-redux';
 import moment from "moment";
 import { addProduct } from '../../store/products/productsActions';
 import ProductForm from '../productForm/ProductForm';
-
 import {
   Button, 
   ButtonGroup, 
@@ -19,10 +19,10 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  useToast,
 } from "@chakra-ui/core";
 import { AddIcon } from '@chakra-ui/icons';
 import ProductService from "../../services/product";
+import { ToastContext } from '../../providers/ToastProvider';
 
 import "./addProductForm.scss";
 
@@ -73,7 +73,8 @@ const AddProductForm = () => {
   const isValidProduct =
     productLabel?.trim()?.length > 0 && productQuantity?.trim()?.length > 0;
 
-  const addProductFormToast = useToast();
+  const {toast} = useContext(ToastContext);
+
   const validateAndAddProduct = () => {
     if (isValidProduct) {
       const expirationDate = moment(productExpirationDate, "DD/MM/YYYY")?.isValid() ? 
@@ -90,7 +91,7 @@ const AddProductForm = () => {
       ProductService.create(product)
         .then((response) => {
           addNewProduct({...product, productKey: response.key});
-          addProductFormToast({
+          toast({
             title: "Produit ajouté",
             description: `${product.productName} a bien été ajouté.`,
             status: "success",
@@ -101,7 +102,7 @@ const AddProductForm = () => {
         })
         .catch((e) => {
           // TODO: manage loading
-          addProductFormToast({
+          toast({
             title: "Echec de l'ajout du produit",
             description: `${product.productName} n'a pas été ajouté. Veuillez réessayer.`,
             status: "error",

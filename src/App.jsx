@@ -18,7 +18,7 @@ import LocationService from "./services/location";
 import CategoryService from "./services/category";
 import ProductService from "./services/product";
 import ApplicationTopBar from "./components/applicationTopBar/ApplicationTopBar";
-import { AuthContext } from "./components/authProvider/AuthProvider";
+import { AuthContext } from "./providers/AuthProvider";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
 
 import "./app.scss";

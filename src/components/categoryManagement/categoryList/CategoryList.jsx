@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  useContext,
   useState
 } from 'react';
 import { useDispatch } from 'react-redux';
@@ -17,9 +18,9 @@ import {
   ModalBody,
   Text,
   useDisclosure,
-  useToast,
 } from "@chakra-ui/core";
 import CategoryService from "../../../services/category";
+import { ToastContext } from '../../../providers/ToastProvider';
 
 import "./categoryList.scss";
 
@@ -44,7 +45,7 @@ const CategoryList = ({categories}) => {
     dispatch(updateCategory(category));
   }, [dispatch]);
 
-  const categoryListToast = useToast();
+  const {toast} = useContext(ToastContext);
 
   const updateCategoryFromModal = () => {
     const data = {
@@ -54,7 +55,7 @@ const CategoryList = ({categories}) => {
       .then(() => {
         updateCategoryStore(updatedCategory);
         onCloseUpdateCategoryModal();
-        categoryListToast({
+        toast({
           title: "Catégorie mise à jour",
           description: `${updatedCategory.label} a bien été mise à jour.`,
           status: "success",
@@ -64,7 +65,7 @@ const CategoryList = ({categories}) => {
       })
       .catch((e) => {
         // TODO: manage loading
-        categoryListToast({
+        toast({
           title: "Echec de la mise à jour de la catégorie",
           description: `${updatedCategory.label} n'a pas été mis à jour. Veuillez réessayer.`,
           status: "error",

@@ -1,11 +1,19 @@
-import { Button, Heading, Input, InputGroup, InputRightElement, useToast } from '@chakra-ui/core';
-import React from 'react';
-import { useCallback } from 'react';
-import { useContext } from 'react';
-import { useState } from 'react';
+import React, { 
+  useCallback,
+  useContext,
+  useState
+} from 'react';
+import { 
+  Button, 
+  Heading, 
+  Input, 
+  InputGroup, 
+  InputRightElement 
+} from '@chakra-ui/core';
 import { Redirect } from 'react-router-dom';
-import { AuthContext } from '../../components/authProvider/AuthProvider.jsx';
 import app from "../../firebase.js";
+import { AuthContext } from '../../providers/AuthProvider.jsx';
+import { ToastContext } from '../../providers/ToastProvider.jsx';
 
 import "./login.scss";
 
@@ -22,17 +30,17 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const loginToast = useToast();
+  const {toast} = useContext(ToastContext);
   
   const handleLogin = useCallback(
-    async (event, mail, password, loginToast) => {
+    async (event, mail, password, toast) => {
       event.preventDefault();
       try {
         await app
           .auth()
           .signInWithEmailAndPassword(mail, password);
       } catch (error) {
-        loginToast({
+        toast({
           title: "Echec de la connexion",
           description: "L'adresse e-mail ou le mot de passe est invalide.",
           status: "error",
@@ -97,7 +105,7 @@ const Login = () => {
           size="sm"
           colorScheme="blue"
           isDisabled={!isValidAuthenticationForm}
-          onClick={(event) => handleLogin(event, mail, password, loginToast)}>
+          onClick={(event) => handleLogin(event, mail, password, toast)}>
           Se connecter 
         </Button>
       </div>

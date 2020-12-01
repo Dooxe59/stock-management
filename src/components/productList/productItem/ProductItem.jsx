@@ -1,4 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { 
+  useCallback, 
+  useContext, 
+  useState 
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { locationsSelector } from '../../../store/locations/locationsSelector';
 import { categoriesSelector } from '../../../store/categories/categoriesSelector';
@@ -23,14 +27,13 @@ import {
   ModalCloseButton,
   IconButton,
   Text,
-  useDisclosure,
-  useToast
+  useDisclosure
 } from "@chakra-ui/core";
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
+import ProductForm from '../../productForm/ProductForm';
+import { ToastContext } from '../../../providers/ToastProvider';
 
 import "./productItem.scss";
-import { useState } from 'react';
-import ProductForm from '../../productForm/ProductForm';
 
 const ProductItem = ({product}) => {
   const dispatch = useDispatch(); 
@@ -47,7 +50,7 @@ const ProductItem = ({product}) => {
 
   const currentProductKey = product?.productKey;
   
-  const productItemToast = useToast();
+  const {toast} = useContext(ToastContext);
 
   const confirmDeleteProduct = () => {
     const productName = product.productName;
@@ -55,7 +58,7 @@ const ProductItem = ({product}) => {
       .then(() => {
         deleteSelectedProduct({productKey: currentProductKey});
         onCloseDeleteProductModal();
-        productItemToast({
+        toast({
           title: "Produit supprimé",
           description: `${productName} a bien été supprimé.`,
           status: "success",
@@ -65,7 +68,7 @@ const ProductItem = ({product}) => {
       })
       .catch((e) => {
         // TODO: manage loading
-        productItemToast({
+        toast({
           title: "Echec de la suppression du produit",
           description: `${productName} n'a pas été supprimé. Veuillez réessayer.`,
           status: "error",
@@ -214,7 +217,7 @@ const ProductItem = ({product}) => {
       ProductService.update(product.productKey, updatedProduct)
         .then(() => {
           updateExistingProduct({...updatedProduct, productKey: product.productKey});
-          productItemToast({
+          toast({
             title: "Produit mis à jour",
             description: `${updatedProduct.productName} a bien été mis à jour.`,
             status: "success",
@@ -225,7 +228,7 @@ const ProductItem = ({product}) => {
         })
         .catch((e) => {
           // TODO: manage loading
-          productItemToast({
+          toast({
             title: "Echec de la mise à jour du produit",
             description: `${updatedProduct.productName} n'a pas été mis à jour. Veuillez réessayer.`,
             status: "error",

@@ -1,5 +1,6 @@
 import React, { 
   useCallback,
+  useContext,
   useState 
 } from 'react';
 import { useDispatch } from 'react-redux';
@@ -17,9 +18,9 @@ import {
   ModalBody,
   Text,
   useDisclosure,
-  useToast,
 } from "@chakra-ui/core";
 import LocationService from "../../../services/location";
+import { ToastContext } from '../../../providers/ToastProvider';
 
 import "./locationList.scss";
 
@@ -44,7 +45,7 @@ const LocationList = ({locations}) => {
     dispatch(updateLocation(location));
   }, [dispatch]);
 
-  const locationListToast = useToast();
+  const {toast} = useContext(ToastContext);
 
   const updateLocationFromModal = () => {
     const data = {
@@ -54,7 +55,7 @@ const LocationList = ({locations}) => {
       .then(() => {
         updateLocationStore(updatedLocation);
         onCloseUpdateLocationModal();
-        locationListToast({
+        toast({
           title: "Emplacement mis à jour",
           description: `${updatedLocation.label} a bien été mis à jour.`,
           status: "success",
@@ -64,7 +65,7 @@ const LocationList = ({locations}) => {
       })
       .catch((e) => {
         // TODO: manage loading
-        locationListToast({
+        toast({
           title: "Echec de la mise à jour de l'emplacement",
           description: `${updatedLocation.label} n'a pas été mis à jour. Veuillez réessayer.`,
           status: "error",
