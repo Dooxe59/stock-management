@@ -4,6 +4,7 @@ import { productsSelector } from '../../store/products/productsSelector';
 import ProductItem from './productItem/ProductItem';
 import _ from 'lodash';
 import moment from "moment";
+import { Spinner } from '@chakra-ui/core';
 
 import "./productList.scss";
 
@@ -12,7 +13,7 @@ const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}
   const filteredProducts = () => {
     const trimmedSearchFilter = searchFilter.trim()?.toLowerCase();
 
-    let sortedProducts = [...products];
+    let sortedProducts = products ? [...products] : [];
     switch(productSort) {
       case 1:
         sortedProducts = _.orderBy(sortedProducts, (product) => {
@@ -55,6 +56,7 @@ const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}
   };
 
   const renderProducts = () => {
+    if(!products) return <Spinner />;
     if (!filteredProducts().length) return 'La liste est vide !';
     return filteredProducts().map((product) => {
       return <ProductItem product={product} key={product.productKey}></ProductItem>
