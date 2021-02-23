@@ -11,15 +11,15 @@ import {
   InputRightElement 
 } from '@chakra-ui/core';
 import { Redirect } from 'react-router-dom';
-import app from "../../firebase.js";
+import app from '../../firebase.js';
 import { AuthContext } from '../../providers/AuthProvider.jsx';
 import { ToastContext } from '../../providers/ToastProvider.jsx';
 
-import "./login.scss";
+import './login.scss';
 
 const Login = () => {
-  const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
+  const [mail, setMail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleInputMailChange = (e) => {
@@ -41,9 +41,9 @@ const Login = () => {
           .signInWithEmailAndPassword(mail, password);
       } catch (error) {
         toast({
-          title: "Echec de la connexion",
-          description: "L'adresse e-mail ou le mot de passe est invalide.",
-          status: "error",
+          title: 'Echec de la connexion',
+          description: 'L\'adresse e-mail ou le mot de passe est invalide.',
+          status: 'error',
           duration: 5000,
           isClosable: true,
         });
@@ -52,7 +52,7 @@ const Login = () => {
   );
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       handleLogin(event, mail, password);
     }
   };
@@ -88,14 +88,14 @@ const Login = () => {
             className="password-input"
             variant="filled"
             pr="4.5rem"
-            type={showPassword ? "text" : "password"}
+            type={showPassword ? 'text' : 'password'}
             placeholder="Mot de passe"
             value={password}
             onChange={handleInputPasswordChange}
             onKeyDown={handleKeyDown}/>
           <InputRightElement width="6.5rem">
             <Button size="sm" onClick={handleShowPassword}>
-              {showPassword ? "Masquer" : "Afficher"}
+              {showPassword ? 'Masquer' : 'Afficher'}
             </Button>
           </InputRightElement>
         </InputGroup>

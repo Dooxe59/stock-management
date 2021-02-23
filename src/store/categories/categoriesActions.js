@@ -2,7 +2,7 @@ import {
   ADD_CATEGORY, 
   INIT_CATEGORY,
   UPDATE_CATEGORY 
-} from "./categoriesReducer";
+} from './categoriesReducer';
 
 export const initCategory = (categories) => ({
   type: INIT_CATEGORY,

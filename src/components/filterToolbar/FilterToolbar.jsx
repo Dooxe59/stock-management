@@ -5,7 +5,7 @@ import { sortProductOptions } from '../../consts';
 import CategorySelectorInput from '../inputs/categorySelectorInput/CategorySelectorInput';
 import LocationSelectorInput from '../inputs/locationSelectorInput/LocationSelectorInput';
 
-import "./filterToolbar.scss";
+import './filterToolbar.scss';
 
 const FilterToolbar = ({
   searchFilter,
@@ -20,7 +20,7 @@ const FilterToolbar = ({
 
   const renderSelectSortProductOptions = () => {
     return sortProductOptions.map(option => {
-      return <option value={option.id} key={option.id}>{option.label}</option>
+      return <option value={option.id} key={option.id}>{option.label}</option>;
     });
   };
   const [showFilters, setShowFilters] = useState(false);
@@ -28,11 +28,11 @@ const FilterToolbar = ({
   const handleToggle = () => setShowFilters(!showFilters);
 
   const showFiltersButtonLabel = showFilters ? 
-    "Masquer les filtres" : "Afficher les filtres";
+    'Masquer les filtres' : 'Afficher les filtres';
 
   const isEnabledResetFilterButton = searchFilter.trim().length || locationFilter || categoryFilter;
 
-  const showFiltersButtonVariant = showFilters ? "outline" : "solid";
+  const showFiltersButtonVariant = showFilters ? 'outline' : 'solid';
 
   return (
     <div className="filter-toolbar">
@@ -41,7 +41,7 @@ const FilterToolbar = ({
       </Button>
       <Collapse mt={4} isOpen={showFilters} className="filter-inputs">
         <div className="search-filter">
-          <FormLabel fontSize={["sm", "md"]} htmlFor="searchFilter">
+          <FormLabel fontSize={['sm', 'md']} htmlFor="searchFilter">
             Filtrer par nom
           </FormLabel>
           <Input 
@@ -66,7 +66,7 @@ const FilterToolbar = ({
           </CategorySelectorInput>
         </div>
         <div className="product-sort">
-          <FormLabel fontSize={["sm", "md"]} htmlFor="productSort">
+          <FormLabel fontSize={['sm', 'md']} htmlFor="productSort">
             Tri
           </FormLabel>
           <Select size="sm" value={productSort} onChange={handleInputProductSortChange}>
@@ -75,7 +75,7 @@ const FilterToolbar = ({
         </div>
         <div className="reset-filters-button">
           <Button 
-            fontSize={["sm", "md"]} 
+            fontSize={['sm', 'md']} 
             size="xs"
             variant="solid"
             colorScheme="teal" 

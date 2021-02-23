@@ -18,11 +18,11 @@ import {
   ModalBody,
   Text,
   useDisclosure,
-} from "@chakra-ui/core";
-import CategoryService from "../../../services/category";
+} from '@chakra-ui/core';
+import CategoryService from '../../../services/category';
 import { ToastContext } from '../../../providers/ToastProvider';
 
-import "./categoryList.scss";
+import './categoryList.scss';
 
 const CategoryList = ({categories}) => {
   const { 
@@ -56,9 +56,9 @@ const CategoryList = ({categories}) => {
         updateCategoryStore(updatedCategory);
         onCloseUpdateCategoryModal();
         toast({
-          title: "Catégorie mise à jour",
+          title: 'Catégorie mise à jour',
           description: `${updatedCategory.label} a bien été mise à jour.`,
-          status: "success",
+          status: 'success',
           duration: 5000,
           isClosable: true,
         });
@@ -66,9 +66,9 @@ const CategoryList = ({categories}) => {
       .catch((e) => {
         // TODO: manage loading
         toast({
-          title: "Echec de la mise à jour de la catégorie",
+          title: 'Echec de la mise à jour de la catégorie',
           description: `${updatedCategory.label} n'a pas été mis à jour. Veuillez réessayer.`,
-          status: "error",
+          status: 'error',
           duration: 5000,
           isClosable: true,
         });
@@ -84,11 +84,11 @@ const CategoryList = ({categories}) => {
           key={index}
           updateCategory={() => openUpdateCategoryModal(category.categoryKey)}>
         </CategoryItem>);
-    })
+    });
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter" && isValidUpdatedCategory) {
+    if (event.key === 'Enter' && isValidUpdatedCategory) {
       updateCategoryFromModal();
       event.preventDefault();
     }
@@ -103,14 +103,14 @@ const CategoryList = ({categories}) => {
 
   return (
     <div className="category-list">
-      <Text fontSize={["sm", "md"]} className="category-list-section-label">
+      <Text fontSize={['sm', 'md']} className="category-list-section-label">
         Catégories:
       </Text>
       { renderCategories() }
       <Modal isOpen={isOpenUpdateCategoryModal} onClose={onCloseUpdateCategoryModal}>
         <ModalOverlay>
           <ModalContent>
-            <ModalHeader fontSize={["md", "lg"]}>Mise à jour d'une catégorie</ModalHeader>
+            <ModalHeader fontSize={['md', 'lg']}>Mise à jour d'une catégorie</ModalHeader>
             <ModalBody>
               <Input
                 size="sm"
@@ -123,7 +123,7 @@ const CategoryList = ({categories}) => {
             <ModalFooter>
               <ButtonGroup spacing="6">
                 <Button
-                  fontSize={["sm", "md"]}
+                  fontSize={['sm', 'md']}
                   size="sm"
                   colorScheme="blue"
                   isDisabled={!isValidUpdatedCategory}
@@ -131,7 +131,7 @@ const CategoryList = ({categories}) => {
                   Mettre à jour
                 </Button>
                 <Button
-                  fontSize={["sm", "md"]}
+                  fontSize={['sm', 'md']}
                   size="sm"
                   variant="ghost"
                   onClick={onCloseUpdateCategoryModal}>

@@ -3,17 +3,17 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { categoriesSelector } from '../../../store/categories/categoriesSelector';
 
-const CategorySelectorInput = ({productCategory, handleInputProductCategoryChange, inputSize = "sm"}) => {
+const CategorySelectorInput = ({productCategory, handleInputProductCategoryChange, inputSize = 'sm'}) => {
   const categories = useSelector(categoriesSelector);
   const renderSelectCategoryOptions = () => {
     return categories.map((category, index) => {
-      return <option value={category.categoryKey} key={index}>{category.label}</option>
+      return <option value={category.categoryKey} key={index}>{category.label}</option>;
     });
   };
 
   return (
     <div className="category-selector-input">
-      <FormLabel fontSize={["sm", "md"]} htmlFor="productExpirationDate">
+      <FormLabel fontSize={['sm', 'md']} htmlFor="productExpirationDate">
         Catégorie
       </FormLabel>
       <Select size={inputSize} value={productCategory} onChange={handleInputProductCategoryChange}>

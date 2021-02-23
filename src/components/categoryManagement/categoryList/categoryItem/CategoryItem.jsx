@@ -1,13 +1,13 @@
 import React from 'react';
 import { EditIcon } from '@chakra-ui/icons';
-import { Button, IconButton, Text } from "@chakra-ui/core";
+import { Button, IconButton, Text } from '@chakra-ui/core';
 
-import "./categoryItem.scss";
+import './categoryItem.scss';
 
 const CategoryItem = ( {category, updateCategory} ) => {
   return (
     <div className="category-item">
-      <Text fontSize={["xs", "sm"]} className="category-label">
+      <Text fontSize={['xs', 'sm']} className="category-label">
         {category.label}
       </Text>
       <Button 

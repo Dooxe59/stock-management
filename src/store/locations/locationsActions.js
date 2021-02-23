@@ -2,7 +2,7 @@ import {
   ADD_LOCATION, 
   INIT_LOCATION, 
   UPDATE_LOCATION
-} from "./locationsReducer";
+} from './locationsReducer';
 
 export const initLocation = (locations) => ({
   type: INIT_LOCATION,

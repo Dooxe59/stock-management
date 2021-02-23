@@ -1,13 +1,13 @@
 import React from 'react';
 import { EditIcon } from '@chakra-ui/icons';
-import { Button, IconButton, Text } from "@chakra-ui/core";
+import { Button, IconButton, Text } from '@chakra-ui/core';
 
-import "./locationItem.scss";
+import './locationItem.scss';
 
 const LocationItem = ( {location, updateLocation} ) => {
   return (
     <div className="location-item">
-      <Text fontSize={["xs", "sm"]} className="location-label">
+      <Text fontSize={['xs', 'sm']} className="location-label">
         {location.label}
       </Text>
       <Button 

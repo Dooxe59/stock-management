@@ -6,30 +6,30 @@ export const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
 
 export const categoriesReducer = (state = initialState, action) => {
   switch(action.type) {
-    case ADD_CATEGORY: {
-      if (!action.payload.categoryLabel  || !action.payload.categoryKey) return state;
+  case ADD_CATEGORY: {
+    if (!action.payload.categoryLabel || !action.payload.categoryKey) return state;
 
-      const newItem = {
-        label: action.payload.categoryLabel,
-        categoryKey: action.payload.categoryKey,
-      };
-      return [...state, newItem];
-    }
-    case INIT_CATEGORY: {
-      if(!action.payload.categories) return;
-      return action.payload.categories;
-    }
-    case UPDATE_CATEGORY: {
-      if (!action.payload.newCategoryLabel || !action.payload.categoryKey) return state;
+    const newItem = {
+      label: action.payload.categoryLabel,
+      categoryKey: action.payload.categoryKey,
+    };
+    return [...state, newItem];
+  }
+  case INIT_CATEGORY: {
+    if(!action.payload.categories) return;
+    return action.payload.categories;
+  }
+  case UPDATE_CATEGORY: {
+    if (!action.payload.newCategoryLabel || !action.payload.categoryKey) return state;
 
-      const categoryIndex = state.findIndex(item => item.categoryKey === action.payload.categoryKey);
-      if (categoryIndex === -1) return state;
+    const categoryIndex = state.findIndex(item => item.categoryKey === action.payload.categoryKey);
+    if (categoryIndex === -1) return state;
 
-      const categoryListTemp = [...state];
-      categoryListTemp[categoryIndex].label = action.payload.newCategoryLabel;
-      return categoryListTemp;
-    }
-    default:
-      return state;
+    const categoryListTemp = [...state];
+    categoryListTemp[categoryIndex].label = action.payload.newCategoryLabel;
+    return categoryListTemp;
+  }
+  default:
+    return state;
   }
 };

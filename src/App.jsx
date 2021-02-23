@@ -2,26 +2,26 @@ import React , {
   useCallback, 
   useContext,
   useEffect,
-} from "react";
+} from 'react';
 import {
   BrowserRouter as Router,
   Route
-} from "react-router-dom";
-import { useDispatch } from "react-redux";
-import Home from "./pages/home/Home";
-import Administration from "./pages/administration/Administration";
-import Login from "./pages/login/Login";
+} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import Home from './pages/home/Home';
+import Administration from './pages/administration/Administration';
+import Login from './pages/login/Login';  
 import { initLocation } from './store/locations/locationsActions';
-import { initCategory } from "./store/categories/categoriesActions";
-import { initProduct } from "./store/products/productsActions";
-import LocationService from "./services/location";
-import CategoryService from "./services/category";
-import ProductService from "./services/product";
-import ApplicationTopBar from "./components/applicationTopBar/ApplicationTopBar";
-import { AuthContext } from "./providers/AuthProvider";
-import PrivateRoute from "./components/privateRoute/PrivateRoute";
+import { initCategory } from './store/categories/categoriesActions';
+import { initProduct } from './store/products/productsActions';
+import LocationService from './services/location';
+import CategoryService from './services/category';
+import ProductService from './services/product';
+import ApplicationTopBar from './components/applicationTopBar/ApplicationTopBar';
+import { AuthContext } from './providers/AuthProvider';
+import PrivateRoute from './components/privateRoute/PrivateRoute';
 
-import "./app.scss";
+import './app.scss';
 
 
 const App = () => {
@@ -29,7 +29,7 @@ const App = () => {
   
   const initStoreLocations = useCallback((locations) => {
     dispatch(initLocation(locations));
-  }, [dispatch]);
+  }, [dispatch]) ;     
 
   const initStoreCategories = useCallback((categories) => {
     dispatch(initCategory(categories));
@@ -39,8 +39,8 @@ const App = () => {
     dispatch(initProduct(products));
   }, [dispatch]);
 
-  useEffect(() => {
-    LocationService.getAll().once("value")
+  const loadLocations = () => {
+    LocationService.getAll().once('value')
       .then(locations => {
         const dbLocations = [];
         locations.forEach((item) => {
@@ -57,8 +57,10 @@ const App = () => {
         // TODO: error management + loading
         console.error(error.message);
       });
+  };
 
-    CategoryService.getAll().once("value")
+  const loadCategories = () => {
+    CategoryService.getAll().once('value')
       .then(categories => {
         const dbCategories = [];
         categories.forEach((item) => {
@@ -75,8 +77,10 @@ const App = () => {
         // TODO: error management + loading
         console.error(error.message);
       });
+  };
 
-    ProductService.getAll().once("value")
+  const loadProducts = () => {
+    ProductService.getAll().once('value')
       .then(products => {
         const dbProducts = [];
         products.forEach((product) => {
@@ -97,12 +101,18 @@ const App = () => {
         // TODO: error management + loading
         console.error(error.message);
       });
+  };
+
+  useEffect(() => {
+    loadLocations();
+    loadCategories();
+    loadProducts();
   });
 
   const {currentUser} = useContext(AuthContext);
   const renderAppBar = () => {
     return currentUser ? <ApplicationTopBar></ApplicationTopBar> : null;
-  }
+  };
 
   return (
     <div className="app">

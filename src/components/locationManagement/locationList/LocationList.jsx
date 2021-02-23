@@ -18,11 +18,11 @@ import {
   ModalBody,
   Text,
   useDisclosure,
-} from "@chakra-ui/core";
-import LocationService from "../../../services/location";
+} from '@chakra-ui/core';
+import LocationService from '../../../services/location';
 import { ToastContext } from '../../../providers/ToastProvider';
 
-import "./locationList.scss";
+import './locationList.scss';
 
 const LocationList = ({locations}) => {
   const { 
@@ -56,9 +56,9 @@ const LocationList = ({locations}) => {
         updateLocationStore(updatedLocation);
         onCloseUpdateLocationModal();
         toast({
-          title: "Emplacement mis à jour",
+          title: 'Emplacement mis à jour',
           description: `${updatedLocation.label} a bien été mis à jour.`,
-          status: "success",
+          status: 'success',
           duration: 5000,
           isClosable: true,
         });
@@ -66,9 +66,9 @@ const LocationList = ({locations}) => {
       .catch((e) => {
         // TODO: manage loading
         toast({
-          title: "Echec de la mise à jour de l'emplacement",
+          title: 'Echec de la mise à jour de l\'emplacement',
           description: `${updatedLocation.label} n'a pas été mis à jour. Veuillez réessayer.`,
-          status: "error",
+          status: 'error',
           duration: 5000,
           isClosable: true,
         });
@@ -83,11 +83,11 @@ const LocationList = ({locations}) => {
           key={index} 
           updateLocation={() => openUpdateLocationModal(location.locationKey)}>
         </LocationItem>);
-    })
+    });
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter" && isValidUpdatedLocation) {
+    if (event.key === 'Enter' && isValidUpdatedLocation) {
       updateLocationFromModal();
       event.preventDefault();
     }
@@ -102,14 +102,14 @@ const LocationList = ({locations}) => {
 
   return (
     <div className="location-list">
-      <Text fontSize={["sm", "md"]} className="location-list-section-label">
+      <Text fontSize={['sm', 'md']} className="location-list-section-label">
         Emplacements:
       </Text>
       { renderLocations() }
       <Modal isOpen={isOpenUpdateLocationModal} onClose={onCloseUpdateLocationModal}>
         <ModalOverlay>
           <ModalContent>
-            <ModalHeader fontSize={["md", "lg"]}>Mise à jour d'un emplacement</ModalHeader>
+            <ModalHeader fontSize={['md', 'lg']}>Mise à jour d'un emplacement</ModalHeader>
             <ModalBody>
               <Input 
                 size="sm" 
@@ -122,7 +122,7 @@ const LocationList = ({locations}) => {
             <ModalFooter>
               <ButtonGroup spacing="6">
                 <Button 
-                  fontSize={["sm", "md"]}
+                  fontSize={['sm', 'md']}
                   size="sm"
                   colorScheme="blue"
                   isDisabled={!isValidUpdatedLocation}
@@ -130,7 +130,7 @@ const LocationList = ({locations}) => {
                   Mettre à jour
                 </Button>
                 <Button 
-                  fontSize={["sm", "md"]}
+                  fontSize={['sm', 'md']}
                   size="sm"
                   variant="ghost"
                   onClick={onCloseUpdateLocationModal}>

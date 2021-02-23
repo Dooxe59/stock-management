@@ -6,13 +6,13 @@ import React, {
 import { useDispatch, useSelector } from 'react-redux';
 import { addCategory } from '../../store/categories/categoriesActions';
 import CategoryList from './categoryList/CategoryList';
-import { Button, IconButton, Input } from "@chakra-ui/core";
+import { Button, IconButton, Input } from '@chakra-ui/core';
 import { AddIcon } from '@chakra-ui/icons';
-import CategoryService from "../../services/category";
+import CategoryService from '../../services/category';
 import { categoriesSelector } from '../../store/categories/categoriesSelector';
 import { ToastContext } from '../../providers/ToastProvider';
 
-import "./categoryManagement.scss";
+import './categoryManagement.scss';
 
 const CategoryManagement = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const CategoryManagement = () => {
 
   const categories = useSelector(categoriesSelector);
 
-  const [newCategoryLabel, setNewCategoryLabel] = useState("");
+  const [newCategoryLabel, setNewCategoryLabel] = useState('');
 
   const handleInputTextChange = (event) => {
     setNewCategoryLabel(event.target.value);
@@ -31,7 +31,7 @@ const CategoryManagement = () => {
   const isValidNewCategoryLabel = newCategoryLabel?.trim()?.length > 0;
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       validateAndAddNewCategory();
       event.preventDefault();
     }
@@ -52,9 +52,9 @@ const CategoryManagement = () => {
         .then((response) => {
           addNewCategory({categoryLabel: categoryLabel, categoryKey: response.key});
           toast({
-            title: "Catégorie ajoutée",
+            title: 'Catégorie ajoutée',
             description: `${categoryLabel} a bien été ajouté.`,
-            status: "success",
+            status: 'success',
             duration: 5000,
             isClosable: true,
           });
@@ -63,9 +63,9 @@ const CategoryManagement = () => {
         .catch((e) => {
           // TODO: manage loading
           toast({
-            title: "Echec de l'ajout de la catégorie",
+            title: 'Echec de l\'ajout de la catégorie',
             description: `${categoryLabel} n'a pas été ajoutée. Veuillez réessayer.`,
-            status: "error",
+            status: 'error',
             duration: 5000,
             isClosable: true,
           });
@@ -75,7 +75,7 @@ const CategoryManagement = () => {
   };
 
   const clearInputText = () => {
-    setNewCategoryLabel("");
+    setNewCategoryLabel('');
   };
 
   return (

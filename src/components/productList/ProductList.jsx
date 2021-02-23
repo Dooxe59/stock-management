@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { productsSelector } from '../../store/products/productsSelector';
 import ProductItem from './productItem/ProductItem';
 import _ from 'lodash';
-import moment from "moment";
+import moment from 'moment';
 import { Spinner } from '@chakra-ui/core';
 
-import "./productList.scss";
+import './productList.scss';
 
 const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}) => {
   const products = useSelector(productsSelector);
@@ -15,24 +15,24 @@ const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}
 
     let sortedProducts = products ? [...products] : [];
     switch(productSort) {
-      case 1:
-        sortedProducts = _.orderBy(sortedProducts, (product) => {
-          const date = moment(product.expirationDate, "DD/MM/YYYY")?.isValid() ?
-            moment(product.expirationDate, "DD/MM/YYYY")?.toDate() : null;
-          return date;
-        });
-        break;
-      case 2:
-        sortedProducts = _.orderBy(sortedProducts, "productName", "asc");
-        break;
-      case 3:
-        sortedProducts = _.orderBy(sortedProducts, "categoryKey", "asc");
-        break;
-      case 4:
-        sortedProducts = _.orderBy(sortedProducts, "locationKey", "asc");
-        break;
-      default: 
-        break;
+    case 1:
+      sortedProducts = _.orderBy(sortedProducts, (product) => {
+        const date = moment(product.expirationDate, 'DD/MM/YYYY')?.isValid() ?
+          moment(product.expirationDate, 'DD/MM/YYYY')?.toDate() : null;
+        return date;
+      });
+      break;
+    case 2:
+      sortedProducts = _.orderBy(sortedProducts, 'productName', 'asc');
+      break;
+    case 3:
+      sortedProducts = _.orderBy(sortedProducts, 'categoryKey', 'asc');
+      break;
+    case 4:
+      sortedProducts = _.orderBy(sortedProducts, 'locationKey', 'asc');
+      break;
+    default: 
+      break;
     }
 
     if(!trimmedSearchFilter && !locationFilter && !categoryFilter) return sortedProducts;
@@ -59,9 +59,9 @@ const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}
     if(!products) return <Spinner />;
     if (!filteredProducts().length) return 'La liste est vide !';
     return filteredProducts().map((product) => {
-      return <ProductItem product={product} key={product.productKey}></ProductItem>
-    })
-  }
+      return <ProductItem product={product} key={product.productKey}></ProductItem>;
+    });
+  };
 
   return (
     <div className="product-list">

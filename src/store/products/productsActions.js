@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, DELETE_PRODUCT, INIT_PRODUCT, UPDATE_PRODUCT } from "./productsReducer";
+import { ADD_PRODUCT, DELETE_PRODUCT, INIT_PRODUCT, UPDATE_PRODUCT } from './productsReducer';
 
 export const initProduct = (products) => ({
   type: INIT_PRODUCT,

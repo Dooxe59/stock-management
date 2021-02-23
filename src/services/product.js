@@ -1,6 +1,6 @@
-import firebase from "../firebase";
+import firebase from '../firebase';
 
-const db = firebase.database().ref("/product");
+const db = firebase.database().ref('/product');
 
 class ProductService {
   getAll() {

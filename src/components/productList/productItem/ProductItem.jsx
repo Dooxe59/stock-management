@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { locationsSelector } from '../../../store/locations/locationsSelector';
 import { categoriesSelector } from '../../../store/categories/categoriesSelector';
 import { deleteProduct, updateProduct } from '../../../store/products/productsActions';
-import ProductService from "../../../services/product";
-import moment from "moment";
+import ProductService from '../../../services/product';
+import moment from 'moment';
 
 import { 
   Badge, 
@@ -28,12 +28,12 @@ import {
   IconButton,
   Text,
   useDisclosure
-} from "@chakra-ui/core";
+} from '@chakra-ui/core';
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import ProductForm from '../../productForm/ProductForm';
 import { ToastContext } from '../../../providers/ToastProvider';
 
-import "./productItem.scss";
+import './productItem.scss';
 
 const ProductItem = ({product}) => {
   const dispatch = useDispatch(); 
@@ -59,9 +59,9 @@ const ProductItem = ({product}) => {
         deleteSelectedProduct({productKey: currentProductKey});
         onCloseDeleteProductModal();
         toast({
-          title: "Produit supprimé",
+          title: 'Produit supprimé',
           description: `${productName} a bien été supprimé.`,
-          status: "success",
+          status: 'success',
           duration: 5000,
           isClosable: true,
         });
@@ -69,9 +69,9 @@ const ProductItem = ({product}) => {
       .catch((e) => {
         // TODO: manage loading
         toast({
-          title: "Echec de la suppression du produit",
+          title: 'Echec de la suppression du produit',
           description: `${productName} n'a pas été supprimé. Veuillez réessayer.`,
-          status: "error",
+          status: 'error',
           duration: 5000,
           isClosable: true,
         });
@@ -82,7 +82,7 @@ const ProductItem = ({product}) => {
   const currentLocation = locations.find(location => location.locationKey === product.locationKey);
   // TODO: 2 render by default ??
 
-  const momentExpirationDate = moment(product.expirationDate, "DDMMYYYY");
+  const momentExpirationDate = moment(product.expirationDate, 'DDMMYYYY');
   const isValidExpirationDate = momentExpirationDate.isValid();
 
   const currentDate = moment();
@@ -93,16 +93,16 @@ const ProductItem = ({product}) => {
     let classes = '';
     
     if(!isValidExpirationDate) {
-      status = `Pas de date d'expiration`;
+      status = 'Pas de date d\'expiration';
       classes = 'no-expiration-date-alert';
     } else if(daysRemaining < 0) {
       status = `Date dépassée depuis ${daysRemaining * -1} jours !`;
       classes = 'expiration-date-alert';
     } else if(daysRemaining === 0) {
-      status = "Date limite aujourd'hui !"
+      status = 'Date limite aujourd\'hui !';
       classes = 'expiration-date-alert';
     } else if(daysRemaining === 1) {
-      status = `Date limite demain`;
+      status = 'Date limite demain';
       classes = 'expiration-date-warning';
     } else if(daysRemaining <= 3) {
       status = `Date proche, plus que ${daysRemaining} jours!`;
@@ -114,16 +114,16 @@ const ProductItem = ({product}) => {
     return (
       <div className={`expiration-date-status ${classes} truncated`} title={status}>
         <Text 
-          fontSize={["xs", "sm"]}
+          fontSize={['xs', 'sm']}
           className="expiration-date-text">
           { status }
         </Text>
         <Text 
-          fontSize={["xs", "sm"]}
+          fontSize={['xs', 'sm']}
           className="expiration-date-icon">
           { <BellIcon/> }
         </Text>
-      </div>)
+      </div>);
   };
 
   const categories = useSelector(categoriesSelector);
@@ -174,21 +174,21 @@ const ProductItem = ({product}) => {
 
   const [updateProductExpirationDate, setUpdateProductExpirationDate] = useState(product?.expirationDate);
   const handleInputProductExpirationDateChange = (event) => {
-    setUpdateProductExpirationDate(event.target.value || "");
+    setUpdateProductExpirationDate(event.target.value || '');
   };
 
   const [updateProductLocation, setUpdateProductLocation] = useState(product?.locationKey);
   const handleInputProductLocationChange = (event) => {
-    setUpdateProductLocation(event.target.value || "");
+    setUpdateProductLocation(event.target.value || '');
   };
 
   const [updateProductCategory, setUpdateProductCategory] = useState(product?.categoryKey);
   const handleInputProductCategoryChange = (event) => {
-    setUpdateProductCategory(event.target.value || "");
+    setUpdateProductCategory(event.target.value || '');
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       validateAndUpdateProduct();
       event.preventDefault();
     }
@@ -203,8 +203,8 @@ const ProductItem = ({product}) => {
 
   const validateAndUpdateProduct = () => {
     if (isValidUpdateProduct) {
-      const expirationDate = moment(updateProductExpirationDate, "DD/MM/YYYY")?.isValid() ? 
-        updateProductExpirationDate : "";
+      const expirationDate = moment(updateProductExpirationDate, 'DD/MM/YYYY')?.isValid() ? 
+        updateProductExpirationDate : '';
       const updatedProduct = {
         productName: updateProductLabel.trim(),
         locationKey: updateProductLocation,
@@ -218,9 +218,9 @@ const ProductItem = ({product}) => {
         .then(() => {
           updateExistingProduct({...updatedProduct, productKey: product.productKey});
           toast({
-            title: "Produit mis à jour",
+            title: 'Produit mis à jour',
             description: `${updatedProduct.productName} a bien été mis à jour.`,
-            status: "success",
+            status: 'success',
             duration: 5000,
             isClosable: true,
           });
@@ -229,20 +229,20 @@ const ProductItem = ({product}) => {
         .catch((e) => {
           // TODO: manage loading
           toast({
-            title: "Echec de la mise à jour du produit",
+            title: 'Echec de la mise à jour du produit',
             description: `${updatedProduct.productName} n'a pas été mis à jour. Veuillez réessayer.`,
-            status: "error",
+            status: 'error',
             duration: 5000,
             isClosable: true,
           });
         });
     }
-  }
+  };
   return (
     <div className="product-item">
       <div className="product-name-quantity truncated" title={`${product.productName} (${product.quantity})`}>
         <Text 
-          fontSize={["xs", "sm"]}
+          fontSize={['xs', 'sm']}
           className="truncated">
           {product.productName} ({product.quantity})
         </Text>
@@ -266,20 +266,20 @@ const ProductItem = ({product}) => {
             rounded="md"
             borderWidth="2px"
             icon={<ChevronDownIcon/>}
-            _hover={{ bg: "gray.100" }}
-            _expanded={{ bg: "teal.100" }}
-            _focus={{ outline: 0, boxShadow: "outline" }}>
+            _hover={{ bg: 'gray.100' }}
+            _expanded={{ bg: 'teal.100' }}
+            _focus={{ outline: 0, boxShadow: 'outline' }}>
           </MenuButton>
           <MenuList>
             <MenuItem
-              fontSize={["sm", "md"]}
+              fontSize={['sm', 'md']}
               size="sm"
               variant="ghost"
               onClick={onOpenUpdateProductModal}>
               Modifier
             </MenuItem>
             <MenuItem 
-              fontSize={["sm", "md"]}
+              fontSize={['sm', 'md']}
               size="sm"
               variant="ghost"
               onClick={onOpenDeleteProductModal}>
@@ -290,7 +290,7 @@ const ProductItem = ({product}) => {
         <Modal isOpen={isOpenUpdateProductModal} onClose={onCloseUpdateProductModal}>
           <ModalOverlay>
             <ModalContent>
-              <ModalHeader fontSize={["md", "lg"]}>
+              <ModalHeader fontSize={['md', 'lg']}>
                 Modifier un produit
               </ModalHeader>
               <ModalCloseButton />
@@ -312,7 +312,7 @@ const ProductItem = ({product}) => {
               <ModalFooter>
                 <ButtonGroup spacing="6">
                   <Button 
-                    fontSize={["sm", "md"]} 
+                    fontSize={['sm', 'md']} 
                     size="sm"
                     colorScheme="blue" 
                     isDisabled={!isValidUpdateProduct} 
@@ -320,7 +320,7 @@ const ProductItem = ({product}) => {
                     Modifier le produit
                   </Button>
                   <Button 
-                    fontSize={["sm", "md"]} 
+                    fontSize={['sm', 'md']} 
                     size="sm"
                     variant="ghost" 
                     onClick={onCloseUpdateProductModal}>
@@ -334,24 +334,24 @@ const ProductItem = ({product}) => {
         <Modal isOpen={isOpenDeleteProductModal} onClose={onCloseDeleteProductModal}>
           <ModalOverlay>
             <ModalContent>
-              <ModalHeader fontSize={["md", "lg"]}>
+              <ModalHeader fontSize={['md', 'lg']}>
                 Suppression d'un produit
               </ModalHeader>
               <ModalCloseButton />
-              <ModalBody fontSize={["sm", "md"]}>
+              <ModalBody fontSize={['sm', 'md']}>
                 Êtes-vous sur de vouloir supprimer "{product.productName}" ({product.quantity}) ?
               </ModalBody>
               <ModalFooter>
                 <ButtonGroup spacing="6">
                   <Button 
-                    fontSize={["sm", "md"]} 
+                    fontSize={['sm', 'md']} 
                     size="sm"
                     colorScheme="red" 
                     onClick={confirmDeleteProduct}>
                     Supprimer
                   </Button>
                   <Button 
-                    fontSize={["sm", "md"]} 
+                    fontSize={['sm', 'md']} 
                     size="sm"
                     variant="ghost" 
                     onClick={onCloseDeleteProductModal}>

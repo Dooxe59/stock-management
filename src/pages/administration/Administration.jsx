@@ -2,7 +2,7 @@ import React from 'react';
 import CategoryManagement from '../../components/categoryManagement/CategoryManagement';
 import LocationManagement from '../../components/locationManagement/LocationManagement';
 
-import "./administration.scss";
+import './administration.scss';
 
 const Administration = () => {
   return (

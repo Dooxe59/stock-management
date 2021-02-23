@@ -6,13 +6,13 @@ import React, {
 import { useDispatch, useSelector } from 'react-redux';
 import { addLocation } from '../../store/locations/locationsActions';
 import LocationList from './locationList/LocationList';
-import { Button, IconButton, Input } from "@chakra-ui/core";
+import { Button, IconButton, Input } from '@chakra-ui/core';
 import { AddIcon } from '@chakra-ui/icons';
-import LocationService from "../../services/location";
+import LocationService from '../../services/location';
 import { locationsSelector } from '../../store/locations/locationsSelector';
 import { ToastContext } from '../../providers/ToastProvider';
 
-import "./locationManagement.scss";
+import './locationManagement.scss';
 
 const LocationManagement = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const LocationManagement = () => {
 
   const locations = useSelector(locationsSelector);
 
-  const [newLocationLabel, setNewLocationLabel] = useState("");
+  const [newLocationLabel, setNewLocationLabel] = useState('');
 
   const handleInputTextChange = (event) => {
     setNewLocationLabel(event.target.value);
@@ -31,7 +31,7 @@ const LocationManagement = () => {
   const isValidNewLocationLabel = newLocationLabel?.trim()?.length > 0;
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       validateAndAddNewLocation();
       event.preventDefault();
     }
@@ -52,9 +52,9 @@ const LocationManagement = () => {
         .then((response) => {
           addNewLocation({locationLabel: locationLabel, locationKey: response.key});
           toast({
-            title: "Emplacement ajouté",
+            title: 'Emplacement ajouté',
             description: `${locationLabel} a bien été ajouté.`,
-            status: "success",
+            status: 'success',
             duration: 5000,
             isClosable: true,
           });
@@ -63,9 +63,9 @@ const LocationManagement = () => {
         .catch((e) => {
           // TODO: manage loading
           toast({
-            title: "Echec de l'ajout de l'emplacement",
+            title: 'Echec de l\'ajout de l\'emplacement',
             description: `${locationLabel} n'a pas été ajouté. Veuillez réessayer.`,
-            status: "error",
+            status: 'error',
             duration: 5000,
             isClosable: true,
           });
@@ -75,7 +75,7 @@ const LocationManagement = () => {
   };
 
   const clearInputText = () => {
-    setNewLocationLabel("");
+    setNewLocationLabel('');
   };
 
   return (

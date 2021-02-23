@@ -4,7 +4,7 @@ import React, {
   useState 
 } from 'react';
 import { useDispatch } from 'react-redux';
-import moment from "moment";
+import moment from 'moment';
 import { addProduct } from '../../store/products/productsActions';
 import ProductForm from '../productForm/ProductForm';
 import {
@@ -19,12 +19,12 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-} from "@chakra-ui/core";
+} from '@chakra-ui/core';
 import { AddIcon } from '@chakra-ui/icons';
-import ProductService from "../../services/product";
+import ProductService from '../../services/product';
 import { ToastContext } from '../../providers/ToastProvider';
 
-import "./addProductForm.scss";
+import './addProductForm.scss';
 
 const AddProductForm = () => {
   const { isOpen: isOpenDeleteProductModal, onOpen: onOpenDeleteProductModal, onClose: onCloseDeleteProductModal } = useDisclosure();
@@ -34,37 +34,37 @@ const AddProductForm = () => {
     dispatch(addProduct(product));
   }, [dispatch]);
 
-  const [productLabel, setProductLabel] = useState("");
+  const [productLabel, setProductLabel] = useState('');
   const handleInputProductLabelChange = (event) => {
     setProductLabel(event.target.value);
   };
 
-  const [productQuantity, setProductQuantity] = useState("");
+  const [productQuantity, setProductQuantity] = useState('');
   const handleInputProductQuantityChange = (event) => {
     setProductQuantity(event.target.value);
   };
 
-  const [productExpirationDate, setProductExpirationDate] = useState("");
+  const [productExpirationDate, setProductExpirationDate] = useState('');
   const handleInputProductExpirationDateChange = (event) => {
     setProductExpirationDate(event.target.value);
   };
 
 
   // TODO: Selected key en dur :(
-  const defaultSelectedLocation = "-MLEz92wvk2WfZwYzriv";
+  const defaultSelectedLocation = '-MLEz92wvk2WfZwYzriv';
   const [productLocation, setProductLocation] = useState(defaultSelectedLocation);
   const handleInputProductLocationChange = (event) => {
-    setProductLocation(event.target.value || "");
+    setProductLocation(event.target.value || '');
   };
 
-  const [productCategory, setProductCategory] = useState("");
+  const [productCategory, setProductCategory] = useState('');
   const handleInputProductCategoryChange = (event) => {
-    setProductCategory(event.target.value || "");
+    setProductCategory(event.target.value || '');
   };
 
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       validateAndAddProduct();
       event.preventDefault();
     }
@@ -77,8 +77,8 @@ const AddProductForm = () => {
 
   const validateAndAddProduct = () => {
     if (isValidProduct) {
-      const expirationDate = moment(productExpirationDate, "DD/MM/YYYY")?.isValid() ? 
-        productExpirationDate : "";
+      const expirationDate = moment(productExpirationDate, 'DD/MM/YYYY')?.isValid() ? 
+        productExpirationDate : '';
       const product = {
         productName: productLabel.trim(),
         locationKey: productLocation,
@@ -92,9 +92,9 @@ const AddProductForm = () => {
         .then((response) => {
           addNewProduct({...product, productKey: response.key});
           toast({
-            title: "Produit ajouté",
+            title: 'Produit ajouté',
             description: `${product.productName} a bien été ajouté.`,
-            status: "success",
+            status: 'success',
             duration: 5000,
             isClosable: true,
           });
@@ -103,22 +103,21 @@ const AddProductForm = () => {
         .catch((e) => {
           // TODO: manage loading
           toast({
-            title: "Echec de l'ajout du produit",
+            title: 'Echec de l\'ajout du produit',
             description: `${product.productName} n'a pas été ajouté. Veuillez réessayer.`,
-            status: "error",
+            status: 'error',
             duration: 5000,
             isClosable: true,
           });
           console.log(e);
         });
-      // setFocusOnFirstInput();
     }
-  }
+  };
 
   const clearProductForm = () => {
-    setProductLabel("");
-    setProductQuantity("");
-    setProductExpirationDate("");
+    setProductLabel('');
+    setProductQuantity('');
+    setProductExpirationDate('');
   };
 
   const closeDeleteProductModal = () => {
@@ -137,7 +136,7 @@ const AddProductForm = () => {
       <Modal isOpen={isOpenDeleteProductModal} onClose={closeDeleteProductModal}>
         <ModalOverlay>
           <ModalContent>
-            <ModalHeader fontSize={["md", "lg"]}>
+            <ModalHeader fontSize={['md', 'lg']}>
               Ajouter un nouveau produit
             </ModalHeader>
             <ModalCloseButton />
@@ -159,7 +158,7 @@ const AddProductForm = () => {
             <ModalFooter>
               <ButtonGroup spacing="6">
                 <Button 
-                  fontSize={["sm", "md"]} 
+                  fontSize={['sm', 'md']} 
                   size="sm"
                   colorScheme="blue" 
                   isDisabled={!isValidProduct} 
@@ -167,7 +166,7 @@ const AddProductForm = () => {
                   Ajouter le produit
                 </Button>
                 <Button 
-                  fontSize={["sm", "md"]} 
+                  fontSize={['sm', 'md']} 
                   size="sm"
                   variant="ghost" 
                   onClick={closeDeleteProductModal}>

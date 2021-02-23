@@ -1,13 +1,13 @@
 export const sortProductOptions = [{
   id: 1,
-  label: "Date d'expiration",
+  label: 'Date d\'expiration',
 }, {
   id: 2,
-  label: "Alphabétique (nom)",
+  label: 'Alphabétique (nom)',
 },{
   id: 3,
-  label: "Catégorie",
+  label: 'Catégorie',
 }, {
   id: 4,
-  label: "Emplacement",
+  label: 'Emplacement',
 }]; 
