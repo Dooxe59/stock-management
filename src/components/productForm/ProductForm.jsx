@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LocationSelectorInput from '../inputs/locationSelectorInput/LocationSelectorInput';
 import CategorySelectorInput from '../inputs/categorySelectorInput/CategorySelectorInput';
 import { FormLabel, Input } from '@chakra-ui/core';
@@ -73,6 +74,20 @@ const ProductForm = ({
       </div>
     </div>
   );
+};
+
+ProductForm.propTypes = {
+  productLabel: PropTypes.string.isRequired,
+  productQuantity: PropTypes.string.isRequired,
+  productExpirationDate: PropTypes.string.isRequired,
+  productLocation: PropTypes.string.isRequired,
+  productCategory: PropTypes.string.isRequired,
+  handleInputProductLabelChange: PropTypes.func.isRequired,
+  handleInputProductQuantityChange: PropTypes.func.isRequired,
+  handleInputProductLocationChange: PropTypes.func.isRequired,
+  handleInputProductCategoryChange: PropTypes.func.isRequired,
+  handleInputProductExpirationDateChange: PropTypes.func.isRequired,
+  handleKeyDown: PropTypes.func.isRequired,
 };
 
 export default ProductForm;

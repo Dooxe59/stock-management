@@ -1,5 +1,5 @@
-import React from 'react';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
@@ -18,6 +18,10 @@ const PrivateRoute = ({component: RouteComponent, ...rest}) => {
       }
     />
   );
+};
+
+PrivateRoute.propTypes = {
+  component: PropTypes.object.isRequired,
 };
 
 export default PrivateRoute;

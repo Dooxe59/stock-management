@@ -7,15 +7,10 @@ App icon PWA
 
 Après ajout d'un produit, remettre le focus au niveau du premier input
 
-Add props validation
-
 Authentification: gestion des erreurs
 BDD: gestion des erreurs + loader
 
 Repasser sur les imports de la solution (' / ")
-
-create Toast Provider
-Revoir l'ensemble des libellés des toasts
 
 F5 fait apparaitre page login avant de naviguer
 

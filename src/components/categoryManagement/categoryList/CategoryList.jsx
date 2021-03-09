@@ -3,6 +3,7 @@ import React, {
   useContext,
   useState
 } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { updateCategory } from '../../../store/categories/categoriesActions';
 import CategoryItem from './categoryItem/CategoryItem';
@@ -144,6 +145,10 @@ const CategoryList = ({categories}) => {
       </Modal>
     </div>
   );
+};
+
+CategoryList.propTypes = {
+  categories: PropTypes.array.isRequired,
 };
 
 export default CategoryList;

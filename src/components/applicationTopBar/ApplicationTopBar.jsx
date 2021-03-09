@@ -27,7 +27,7 @@ import './applicationTopBar.scss';
 
 const ApplicationTopBar = () => {
   const {toast} = useContext(ToastContext);
-
+ 
   const tryLogOut = () => {
     app.auth().signOut().then(() => {
       toast({

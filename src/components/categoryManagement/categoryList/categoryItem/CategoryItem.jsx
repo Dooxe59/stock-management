@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { EditIcon } from '@chakra-ui/icons';
 import { Button, IconButton, Text } from '@chakra-ui/core';
 
@@ -28,6 +29,11 @@ const CategoryItem = ( {category, updateCategory} ) => {
         onClick={() => updateCategory()}/>
     </div>
   );
+};
+
+CategoryItem.propTypes = {
+  category: PropTypes.object.isRequired,
+  updateCategory: PropTypes.func.isRequired,
 };
 
 export default CategoryItem;

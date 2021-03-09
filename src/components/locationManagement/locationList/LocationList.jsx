@@ -3,6 +3,7 @@ import React, {
   useContext,
   useState 
 } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { updateLocation } from '../../../store/locations/locationsActions';
 import LocationItem from './locationItem/LocationItem';
@@ -143,6 +144,10 @@ const LocationList = ({locations}) => {
       </Modal>
     </div>
   );
+};
+
+LocationList.propTypes = {
+  locations: PropTypes.array.isRequired,
 };
 
 export default LocationList;

@@ -1,5 +1,6 @@
 import { FormLabel, Select } from '@chakra-ui/core';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { categoriesSelector } from '../../../store/categories/categoriesSelector';
 
@@ -22,6 +23,12 @@ const CategorySelectorInput = ({productCategory, handleInputProductCategoryChang
       </Select>
     </div>
   );
+};
+
+CategorySelectorInput.propTypes = {
+  productCategory: PropTypes.string.isRequired,
+  handleInputProductCategoryChange: PropTypes.func.isRequired,
+  inputSize: PropTypes.string,
 };
 
 export default CategorySelectorInput;

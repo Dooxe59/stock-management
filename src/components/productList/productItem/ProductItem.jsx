@@ -3,6 +3,7 @@ import React, {
   useContext, 
   useState 
 } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { locationsSelector } from '../../../store/locations/locationsSelector';
 import { categoriesSelector } from '../../../store/categories/categoriesSelector';
@@ -365,6 +366,10 @@ const ProductItem = ({product}) => {
       </div>
     </div>
   );
+};
+
+ProductItem.propTypes = {
+  product: PropTypes.object.isRequired,
 };
 
 export default ProductItem;

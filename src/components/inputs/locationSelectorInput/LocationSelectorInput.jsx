@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormLabel, Select } from '@chakra-ui/core';
 import { locationsSelector } from '../../../store/locations/locationsSelector';
 import { useSelector } from 'react-redux';
@@ -22,6 +23,13 @@ const LocationSelectorInput = ({productLocation, handleInputProductLocationChang
       </Select>
     </div>
   );
+};
+
+LocationSelectorInput.propTypes = {
+  productLocation: PropTypes.string.isRequired,
+  handleInputProductLocationChange: PropTypes.func.isRequired,
+  addEmptySelect: PropTypes.bool,
+  inputSize: PropTypes.string,
 };
 
 export default LocationSelectorInput;

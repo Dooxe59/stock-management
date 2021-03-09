@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { productsSelector } from '../../store/products/productsSelector';
 import ProductItem from './productItem/ProductItem';
@@ -68,6 +69,13 @@ const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}
       { renderProducts() }
     </div>
   );
+};
+
+ProductList.propTypes = {
+  searchFilter: PropTypes.string.isRequired,
+  locationFilter: PropTypes.string.isRequired,
+  categoryFilter: PropTypes.string.isRequired,
+  productSort: PropTypes.string.isRequired,
 };
 
 export default ProductList;

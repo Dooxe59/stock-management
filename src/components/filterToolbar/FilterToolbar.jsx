@@ -1,6 +1,6 @@
 import { Button, Collapse, FormLabel, Input, Select } from '@chakra-ui/core';
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { sortProductOptions } from '../../consts';
 import CategorySelectorInput from '../inputs/categorySelectorInput/CategorySelectorInput';
 import LocationSelectorInput from '../inputs/locationSelectorInput/LocationSelectorInput';
@@ -87,6 +87,18 @@ const FilterToolbar = ({
       </Collapse>
     </div>
   );
+};
+
+FilterToolbar.propTypes = {
+  searchFilter: PropTypes.string.isRequired,
+  locationFilter: PropTypes.string.isRequired,
+  categoryFilter: PropTypes.string.isRequired,
+  productSort: PropTypes.string.isRequired,
+  handleInputSearchFilterChange: PropTypes.func.isRequired,
+  handleInputLocationFilterChange: PropTypes.func.isRequired,
+  handleInputCategoryFilterChange: PropTypes.func.isRequired,
+  handleInputProductSortChange: PropTypes.func.isRequired,
+  resetFilters: PropTypes.func.isRequired,
 };
 
 export default FilterToolbar;
