@@ -81,7 +81,6 @@ const ProductItem = ({product}) => {
 
   const locations = useSelector(locationsSelector);
   const currentLocation = locations.find(location => location.locationKey === product.locationKey);
-  // TODO: 2 render by default ??
 
   const momentExpirationDate = moment(product.expirationDate, 'DDMMYYYY');
   const isValidExpirationDate = momentExpirationDate.isValid();

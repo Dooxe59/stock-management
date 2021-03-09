@@ -22,6 +22,7 @@ import { AuthContext } from './providers/AuthProvider';
 import PrivateRoute from './components/privateRoute/PrivateRoute';
 
 import './app.scss';
+import { ToastContext } from './providers/ToastProvider';
 
 
 const App = () => {
@@ -39,6 +40,8 @@ const App = () => {
     dispatch(initProduct(products));
   }, [dispatch]);
 
+  const {toast} = useContext(ToastContext);
+
   const loadLocations = () => {
     LocationService.getAll().once('value')
       .then(locations => {
@@ -54,8 +57,14 @@ const App = () => {
         initStoreLocations(dbLocations);
       })
       .catch(error => {
-        // TODO: error management + loading
-        console.error(error.message);
+        // TODO: manage loading
+        toast({
+          title: 'Echec du chargement des emplacements',
+          description: `${error.message}`,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
       });
   };
 
@@ -74,8 +83,14 @@ const App = () => {
         initStoreCategories(dbCategories);
       })
       .catch(error => {
-        // TODO: error management + loading
-        console.error(error.message);
+        // TODO: manage loading
+        toast({
+          title: 'Echec du chargement des catégories',
+          description: `${error.message}`,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
       });
   };
 
@@ -98,8 +113,14 @@ const App = () => {
         initStoreProducts(dbProducts);
       })
       .catch(error => {
-        // TODO: error management + loading
-        console.error(error.message);
+        // TODO: manage loading
+        toast({
+          title: 'Echec du chargement des produits',
+          description: `${error.message}`,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
       });
   };
 

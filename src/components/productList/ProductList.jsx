@@ -57,8 +57,7 @@ const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}
   };
 
   const renderProducts = () => {
-    if(!products) return <Spinner />;
-    if (!filteredProducts().length) return 'La liste est vide !';
+    if (!products || !filteredProducts().length) return <Spinner />;
     return filteredProducts().map((product) => {
       return <ProductItem product={product} key={product.productKey}></ProductItem>;
     });
@@ -75,7 +74,7 @@ ProductList.propTypes = {
   searchFilter: PropTypes.string.isRequired,
   locationFilter: PropTypes.string.isRequired,
   categoryFilter: PropTypes.string.isRequired,
-  productSort: PropTypes.string.isRequired,
+  productSort: PropTypes.number.isRequired,
 };
 
 export default ProductList;

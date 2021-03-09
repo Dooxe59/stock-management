@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
 
@@ -14,7 +14,4 @@ let config = {
 };
 
 const app = firebase.initializeApp(config);
-// firebase.analytics();
 export default app;
-
-// export default firebase.database();

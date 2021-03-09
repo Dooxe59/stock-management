@@ -93,7 +93,7 @@ FilterToolbar.propTypes = {
   searchFilter: PropTypes.string.isRequired,
   locationFilter: PropTypes.string.isRequired,
   categoryFilter: PropTypes.string.isRequired,
-  productSort: PropTypes.string.isRequired,
+  productSort: PropTypes.number.isRequired,
   handleInputSearchFilterChange: PropTypes.func.isRequired,
   handleInputLocationFilterChange: PropTypes.func.isRequired,
   handleInputCategoryFilterChange: PropTypes.func.isRequired,
