@@ -3,7 +3,7 @@ import React, {
   useContext,
   useState 
 } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { addProduct } from '../../store/products/productsActions';
 import ProductForm from '../productForm/ProductForm';
@@ -25,6 +25,7 @@ import ProductService from '../../services/product';
 import { ToastContext } from '../../providers/ToastProvider';
 
 import './addProductForm.scss';
+import { locationsSelector } from '../../store/locations/locationsSelector';
 
 const AddProductForm = () => {
   const { isOpen: isOpenDeleteProductModal, onOpen: onOpenDeleteProductModal, onClose: onCloseDeleteProductModal } = useDisclosure();
@@ -49,9 +50,8 @@ const AddProductForm = () => {
     setProductExpirationDate(event.target.value);
   };
 
-
-  // TODO: Selected key en dur :(
-  const defaultSelectedLocation = '-MLEz92wvk2WfZwYzriv';
+  const locations = useSelector(locationsSelector);
+  const defaultSelectedLocation = locations && locations.length > 0 ? locations[0].locationKey : '';
   const [productLocation, setProductLocation] = useState(defaultSelectedLocation);
   const handleInputProductLocationChange = (event) => {
     setProductLocation(event.target.value || '');
