@@ -3,6 +3,7 @@ import React, {
   useContext,
   useState
 } from 'react';
+import { Redirect } from 'react-router-dom';
 import { 
   Button, 
   Heading, 
@@ -10,10 +11,9 @@ import {
   InputGroup, 
   InputRightElement 
 } from '@chakra-ui/core';
-import { Redirect } from 'react-router-dom';
-import app from '../../firebase.js';
-import { AuthContext } from '../../providers/AuthProvider.jsx';
-import { ToastContext } from '../../providers/ToastProvider.jsx';
+import app from 'firebase';
+import { AuthContext } from 'providers/AuthProvider';
+import { ToastContext } from 'providers/ToastProvider';
 
 import './login.scss';
 

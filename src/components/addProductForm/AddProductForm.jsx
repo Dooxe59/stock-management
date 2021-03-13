@@ -23,9 +23,9 @@ import {
 import { AddIcon } from '@chakra-ui/icons';
 import ProductService from '../../services/product';
 import { ToastContext } from '../../providers/ToastProvider';
+import { locationsSelector } from '../../store/locations/locationsSelector';
 
 import './addProductForm.scss';
-import { locationsSelector } from '../../store/locations/locationsSelector';
 
 const AddProductForm = () => {
   const { isOpen: isOpenDeleteProductModal, onOpen: onOpenDeleteProductModal, onClose: onCloseDeleteProductModal } = useDisclosure();
