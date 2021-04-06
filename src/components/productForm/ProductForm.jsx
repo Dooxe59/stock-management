@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LocationSelectorInput from '../inputs/locationSelectorInput/LocationSelectorInput';
 import CategorySelectorInput from '../inputs/categorySelectorInput/CategorySelectorInput';
-import { FormLabel, Input } from '@chakra-ui/core';
+import { FormLabel, Input } from '@chakra-ui/react';
 
 const ProductForm = ({
   productLabel, 

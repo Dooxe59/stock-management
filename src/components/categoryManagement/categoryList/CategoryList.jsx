@@ -19,7 +19,7 @@ import {
   ModalBody,
   Text,
   useDisclosure,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import CategoryService from '../../../services/category';
 import { ToastContext } from '../../../providers/ToastProvider';
 

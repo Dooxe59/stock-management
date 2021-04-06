@@ -29,7 +29,7 @@ import {
   IconButton,
   Text,
   useDisclosure
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import ProductForm from '../../productForm/ProductForm';
 import { ToastContext } from '../../../providers/ToastProvider';

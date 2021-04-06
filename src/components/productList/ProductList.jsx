@@ -5,7 +5,7 @@ import { productsSelector } from '../../store/products/productsSelector';
 import ProductItem from './productItem/ProductItem';
 import _ from 'lodash';
 import moment from 'moment';
-import { Spinner } from '@chakra-ui/core';
+import { Spinner } from '@chakra-ui/react';
 
 import './productList.scss';
 

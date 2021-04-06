@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { EditIcon } from '@chakra-ui/icons';
-import { Button, IconButton, Text } from '@chakra-ui/core';
+import { Button, IconButton, Text } from '@chakra-ui/react';
 
 import './locationItem.scss';
 

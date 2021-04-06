@@ -6,7 +6,7 @@ import React, {
 import { useDispatch, useSelector } from 'react-redux';
 import { addCategory } from '../../store/categories/categoriesActions';
 import CategoryList from './categoryList/CategoryList';
-import { Button, IconButton, Input } from '@chakra-ui/core';
+import { Button, IconButton, Input } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import CategoryService from '../../services/category';
 import { categoriesSelector } from '../../store/categories/categoriesSelector';

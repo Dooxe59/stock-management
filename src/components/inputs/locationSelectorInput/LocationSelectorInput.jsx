@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormLabel, Select } from '@chakra-ui/core';
+import { FormLabel, Select } from '@chakra-ui/react';
 import { locationsSelector } from '../../../store/locations/locationsSelector';
 import { useSelector } from 'react-redux';
 

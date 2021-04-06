@@ -19,7 +19,7 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import ProductService from '../../services/product';
 import { ToastContext } from '../../providers/ToastProvider';

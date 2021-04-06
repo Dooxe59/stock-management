@@ -1,4 +1,4 @@
-import { Button, Collapse, FormLabel, Input, Select } from '@chakra-ui/core';
+import { Button, Collapse, FormLabel, Input, Select } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { sortProductOptions } from '../../consts';

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useToast } from '@chakra-ui/core';
+import { useToast } from '@chakra-ui/react';
 
 export const ToastContext = React.createContext();
 

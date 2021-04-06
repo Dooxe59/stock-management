@@ -9,7 +9,7 @@ import {
   Input, 
   InputGroup, 
   InputRightElement 
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { Redirect } from 'react-router-dom';
 import app from '../../firebase.js';
 import { AuthContext } from '../../providers/AuthProvider.jsx';

@@ -1,4 +1,4 @@
-import { FormLabel, Select } from '@chakra-ui/core';
+import { FormLabel, Select } from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';

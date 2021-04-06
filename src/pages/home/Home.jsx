@@ -1,7 +1,7 @@
 import React from 'react';
 import AddProductForm from '../../components/addProductForm/AddProductForm';
 import ProductList from '../../components/productList/ProductList';
-import { Text } from '@chakra-ui/core';
+import { Text } from '@chakra-ui/react';
 import { useState } from 'react';
 import FilterToolbar from '../../components/filterToolbar/FilterToolbar';
 import { sortProductOptions } from '../../consts';

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { ChakraProvider } from '@chakra-ui/core';
+import { ChakraProvider } from '@chakra-ui/react';
 import store from './store/index.js';
 import moment from 'moment';
 import 'moment/locale/fr';

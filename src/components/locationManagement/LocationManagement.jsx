@@ -6,7 +6,7 @@ import React, {
 import { useDispatch, useSelector } from 'react-redux';
 import { addLocation } from '../../store/locations/locationsActions';
 import LocationList from './locationList/LocationList';
-import { Button, IconButton, Input } from '@chakra-ui/core';
+import { Button, IconButton, Input } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import LocationService from '../../services/location';
 import { locationsSelector } from '../../store/locations/locationsSelector';

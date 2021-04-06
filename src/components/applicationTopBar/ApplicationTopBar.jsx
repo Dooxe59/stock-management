@@ -10,7 +10,7 @@ import {
   PopoverHeader, 
   PopoverTrigger, 
   Text
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { 
   BellIcon, 
   ExternalLinkIcon,
@@ -36,7 +36,7 @@ const ApplicationTopBar = () => {
         duration: 5000,
         isClosable: true,
       });
-    }).catch(error => {
+    }).catch(() => {
       toast({
         title: 'Echec de la déconnexion ',
         status: 'error',
