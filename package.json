@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ant-design/icons": "4.2.2",
     "@chakra-ui/icons": "^1.0.8",
     "@chakra-ui/react": "^1.0.0",
     "@emotion/react": "^11.0.0",
