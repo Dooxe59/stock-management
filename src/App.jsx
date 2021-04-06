@@ -124,13 +124,16 @@ const App = () => {
       });
   };
 
-  useEffect(() => {
-    loadLocations();
-    loadCategories();
-    loadProducts();
-  });
-
   const {currentUser} = useContext(AuthContext);
+
+  useEffect(() => {
+    if(currentUser) {
+      loadLocations();
+      loadCategories();
+      loadProducts();
+    }
+  }); // eslint-disable-line react-hooks/exhaustive-deps
+
   const renderAppBar = () => {
     return currentUser ? <ApplicationTopBar></ApplicationTopBar> : null;
   };
