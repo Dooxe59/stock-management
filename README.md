@@ -17,3 +17,5 @@ F5 fait apparaitre page login avant de naviguer
 notif PWA + invalider cache
 
 Delete momentJs
+
+Clean package.json
