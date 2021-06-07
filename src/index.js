@@ -10,6 +10,10 @@ import { Provider } from 'react-redux';
 import AuthProvider from './providers/AuthProvider';
 import ToastProvider from './providers/ToastProvider';
 
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
 import './index.scss';
 
 moment.locale('fr');
