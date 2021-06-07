@@ -17,3 +17,5 @@ Environnement Prod / Dev
 
 Gestion data / spinner
 Update react
+
+GERER LOADING, ERROR, SUCCESS LOCATION MANAGEMENT
