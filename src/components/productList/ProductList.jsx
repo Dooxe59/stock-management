@@ -57,7 +57,7 @@ const ProductList = ({searchFilter, locationFilter, categoryFilter, productSort}
   };
 
   const renderProducts = () => {
-    if (!products || !filteredProducts().length) return <Spinner />;
+    if (!products || !filteredProducts().length) return "Chargement / Pas de data";
     return filteredProducts().map((product) => {
       return <ProductItem product={product} key={product.productKey}></ProductItem>;
     });

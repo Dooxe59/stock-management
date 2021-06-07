@@ -1,5 +1,5 @@
-import { Button, Collapse, FormLabel, Input, Select } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Button, FormLabel, Input, Select } from '@chakra-ui/react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { sortProductOptions } from '../../consts';
 import CategorySelectorInput from '../inputs/categorySelectorInput/CategorySelectorInput';
@@ -23,68 +23,65 @@ const FilterToolbar = ({
       return <option value={option.id} key={option.id}>{option.label}</option>;
     });
   };
-  const [showFilters, setShowFilters] = useState(false);
-
-  const handleToggle = () => setShowFilters(!showFilters);
-
-  const showFiltersButtonLabel = showFilters ? 
-    'Masquer les filtres' : 'Afficher les filtres';
-
   const isEnabledResetFilterButton = searchFilter.trim().length || locationFilter || categoryFilter;
-
-  const showFiltersButtonVariant = showFilters ? 'outline' : 'solid';
 
   return (
     <div className="filter-toolbar">
-      <Button size="xs" variant={showFiltersButtonVariant} colorScheme="teal" onClick={handleToggle}>
-        {showFiltersButtonLabel}
-      </Button>
-      <Collapse mt={4} isOpen={showFilters} className="filter-inputs">
-        <div className="search-filter">
-          <FormLabel fontSize={['sm', 'md']} htmlFor="searchFilter">
-            Filtrer par nom
-          </FormLabel>
-          <Input 
-            id="searchFilter"
-            size="sm" 
-            autoComplete="off"
-            placeholder="Filtrer par nom" 
-            value={searchFilter}
-            onChange={handleInputSearchFilterChange}/> 
-        </div>
-        <div className="location-filter">
-          <LocationSelectorInput 
-            productLocation={locationFilter}
-            handleInputProductLocationChange={handleInputLocationFilterChange}
-            addEmptySelect={true}>
-          </LocationSelectorInput>
-        </div>
-        <div className="category-filter">
-          <CategorySelectorInput
-            productCategory={categoryFilter}
-            handleInputProductCategoryChange={handleInputCategoryFilterChange}>
-          </CategorySelectorInput>
-        </div>
-        <div className="product-sort">
-          <FormLabel fontSize={['sm', 'md']} htmlFor="productSort">
-            Tri
-          </FormLabel>
-          <Select size="sm" value={productSort} onChange={handleInputProductSortChange}>
-            {renderSelectSortProductOptions()}
-          </Select>
-        </div>
-        <div className="reset-filters-button">
-          <Button 
-            fontSize={['sm', 'md']} 
-            size="xs"
-            variant="solid"
-            colorScheme="teal" 
-            isDisabled={!isEnabledResetFilterButton}
-            onClick={() => resetFilters()}>
-            Effacer les filtres
-          </Button>
-        </div>
-      </Collapse>
+      <Accordion allowToggle>
+        <AccordionItem>
+          <h2>
+            <AccordionButton>
+              Accéder / Masquer les filtres
+            </AccordionButton>
+          </h2>
+          <AccordionPanel pb={4}>
+            <div className="search-filter">
+              <FormLabel fontSize={['sm', 'md']} htmlFor="searchFilter">
+                Filtrer par nom
+              </FormLabel>
+              <Input 
+                id="searchFilter"
+                size="sm" 
+                autoComplete="off"
+                placeholder="Filtrer par nom" 
+                value={searchFilter}
+                onChange={handleInputSearchFilterChange}/> 
+            </div>
+            <div className="location-filter">
+              <LocationSelectorInput 
+                productLocation={locationFilter}
+                handleInputProductLocationChange={handleInputLocationFilterChange}
+                addEmptySelect={true}>
+              </LocationSelectorInput>
+            </div>
+            <div className="category-filter">
+              <CategorySelectorInput
+                productCategory={categoryFilter}
+                handleInputProductCategoryChange={handleInputCategoryFilterChange}>
+              </CategorySelectorInput>
+            </div>
+            <div className="product-sort">
+              <FormLabel fontSize={['sm', 'md']} htmlFor="productSort">
+                Tri
+              </FormLabel>
+              <Select size="sm" value={productSort} onChange={handleInputProductSortChange}>
+                {renderSelectSortProductOptions()}
+              </Select>
+            </div>
+            <div className="reset-filters-button">
+              <Button 
+                fontSize={['sm', 'md']} 
+                size="xs"
+                variant="solid"
+                colorScheme="teal" 
+                isDisabled={!isEnabledResetFilterButton}
+                onClick={() => resetFilters()}>
+                Effacer les filtres
+              </Button>
+            </div>
+          </AccordionPanel>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 };
