@@ -16,3 +16,4 @@ notif PWA + invalider cache
 Environnement Prod / Dev
 
 Gestion data / spinner
+Update react
