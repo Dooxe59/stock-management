@@ -3,14 +3,17 @@ import React, {
   useContext,
   useState 
 } from 'react';
+
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { Divider } from 'primereact/divider';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { addLocation } from '../../store/locations/locationsActions';
+import { addLocation } from 'store/locations/locationsActions';
 import LocationList from './locationList/LocationList';
-import { Button, IconButton, Input } from '@chakra-ui/react';
-import { AddIcon } from '@chakra-ui/icons';
-import LocationService from '../../services/location';
-import { locationsSelector } from '../../store/locations/locationsSelector';
-import { ToastContext } from '../../providers/ToastProvider';
+import LocationService from 'services/location';
+import { locationsSelector } from 'store/locations/locationsSelector';
+import { ToastContext } from 'providers/ToastProvider';
 
 import './locationManagement.scss';
 
@@ -23,6 +26,7 @@ const LocationManagement = () => {
   const locations = useSelector(locationsSelector);
 
   const [newLocationLabel, setNewLocationLabel] = useState('');
+  const [addLocationState, setAddLocationState] = useState('');
 
   const handleInputTextChange = (event) => {
     setNewLocationLabel(event.target.value);
@@ -48,6 +52,7 @@ const LocationManagement = () => {
         label: locationLabel,
       };
 
+      setAddLocationState('LOADING');
       LocationService.create(data)
         .then((response) => {
           addNewLocation({locationLabel: locationLabel, locationKey: response.key});
@@ -59,9 +64,10 @@ const LocationManagement = () => {
             isClosable: true,
           });
           clearInputText();
+          setAddLocationState('SUCCESS');
         })
         .catch((e) => {
-          // TODO: manage loading
+          setAddLocationState('ERROR');
           toast({
             title: 'Echec de l\'ajout de l\'emplacement',
             description: `${locationLabel} n'a pas été ajouté. Veuillez réessayer.`,
@@ -69,10 +75,12 @@ const LocationManagement = () => {
             duration: 5000,
             isClosable: true,
           });
-          console.log(e);
         });
     }
   };
+
+  const isLoadingAddLocationState = addLocationState === "LOADING";
+  const isDisabledAddNewLocationButton = !isValidNewLocationLabel || isLoadingAddLocationState;
 
   const clearInputText = () => {
     setNewLocationLabel('');
@@ -81,33 +89,24 @@ const LocationManagement = () => {
   return (
     <div className="location-management">
       <div className="add-location-form">
-        <Input
-          variant="filled"
-          size="sm" 
-          placeholder="Ajouter un emplacement" 
-          value={newLocationLabel}
-          onChange={handleInputTextChange}
-          onKeyDown={handleKeyDown}/>
+        <div className="p-float-label p-input-icon-right location-form">
+          { isLoadingAddLocationState && <i className="pi pi-spin pi-spinner" /> }
+          <InputText 
+            id="newLocationInput" 
+            value={newLocationLabel} 
+            onChange={handleInputTextChange}
+            placeholder="Ajouter un emplacement" 
+            className="p-inputtext-sm location-input-text"
+            onKeyDown={handleKeyDown}
+          />
+        </div>
         <Button 
-          className="add-location-button add-location-button-text"
-          variant="outline"
-          size="sm"
-          colorScheme="green"
-          isDisabled={!isValidNewLocationLabel}
-          onClick={() => validateAndAddNewLocation()}>
-          Ajouter
-        </Button>
-        <IconButton 
-          className="add-location-button add-location-button-icon"
-          variant="outline"
-          title="Ajouter"
-          icon={<AddIcon />} 
-          size="sm" 
-          colorScheme="green"
-          isDisabled={!isValidNewLocationLabel}
+          label="Ajouter" 
+          className="p-button-sm p-button-outlined add-location-button" 
+          disabled={isDisabledAddNewLocationButton}
           onClick={() => validateAndAddNewLocation()}/>
       </div>
-      <hr/>
+      <Divider />
       <LocationList locations={locations}></LocationList>
     </div>
   );

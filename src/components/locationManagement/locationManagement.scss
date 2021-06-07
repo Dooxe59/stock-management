@@ -6,23 +6,17 @@
     margin: 0 10%;
     margin-bottom: 10px;
 
-    .add-location-button {
-      flex-shrink: 0;
-      margin-left: 10px;
+    .location-form {
+      width: 100%;
 
-      &.add-location-button-icon {
-        display: none;
+      .location-input-text {
+        width: 100%;
       }
     }
 
-    @media screen and (max-width: 480px) {
-      .add-location-button-icon {
-        display: block !important;
-      }
-
-      .add-location-button-text {
-        display: none;
-      }
+    .add-location-button {
+      flex-shrink: 0;
+      margin-left: 10px;
     }
   }
 }
