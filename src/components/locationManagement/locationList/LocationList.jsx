@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LocationItem from './locationItem/LocationItem';
+import Tag from 'components/ui/tag/Tag';
 import Uid from 'utils/uid';
 
 import './locationList.scss';
@@ -10,7 +10,7 @@ const LocationList = ({locations}) => {
     return locations.map((location) => {
       return (
         <div className="location-item-container" key={Uid.generate()}>
-          <LocationItem location={location} />
+          <Tag location={location.label} />
         </div>);
     });
   };
