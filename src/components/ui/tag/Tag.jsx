@@ -11,7 +11,7 @@ const Tag = ( {label} ) => {
 };
 
 Tag.propTypes = {
-  label: PropTypes.object.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 export default Tag;

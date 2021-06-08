@@ -1,0 +1,18 @@
+.add-category-form {
+  display: flex;
+  margin: 0 10%;
+  margin-bottom: 25px;
+
+  .category-form {
+    width: 100%;
+
+    .category-input-text {
+      width: 100%;
+    }
+  }
+
+  .add-category-button {
+    flex-shrink: 0;
+    margin-left: 10px;
+  }
+}
