@@ -22,3 +22,5 @@ GERER LOADING, ERROR, SUCCESS LOCATION MANAGEMENT
 Ajouter un error boundary
 revoir gestion redux
 Changement système toast
+
+Update / Delete location
