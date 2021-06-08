@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Home from './pages/home/Home';
-import Administration from './pages/administration/Administration';
+import Administration from 'components/administration/Administration';
 import Login from './pages/login/Login';  
 import { initLocation } from './store/locations/locationsActions';
 import { initCategory } from './store/categories/categoriesActions';
@@ -20,9 +20,9 @@ import ProductService from './services/product';
 import ApplicationTopBar from './components/applicationTopBar/ApplicationTopBar';
 import { AuthContext } from './providers/AuthProvider';
 import PrivateRoute from './components/privateRoute/PrivateRoute';
+import { ToastContext } from './providers/ToastProvider';
 
 import './app.scss';
-import { ToastContext } from './providers/ToastProvider';
 
 
 const App = () => {

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { TabView,TabPanel } from 'primereact/tabview';
 
-import CategoryManagement from 'components/categoryManagement/CategoryManagement';
-import LocationManagement from 'components/locationManagement/LocationManagement';
+import CategoryManagement from './categoryManagement/CategoryManagement';
+import LocationManagement from './locationManagement/LocationManagement';
 
 import './administration.scss';
 

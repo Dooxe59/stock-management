@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { updateCategory } from '../../../store/categories/categoriesActions';
+import { updateCategory } from 'store/categories/categoriesActions';
 import CategoryItem from './categoryItem/CategoryItem';
 import {
   Button,
@@ -20,8 +20,8 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import CategoryService from '../../../services/category';
-import { ToastContext } from '../../../providers/ToastProvider';
+import CategoryService from 'services/category';
+import { ToastContext } from 'providers/ToastProvider';
 
 import './categoryList.scss';
 

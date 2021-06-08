@@ -10,7 +10,7 @@ const LocationList = ({locations}) => {
     return locations.map((location) => {
       return (
         <div className="location-item-container" key={Uid.generate()}>
-          <Tag location={location.label} />
+          <Tag label={location.label} />
         </div>);
     });
   };
