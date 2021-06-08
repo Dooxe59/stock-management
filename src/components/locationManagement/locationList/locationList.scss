@@ -1,11 +1,10 @@
 .location-list {
-  margin-right: 10%;
-  margin-left: 10%;
+  margin: 0 10%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
 
-  .location-list-section-label {
+  .location-item-container {
+    margin-right: 10px;
     margin-bottom: 5px;
   }
 }
