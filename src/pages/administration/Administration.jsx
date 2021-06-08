@@ -1,19 +1,27 @@
-import React from 'react';
-import CategoryManagement from '../../components/categoryManagement/CategoryManagement';
-import LocationManagement from '../../components/locationManagement/LocationManagement';
+import React, { useState } from 'react';
+import { TabView,TabPanel } from 'primereact/tabview';
+
+import CategoryManagement from 'components/categoryManagement/CategoryManagement';
+import LocationManagement from 'components/locationManagement/LocationManagement';
 
 import './administration.scss';
 
 const Administration = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
   return (
     <div className="administration-page">
-      <div className="location-management">
-        <LocationManagement></LocationManagement>
-      </div>
-      <hr className="administration-separator"/>
-      <div className="category-management">
-        <CategoryManagement></CategoryManagement>
-      </div>
+      <TabView 
+        activeIndex={activeIndex} 
+        onTabChange={(e) => setActiveIndex(e.index)}>
+          <TabPanel header="Emplacements">
+            <LocationManagement></LocationManagement>
+          </TabPanel>
+          <TabPanel header="Catégories">
+            <div className="category-management">
+              <CategoryManagement></CategoryManagement>
+            </div>
+          </TabPanel>
+      </TabView>
     </div>
   );
 };
