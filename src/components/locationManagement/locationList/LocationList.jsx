@@ -103,9 +103,6 @@ const LocationList = ({locations}) => {
 
   return (
     <div className="location-list">
-      <Text fontSize={['sm', 'md']} className="location-list-section-label">
-        Emplacements:
-      </Text>
       { renderLocations() }
       <Modal isOpen={isOpenUpdateLocationModal} onClose={onCloseUpdateLocationModal}>
         <ModalOverlay>
