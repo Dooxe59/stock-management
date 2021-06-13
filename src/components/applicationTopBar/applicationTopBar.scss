@@ -1,72 +1,11 @@
-.application-top-bar {
-  display: flex;
-  align-items: center;
-  height: 40px;
-  border-bottom: 2px solid lightgray;
+.help-button {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
 
-  a {
-    display: flex;
-  }
-
-  .application-name {
-    margin: 0 10px;
-    font-size: larger;
-    font-weight: bold;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #1976d2;
-
-    &:hover {
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  }
-
-  .empty-area {
-    flex: 1;
-  }
-
-  .administration-button-text,
-  .logout-button-text {
-    margin: 0 5px;
-  }
-
-  .administration-button-icon,
-  .logout-button-icon {
-    display: none;
-  }
-
-  @media screen and (max-width: 480px) {
-    .administration-button-text,
-    .logout-button-text {
-      display: none;
-    }
-
-    .administration-button-icon,
-    .logout-button-icon {
-      display: block;
-    }
-
-    .help-button-icon {
-      margin: 0 5px;
-    }
-
-    .logout-button-icon {
-      margin-right: 5px;
-    }
-  }
-
-  .bell-icon-alert {
-    color: red;
-  }
-
-  .bell-icon-warning {
-    color: orange;
-  }
-
-  .bell-icon {
-    color: green;
+.p-button {
+  &.help-button {
+    position: absolute;
   }
 }

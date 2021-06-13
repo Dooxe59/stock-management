@@ -1,33 +1,18 @@
-import React, { useContext } from 'react';
-import { 
-  Button, 
-  IconButton, 
-  Popover, 
-  PopoverArrow, 
-  PopoverBody, 
-  PopoverCloseButton, 
-  PopoverContent, 
-  PopoverHeader, 
-  PopoverTrigger, 
-  Text
-} from '@chakra-ui/react';
-import { 
-  BellIcon, 
-  ExternalLinkIcon,
-  QuestionIcon, 
-  SettingsIcon
-} from '@chakra-ui/icons';
-import {
-  Link
-} from 'react-router-dom';
-import app from '../../firebase';
-import { ToastContext } from '../../providers/ToastProvider';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Button } from 'primereact/button';
+import { Sidebar } from 'primereact/sidebar';
+import { Menubar } from 'primereact/menubar';
+import IconHelper from './iconHelper/IconHelper';
+import app from 'firebase';
+import { ToastContext } from 'providers/ToastProvider';
 
 import './applicationTopBar.scss';
 
 const ApplicationTopBar = () => {
   const {toast} = useContext(ToastContext);
- 
+
+  
   const tryLogOut = () => {
     app.auth().signOut().then(() => {
       toast({
@@ -45,81 +30,28 @@ const ApplicationTopBar = () => {
       });
     });
   };
+  
+  const history = useHistory();
+
+  const items = [
+    {label: 'Accueil', icon: 'pi pi-fw pi-home', command: () => { history.push('/')} },
+    {label: 'Administration', icon: 'pi pi-fw pi-cog', command: () => { history.push('/administration')} },
+    {label: 'Déconnexion',icon:'pi pi-fw pi-power-off', command: () => {tryLogOut()}}
+  ];
+
+  const [showHelp, setShowHelp] = useState(false);
 
   return (
-    <div className="application-top-bar">
-      <Link to="/">
-        <Button size="sm" colorScheme="teal" variant="ghost">
-          Gestion des stocks
-        </Button>
-      </Link>
-      <div className="empty-area"></div>
-      <Link to="/administration">
-        <Button 
-          className="administration-button-text" 
-          variant="outline"
-          size="xs" 
-          colorScheme="teal">
-          Administration
-        </Button>
-        <IconButton 
-          className="administration-button-icon"
-          title="Administration"
-          variant="outline"
-          icon={<SettingsIcon />} 
-          size="xs" 
-          colorScheme="teal"/>
-      </Link>
-      <Popover>
-        <PopoverTrigger>
-          <IconButton 
-            className="help-button-icon"
-            title="Aide"
-            variant="outline"
-            icon={<QuestionIcon />} 
-            size="xs" 
-            colorScheme="teal"/>
-        </PopoverTrigger>
-        <PopoverContent>
-          <PopoverArrow />
-          <PopoverCloseButton />
-          <PopoverHeader>Aide</PopoverHeader>
-          <PopoverBody>
-            <Text 
-              fontSize={['xs', 'sm']}
-              className="bell-icon-alert">
-              { <BellIcon/> }: Date passée / aujourd'hui
-            </Text>
-            <Text 
-              fontSize={['xs', 'sm']}
-              className="bell-icon-warning">
-              { <BellIcon/> }: Date proche (1 à 3 jours)
-            </Text>
-            <Text 
-              fontSize={['xs', 'sm']}
-              className="bell-icon">
-              { <BellIcon /> }: Reste plus de 3 jours
-            </Text>
-          </PopoverBody>
-        </PopoverContent>
-      </Popover>
+    <>
+      <Menubar model={items}/>
       <Button 
-        className="logout-button-text" 
-        variant="outline"
-        size="xs" 
-        colorScheme="pink"
-        onClick={() => tryLogOut()}>
-        Déconnexion
-      </Button>
-      <IconButton 
-        className="logout-button-icon"
-        title="Déconnexion"
-        variant="outline"
-        icon={<ExternalLinkIcon />} 
-        size="xs" 
-        colorScheme="pink"
-        onClick={() => tryLogOut()}/>
-    </div>
+        icon="pi pi-question" 
+        className="p-button-rounded p-button-secondary p-button-text help-button" 
+        onClick={() => setShowHelp(true)}/>
+      <Sidebar visible={showHelp} position="bottom" onHide={() => setShowHelp(false)}>
+        <IconHelper />
+      </Sidebar>
+    </>
   );
 };
 
