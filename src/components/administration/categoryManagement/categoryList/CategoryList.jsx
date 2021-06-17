@@ -148,6 +148,13 @@ const CategoryList = ({categories}) => {
   const isLoadingUpdateCategoryState = updateCategoryState === State.LOADING;
   const updateCategoryButtonLabel = isLoadingUpdateCategoryState ? "" : "Modifier"
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      updateExistingCategory();
+      event.preventDefault();
+    }
+  };
+
   return (
     <div className="category-list">
       { renderCategories() }
@@ -159,7 +166,8 @@ const CategoryList = ({categories}) => {
           <InputText 
             id="updateCategoryInput" 
             value={selectedCategory?.label} 
-            onChange={(e) => handleInputTextChange(e)} /> 
+            onChange={(e) => handleInputTextChange(e)} 
+            onKeyDown={handleKeyDown}/> 
           <label htmlFor="updateCategoryInput">Nom de la catégorie</label>
         </span>
         <div className="p-buttonset update-button">
