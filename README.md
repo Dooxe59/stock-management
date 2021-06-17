@@ -13,8 +13,6 @@ Clean package.json
 F5 fait apparaitre page login avant de naviguer
 notif PWA + invalider cache
 
-Environnement Prod / Dev
-
 Gestion data / spinner
 Update react
 
@@ -24,3 +22,4 @@ revoir gestion redux
 Changement système toast
 
 Update / Delete location
+Update / Delete category

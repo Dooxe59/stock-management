@@ -51,7 +51,7 @@ const CategoryList = ({categories}) => {
 
   const {toast} = useContext(ToastContext);
 
-  const updateCategory = () => {
+  const updateExistingCategory = () => {
     if(!isValidCategory) return;
     const data = {
       label: selectedCategory.label,
@@ -120,7 +120,7 @@ const CategoryList = ({categories}) => {
             icon="pi pi-check" 
             disabled={!isValidCategory}
             loading={isLoadingUpdateCategoryState}
-            onClick={() => updateCategory()}/>
+            onClick={() => updateExistingCategory()}/>
         </div>
       </Sidebar>
     </div>

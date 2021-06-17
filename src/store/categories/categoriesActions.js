@@ -16,5 +16,8 @@ export const addCategory = (category) => ({
 
 export const updateCategory = (category) => ({
   type: UPDATE_CATEGORY,
-  payload: {categoryKey: category.categoryKey, newCategoryLabel: category.label}
+  payload: {
+    categoryKey: category.categoryKey, 
+    newCategoryLabel: category.label
+  }
 });
