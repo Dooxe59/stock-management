@@ -15,6 +15,7 @@ import CategoryService from 'services/category';
 import { ToastContext } from 'providers/ToastProvider';
 import { updateCategory } from 'store/categories/categoriesActions';
 import Uid from 'utils/uid';
+import { State } from 'utils/enums';
 
 import './categoryList.scss';
 
@@ -55,7 +56,7 @@ const CategoryList = ({categories}) => {
     const data = {
       label: selectedCategory.label,
     };
-    setUpdateCategoryState("LOADING");
+    setUpdateCategoryState(State.LOADING);
     CategoryService.update(selectedCategory.categoryKey, data)
       .then(() => {
         updateCategoryStore(selectedCategory);
@@ -67,7 +68,7 @@ const CategoryList = ({categories}) => {
           duration: 5000,
           isClosable: true,
         });
-        setUpdateCategoryState("SUCCESS");
+        setUpdateCategoryState(State.SUCCESS);
       })
       .catch((e) => {
         toast({
@@ -78,7 +79,7 @@ const CategoryList = ({categories}) => {
           isClosable: true,
         });
         console.log(e);
-        setUpdateCategoryState("ERROR");
+        setUpdateCategoryState(State.ERROR);
       });
   };
 
@@ -114,7 +115,7 @@ const CategoryList = ({categories}) => {
   };
 
   const isValidCategory = selectedCategory?.label?.trim().length > 0;
-  const isLoadingUpdateCategoryState = updateCategoryState === "LOADING";
+  const isLoadingUpdateCategoryState = updateCategoryState === State.LOADING;
   const updateCategoryButtonLabel = isLoadingUpdateCategoryState ? "" : "Modifier"
 
   return (

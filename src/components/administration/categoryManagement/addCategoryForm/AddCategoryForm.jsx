@@ -11,6 +11,7 @@ import { Button } from 'primereact/button';
 import { addCategory } from 'store/categories/categoriesActions';
 import CategoryService from 'services/category';
 import { ToastContext } from 'providers/ToastProvider';
+import { State } from 'utils/enums';
 
 import './addCategoryForm.scss';
 
@@ -52,7 +53,7 @@ const AddCategoryForm = () => {
         label: categoryLabel,
       };
 
-      setAddCategoryState('LOADING');
+      setAddCategoryState(State.LOADING);
       CategoryService.create(data)
         .then((response) => {
           addNewCategory({categoryLabel: categoryLabel, categoryKey: response.key});
@@ -64,10 +65,10 @@ const AddCategoryForm = () => {
             isClosable: true,
           });
           clearInputText();
-          setAddCategoryState('SUCCESS');
+          setAddCategoryState(State.SUCCESS);
         })
         .catch((e) => {
-          setAddCategoryState('ERROR');
+          setAddCategoryState(State.ERROR);
           toast({
             title: 'Echec de l\'ajout de la catégorie',
             description: `${categoryLabel} n'a pas été ajouté. Veuillez réessayer.`,
