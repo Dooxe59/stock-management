@@ -1,6 +1,7 @@
 const initialState = [];
 
 export const ADD_CATEGORY = 'ADD_CATEGORY';
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const INIT_CATEGORY = 'INIT_CATEGORY';
 export const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
 
@@ -14,6 +15,15 @@ export const categoriesReducer = (state = initialState, action) => {
       categoryKey: action.payload.categoryKey,
     };
     return [...state, newItem];
+  }
+  case DELETE_CATEGORY: {
+    const categoryIndex = state.findIndex(item => item.categoryKey === action.payload.categoryKey);
+    if (categoryIndex === -1) return state;
+
+    const categoryListTemp = [...state];
+
+    categoryListTemp.splice(categoryIndex, 1);
+    return categoryListTemp;
   }
   case INIT_CATEGORY: {
     if(!action.payload.categories) return;

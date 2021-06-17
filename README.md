@@ -16,10 +16,8 @@ notif PWA + invalider cache
 Gestion data / spinner
 Update react
 
-GERER LOADING, ERROR, SUCCESS LOCATION MANAGEMENT
 Ajouter un error boundary
-revoir gestion redux
 Changement système toast
 
 Update / Delete location
-Update / Delete category
+Delete category

@@ -1,5 +1,6 @@
 import { 
   ADD_CATEGORY, 
+  DELETE_CATEGORY,
   INIT_CATEGORY,
   UPDATE_CATEGORY 
 } from './categoriesReducer';
@@ -12,6 +13,11 @@ export const initCategory = (categories) => ({
 export const addCategory = (category) => ({
   type: ADD_CATEGORY,
   payload: {categoryLabel: category.categoryLabel, categoryKey: category.categoryKey}
+});
+
+export const deleteCategory = (category) => ({
+  type: DELETE_CATEGORY,
+  payload: {categoryKey: category.categoryKey}
 });
 
 export const updateCategory = (category) => ({

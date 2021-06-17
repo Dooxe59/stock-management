@@ -13,7 +13,7 @@ import { InputText } from 'primereact/inputtext';
 import { Sidebar } from 'primereact/sidebar';
 import CategoryService from 'services/category';
 import { ToastContext } from 'providers/ToastProvider';
-import { updateCategory } from 'store/categories/categoriesActions';
+import { deleteCategory, updateCategory } from 'store/categories/categoriesActions';
 import Uid from 'utils/uid';
 import { State } from 'utils/enums';
 
@@ -30,6 +30,10 @@ const CategoryList = ({categories}) => {
     dispatch(updateCategory(category));
   }, [dispatch]);
   
+  const deleteCategoryStore = useCallback((category) => {
+    dispatch(deleteCategory(category));
+  }, [dispatch]);
+
   const items = [
     {
        label: 'Modifier',
@@ -39,8 +43,7 @@ const CategoryList = ({categories}) => {
     {
       label: 'Supprimer',
       icon: 'pi pi-fw pi-trash',
-      command:()=>{ console.log('delete ', selectedCategory) }
-
+      command:()=>{ deleteSelectedCategory() }
     }
   ];
 
@@ -50,6 +53,33 @@ const CategoryList = ({categories}) => {
   };
 
   const {toast} = useContext(ToastContext);
+
+  const deleteSelectedCategory = () =>  {
+    const categoryName = { ...selectedCategory}.label;
+    CategoryService.delete(selectedCategory.categoryKey)
+      .then(() => {
+        deleteCategoryStore({categoryKey: selectedCategory.categoryKey});
+        toast({
+          title: 'Catégorie supprimée',
+          description: `${categoryName} a bien été supprimée.`,
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
+        setSelectedCategory(null);
+      })
+      .catch((e) => {
+        // TODO: manage loading
+        toast({
+          title: 'Echec de la suppression de la catégorie',
+          description: `${categoryName} n'a pas été supprimée. Veuillez réessayer.`,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
+        console.error(e);
+      });
+  }
 
   const updateExistingCategory = () => {
     if(!isValidCategory) return;

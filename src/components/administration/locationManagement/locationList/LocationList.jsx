@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Tag from 'components/ui/tag/Tag';
+import { Chip } from 'primereact/chip';
 import Uid from 'utils/uid';
 
 import './locationList.scss';
@@ -10,7 +10,7 @@ const LocationList = ({locations}) => {
     return locations.map((location) => {
       return (
         <div className="location-item-container" key={Uid.generate()}>
-          <Tag label={location.label} />
+          <Chip label={location.label} />
         </div>);
     });
   };
