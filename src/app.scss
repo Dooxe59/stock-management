@@ -4,3 +4,10 @@
   flex-direction: column;
   overflow: hidden;
 }
+
+.p-chip.default-tag {
+  background-color: white;
+  border: 1px solid #2196f3;
+  color: #2196f3;
+  padding-right: 0;
+}

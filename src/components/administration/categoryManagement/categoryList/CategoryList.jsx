@@ -6,15 +6,14 @@ import React, {
 } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import Tag from 'components/ui/tag/Tag';
 import { Button } from 'primereact/button';
-import { ContextMenu } from 'primereact/contextmenu';
+import { Chip } from 'primereact/chip';
+import { Menu } from 'primereact/menu';
 import { InputText } from 'primereact/inputtext';
 import { Sidebar } from 'primereact/sidebar';
 import CategoryService from 'services/category';
 import { ToastContext } from 'providers/ToastProvider';
 import { updateCategory } from 'store/categories/categoriesActions';
-
 import Uid from 'utils/uid';
 
 import './categoryList.scss';
@@ -83,14 +82,26 @@ const CategoryList = ({categories}) => {
       });
   };
 
+  const renderCategoryItem = (category) => {
+    return (
+      <>
+        <span aria-haspopup>{category.label}</span>
+        <Button 
+          icon="pi pi-bars" 
+          className="p-button-rounded p-button-text" 
+          onClick={(event) => openContextualMenu(event, category)} 
+          aria-controls="popup_menu" 
+          aria-haspopup />
+      </>
+      );
+  };
+
   const renderCategories = () => {
     return categories.map((category) => {
       return (
         <div className="category-item-container" key={Uid.generate()}>
-          <ContextMenu model={items} ref={cm}></ContextMenu>
-          <span onContextMenu={(e) => openContextualMenu(e, category)} aria-haspopup>
-            <Tag label={category.label} aria-haspopup/>
-          </span>
+          <Menu model={items} popup ref={cm} id="popup_menu" />
+          <Chip template={renderCategoryItem(category)} className="p-mr-2 p-mb-2 default-tag"/>
         </div>);
     });
   };
@@ -109,9 +120,15 @@ const CategoryList = ({categories}) => {
   return (
     <div className="category-list">
       { renderCategories() }
-      <Sidebar visible={showUpdateCategorySidebar} position="bottom" onHide={() => setShowUpdateCategorySidebar(false)}>
+      <Sidebar 
+        visible={showUpdateCategorySidebar} 
+        position="bottom" 
+        onHide={() => setShowUpdateCategorySidebar(false)}>
         <span className="p-float-label">
-          <InputText id="updateCategoryInput" value={selectedCategory?.label} onChange={(e) => handleInputTextChange(e)} /> 
+          <InputText 
+            id="updateCategoryInput" 
+            value={selectedCategory?.label} 
+            onChange={(e) => handleInputTextChange(e)} /> 
           <label htmlFor="updateCategoryInput">Nom de la catégorie</label>
         </span>
         <div className="p-buttonset update-button">
