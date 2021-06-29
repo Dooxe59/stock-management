@@ -19,5 +19,5 @@ Update react
 Ajouter un error boundary
 Changement système toast
 
-Update / Delete location
-Delete category
+
+renderLocationItem : composant à créer générique
